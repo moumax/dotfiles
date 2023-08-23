@@ -173,17 +173,17 @@ done
 echo "\n"
 
 BaseFolder="$HOME/$FolderName"
-Apps="$HOME/$FolderName/Apps"
-Dotfiles="$HOME/$FolderName/Dotfiles"
+apps="$HOME/$FolderName/apps"
+dotfiles="$HOME/$FolderName/dotfiles"
 
-Neovim="$HOME/$FolderName/Dotfiles/neovim"
-Lua="$HOME/$FolderName/Dotfiles/neovim/lua"
-NeovimUserFolder="$HOME/$FolderName/Dotfiles/neovim/lua/$NeovimUsername"
-Undodir="$HOME/$FolderName/Dotfiles/neovim/lua/$NeovimUsername/undodir"
-After="$HOME/$FolderName/Dotfiles/neovim/after"
-AfterPlugin="$HOME/$FolderName/Dotfiles/neovim/after/plugin"
-AfterFtPlugin="$HOME/$FolderName/Dotfiles/neovim/after/ftplugin"
-Plugin="$HOME/$FolderName/Dotfiles/neovim/plugin"
+Neovim="$HOME/$FolderName/dotfiles/neovim"
+Lua="$HOME/$FolderName/dotfiles/neovim/lua"
+NeovimUserFolder="$HOME/$FolderName/dotfiles/neovim/lua/$NeovimUsername"
+Undodir="$HOME/$FolderName/dotfiles/neovim/lua/$NeovimUsername/undodir"
+After="$HOME/$FolderName/dotfiles/neovim/after"
+AfterPlugin="$HOME/$FolderName/dotfiles/neovim/after/plugin"
+AfterFtPlugin="$HOME/$FolderName/dotfiles/neovim/after/ftplugin"
+Plugin="$HOME/$FolderName/dotfiles/neovim/plugin"
 
 printf "======================================================\n"
 printf "      Suppression des fichiers neovim suivants :      \n"
@@ -192,24 +192,24 @@ printf "         - fichiers de configuration                  \n"
 printf "======================================================\n"
 rm -rf $HOME/.config/nvim
 rm -rf $HOME/.local/share/nvim
-rm -rf $Apps/Neovim
-rm -rf $Dotfiles/neovim
+rm -rf $apps/Neovim
+rm -rf $dotfiles/neovim
 
-if [ ! -d "$Apps" ]; then
-	mkdir -p $Apps
-	printf "=== %s crée ! ===\n" "$Apps"
+if [ ! -d "$apps" ]; then
+	mkdir -p "$apps"
+	printf "=== %s crée ! ===\n" "$apps"
 fi
 
 if [ ! -d "$dotfiles" ]; then
-	mkdir -p $dotfiles
+	mkdir -p "$dotfiles"
 	printf "=== %s crée ! ===\n" "$dotfiles"
 fi
 
 if [ ! -d "$Neovim" ]; then
-	mkdir -p $Neovim
+	mkdir -p "$Neovim"
 	printf "=== %s crée  ! ===\n" "$Neovim"
 	printf "\n"
-	mkdir $Lua
+	mkdir "$Lua"
 	printf "=== %s crée ! ===\n" "$Lua"
 	printf "\n"
 	mkdir $NeovimUserFolder
