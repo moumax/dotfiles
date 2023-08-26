@@ -149,7 +149,7 @@ fi
 if [ "$choice" = "git" ]; then
 	read -p "Ton email ? : " EmailGit
 
-	if ["$EmailGit" = ""]; then
+	if [ "$EmailGit" = "" ]; then
 		printf "\n"
 		printf "Tu dois rentrer un email valide\n"
 		continue
@@ -158,8 +158,8 @@ if [ "$choice" = "git" ]; then
 	cd ~/.ssh 
 	ssh-keygen -t ed25519 -C "$EmailGit"
 	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_ed25519a
-	cat ~/.ssh/id_ed25519a.pub
+	ssh-add ~/.ssh/id_ed25519
+	cat ~/.ssh/id_25519.pub
 fi
 
 if [ "$choice" = "q" ]; then
