@@ -1,7 +1,6 @@
-#!/bin/sh
+#!/bin/sh 
 
-set -e pipefail
-
+set -e pipefail 
 Os="$(uname -s)"
 
 if [ ! "$Os" = "Linux" ]; then 
@@ -30,9 +29,11 @@ printf "           Sélectionnez un choix           \n"
 printf "\n"
 printf "   	1 -- Update et Upgrade du système      \n"
 printf "   	2 -- Création de l'archi dossier       \n"
-printf "   	3 -- Intallation de la font hack       \n"
-printf "   	4 -- Intallation de Alacritty          \n"
-printf "   	5 -- Intallation de Starship           \n"
+printf "   	3 -- Installation de la font hack      \n"
+printf "   	4 -- Installation de Alacritty         \n"
+printf "   	5 -- Installation de Starship          \n"
+printf "   	6 -- Installation de fzf               \n"
+printf "   	7 -- Installation de btop              \n"
 printf "   	q -- Quitter le script                 \n"
 
 read -p "Votre choix ? " choice
@@ -47,9 +48,9 @@ if [ "$choice" = "1" ]; then
 fi
 
 if [ "$choice" = "2" ]; then
-	mkdir ~/dev &&\
-	mkdir ~/apps &&\
-	mkdir ~/downloads &&\
+	mkdir -p ~/dev &&\
+	mkdir -p ~/apps &&\
+	mkdir -p ~/downloads &&\
 	sudo rm -rf ~/Bureau ~/Images ~/Musique ~/Vidéos ~/Documents ~/Modèles ~/Public ~/Téléchargements
 	printf "  =========================================\n"
 	printf "          Les dossiers ont été crées       \n"
@@ -59,7 +60,7 @@ fi
 if [ "$choice" = "3" ]; then
 	wget -P ~/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
 	cd ~/.local/share && \
-	mkdir fonts && \
+	mkdir -p fonts && \
 	cd fonts && \
 	mv ~/downloads/Hack.zip . && \
 	unzip Hack.zip
@@ -76,6 +77,8 @@ if [ "$choice" = "4" ]; then
 	stow -t ~/.config/alacritty alacritty
 	printf "  =========================================\n"
 	printf "      Fin de l'installation d'Alacritty    \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
 fi
 
@@ -87,6 +90,35 @@ if [ "$choice" = "5" ]; then
 	stow -t ~/.config/starship starship
 	printf "  =========================================\n"
 	printf "      Fin de l'installation de starship    \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "  =========================================\n"
+fi
+
+if [ "$choice" = "6" ]; then
+	cd ~/ && \
+	git clone https://github.com/junegunn/fzf ~/.fzf && \
+	cd ~/.fzf && ./install
+	printf "  =========================================\n"
+	printf "         Fin de l'installation de fzf      \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "  =========================================\n"
+fi
+
+if [ "$choice" = "7" ]; then
+	wget -P ~/downloads https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz && \
+	cd ~/apps && \
+	mkdir -p btop && \
+	mv ~/downloads/btop-x86_64-linux-musl.tbz ~/apps/btop && \
+	cd btop
+	tar -xjf btop-x86_64-linux-musl.tbz && \
+	rm btop-x86_64-linux-musl.tbz && \
+	cd btop && sudo make install
+	printf "  =========================================\n"
+	printf "         Fin de l'installation de btop     \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
 fi
 
