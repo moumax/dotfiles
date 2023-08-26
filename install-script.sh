@@ -29,6 +29,7 @@ printf "           Sélectionnez un choix           \n"
 printf "\n"
 printf "   	1 -- Update et Upgrade du système      \n"
 printf "   	2 -- Création de l'archi dossier       \n"
+printf "   	git -- Installation de l'env git       \n"
 printf "	rust -- Installation de rust & cargo   \n"
 printf "	gitui -- Installation de gitui         \n"
 printf "   	3 -- Installation de la font hack      \n"
@@ -144,6 +145,23 @@ if [ "$choice" = "gitui" ]; then
 	printf "        Fin de l'installation de gitui     \n"
 	printf "  =========================================\n"
 fi
+
+if [ "$choice" = "git" ]; then
+	read -p "Ton email ? : " EmailGit
+
+	if ["$EmailGit" = ""]; then
+		printf "\n"
+		printf "Tu dois rentrer un email valide\n"
+		continue
+	fi
+	
+	cd ~/.ssh 
+	ssh-keygen -t ed25519 -C "$EmailGit"
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_ed25519a
+	cat ~/.ssh/id_ed25519a.pub
+fi
+
 if [ "$choice" = "q" ]; then
 	printf "Bye"
 	exit 1
