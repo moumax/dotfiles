@@ -29,6 +29,8 @@ printf "           Sélectionnez un choix           \n"
 printf "\n"
 printf "   	1 -- Update et Upgrade du système      \n"
 printf "   	2 -- Création de l'archi dossier       \n"
+printf "	rust -- Installation de rust & cargo   \n"
+printf "	gitui -- Installation de gitui         \n"
 printf "   	3 -- Installation de la font hack      \n"
 printf "   	4 -- Installation de Alacritty         \n"
 printf "   	5 -- Installation de Starship          \n"
@@ -122,6 +124,26 @@ if [ "$choice" = "7" ]; then
 	printf "  =========================================\n"
 fi
 
+if [ "$choice" = "rust" ]; then
+	cd ~ && \
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	printf "  =========================================\n"
+	printf "         Fin de l'installation de rust     \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "  =========================================\n"
+fi
+
+if [ "$choice" = "gitui" ]; then
+	cd ~ && \
+	cargo install gitui
+	mkdir ~/.config/gitui && \
+	cd ~/dev/dotfiles
+	stow -t ~/.config/gitui gitui
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de gitui     \n"
+	printf "  =========================================\n"
+fi
 if [ "$choice" = "q" ]; then
 	printf "Bye"
 	exit 1
