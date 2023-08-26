@@ -27,21 +27,21 @@ printf "\n"
 printf "  =========================================\n"
 printf "           Sélectionnez un choix           \n"
 printf "\n"
-printf "   	1 -- Update et Upgrade du système      \n"
-printf "   	2 -- Création de l'archi dossier       \n"
+printf "	update -- Update et Upgrade du système \n"
+printf "   	folders -- Création de l'archi dossier \n"
 printf "   	git -- Installation de l'env git       \n"
 printf "	rust -- Installation de rust & cargo   \n"
 printf "	gitui -- Installation de gitui         \n"
-printf "   	3 -- Installation de la font hack      \n"
-printf "   	4 -- Installation de Alacritty         \n"
-printf "   	5 -- Installation de Starship          \n"
-printf "   	6 -- Installation de fzf               \n"
-printf "   	7 -- Installation de btop              \n"
+printf "   	font -- Installation de la font hack   \n"
+printf "   	alacritty -- Installation de Alacritty \n"
+printf "   	starship -- Installation de Starship   \n"
+printf "   	fzf -- Installation de fzf             \n"
+printf "   	btop -- Installation de btop           \n"
 printf "   	q -- Quitter le script                 \n"
 
 read -p "Votre choix ? " choice
 
-if [ "$choice" = "1" ]; then
+if [ "$choice" = "update" ]; then
 	cd ~
 	sudo apt upgrade
 	sudo apt update
@@ -50,7 +50,7 @@ if [ "$choice" = "1" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "2" ]; then
+if [ "$choice" = "folders" ]; then
 	mkdir -p ~/dev &&\
 	mkdir -p ~/apps &&\
 	mkdir -p ~/downloads &&\
@@ -60,7 +60,7 @@ if [ "$choice" = "2" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "3" ]; then
+if [ "$choice" = "font" ]; then
 	wget -P ~/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
 	cd ~/.local/share && \
 	mkdir -p fonts && \
@@ -72,7 +72,7 @@ if [ "$choice" = "3" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "4" ]; then
+if [ "$choice" = "alacritty" ]; then
 	sudo apt update && sudo apt upgrade
 	sudo add-apt-repository ppa:aslatter/ppa -y
 	sudo apt install alacritty
@@ -85,7 +85,7 @@ if [ "$choice" = "4" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "5" ]; then
+if [ "$choice" = "starship" ]; then
 	cd ~/ && \
 	curl -sS https://starship.rs/install.sh | sh
 	mkdir -p ~/.config/starship
@@ -98,7 +98,7 @@ if [ "$choice" = "5" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "6" ]; then
+if [ "$choice" = "fzf" ]; then
 	cd ~/ && \
 	git clone https://github.com/junegunn/fzf ~/.fzf && \
 	cd ~/.fzf && ./install
@@ -109,7 +109,7 @@ if [ "$choice" = "6" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "7" ]; then
+if [ "$choice" = "btop" ]; then
 	wget -P ~/downloads https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz && \
 	cd ~/apps && \
 	mkdir -p btop && \
@@ -160,6 +160,19 @@ if [ "$choice" = "git" ]; then
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/id_ed25519
 	cat ~/.ssh/id_25519.pub
+	printf "  =========================================\n"
+	printf "     Fin de l'installation de l'auth git   \n"
+	printf "  =========================================\n"
+fi
+
+if [ "$choice" = "glow" ]; then
+	sudo mkdir -p /etc/apt/keyrings && \
+	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg && \
+	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list && \
+	sudo apt update && sudo apt install -y glow && sudo apt autoremove -y
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de glow      \n"
+	printf "  =========================================\n"
 fi
 
 if [ "$choice" = "q" ]; then
