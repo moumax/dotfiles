@@ -20,24 +20,39 @@ if ! which node > /dev/null; then
 fi
 
 printf "\n"
-printf "  =========================================\n"
-printf "    Script d'installation Web dev Ubuntu   \n"
-printf "  =========================================\n"
+printf "  =============================================\n"
+printf "       Script d'installation Web dev Ubuntu    \n"
+printf "                 by Moumax (v1.00)             \n"
+printf "  =============================================\n"
 printf "\n"
-printf "  =========================================\n"
-printf "           Sélectionnez un choix           \n"
 printf "\n"
-printf "	update -- Update et Upgrade du système \n"
-printf "   	folders -- Création de l'archi dossier \n"
-printf "   	git -- Installation de l'env git       \n"
-printf "	rust -- Installation de rust & cargo   \n"
-printf "	gitui -- Installation de gitui         \n"
-printf "   	font -- Installation de la font hack   \n"
-printf "   	alacritty -- Installation de Alacritty \n"
-printf "   	starship -- Installation de Starship   \n"
-printf "   	fzf -- Installation de fzf             \n"
-printf "   	btop -- Installation de btop           \n"
-printf "   	q -- Quitter le script                 \n"
+printf "  ----------------DEPENDANCES------------------\n"
+printf "\n"
+printf "  | dep -- Installations de dépendances       |\n"
+printf "\n"
+printf "  ----------------ENVIRONNEMENT----------------\n"
+printf "\n"
+printf "  | update -- Update et Upgrade du système    |\n"
+printf "  | folders -- Création de l'archi dossier    |\n"
+printf "  | git -- Installation de l'env git          |\n"
+printf "  | folders -- Création de l'archi dossier    |\n"
+printf "  | git -- Installation de l'env git          |\n"
+printf "  | rust -- Installation de rust & cargo      |\n"
+printf "  | node -- Installation de NVM pour node     |\n"
+printf "\n"
+printf "  --------------------OUTILS-------------------\n"
+printf "\n"
+printf "  | gitui -- Installation de gitui            |\n"
+printf "  | font -- Installation de la font hack      |\n"
+printf "  | alacritty -- Installation de Alacritty    |\n"
+printf "  | starship -- Installation de Starship      |\n"
+printf "  | fzf -- Installation de fzf                |\n"
+printf "  | btop -- Installation de btop              |\n"
+printf "\n"
+printf "  ---------------------------------------------\n"
+printf "  | q -- Quitter le script                    |\n"
+printf "\n"
+printf "  ---------------------------------------------\n"
 
 read -p "Votre choix ? " choice
 
@@ -175,7 +190,35 @@ if [ "$choice" = "glow" ]; then
 	printf "  =========================================\n"
 fi
 
+if [ "$choice" = "node" ]; then
+	cd ~ && \
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	nvm install 18 && \
+	nvm install 16 && \
+	nvm use 18
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "  =========================================\n"
+fi
+
+
+if [ "$choice" = "dep" ]; then
+	sudo apt update && \
+	sudo apt upgrade -y && \
+	sudo apt install -y git zsh zsh-syntax-highlighting curl i3 rofi compton \
+	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
+	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
+	libssl-dev wget && \
+	sudo apt autoremove -y && \
+	sudo apt autoclean -y
+	printf "  =========================================\n"
+	printf "    Fin de l'installation des dependances  \n"
+	printf "  =========================================\n"
+fi
+
 if [ "$choice" = "q" ]; then
-	printf "Bye"
+	printf "  =========================================\n"
+	printf "                Fin du script              \n"
+	printf "  =========================================\n"
 	exit 1
 fi
