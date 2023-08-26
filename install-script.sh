@@ -35,8 +35,11 @@ read -p "Votre choix ?" choice
 
 if [ "$choice" = "1" ]; then
 	cd ~
+	sudo apt upgrade
 	sudo apt update
-	sudo apt Upgrade
+	printf "  =========================================\n"
+	printf "            Fin de la mise à jour          \n"
+	printf "  =========================================\n"
 fi
 
 if [ "$choice" = "q" ]; then
