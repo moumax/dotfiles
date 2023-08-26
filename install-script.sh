@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 set -e pipefail
 
 Os="$(uname -s)"
@@ -33,6 +32,12 @@ printf "   	1 -- Update et Upgrade du système      \n"
 printf "   	q -- Quitter le script                 \n"
 
 read -p "Votre choix ?" choice
+
+if [ "$choice" = "1" ]; then
+	cd ~
+	sudo apt update
+	sudo apt Upgrade
+fi
 
 if [ "$choice" = "q" ]; then
 	printf "Bye"
