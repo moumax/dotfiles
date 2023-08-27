@@ -51,12 +51,13 @@ printf "  | 10 -- fzf -- Install de fzf               |\n"
 printf "  | 11 -- gitui -- Install de gitui           |\n"
 printf "  | 12 -- btop -- Install de btop             |\n"
 printf "  | 13 -- glow -- Install de glow             |\n"
+printf "  | 14 -- tmux -- Install de tmux             |\n"
 printf "\n"
 printf "  -------------------NEOVIM--------------------\n"
 printf "\n"
-printf "  | 14 -- packer -- Install de packer         |\n"
-printf "  | 15 -- pynvim -- Install de pynvim         |\n"
-printf "  | 16 -- neovim -- Install de neovim 	      |\n"
+printf "  | 15 -- packer -- Install de packer         |\n"
+printf "  | 16 -- pynvim -- Install de pynvim         |\n"
+printf "  | 17 -- neovim -- Install de neovim 	      |\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
 printf "\n"
@@ -260,7 +261,27 @@ if [ "$choice" = "glow" ]; then
 	printf "  =========================================\n"
 fi
 
-# 14 PACKER
+# 14 TMUX (A TESTER) 
+if [ "$choice" = "tmux" ]; then
+	cd ~ && \
+	sudo apt update && \
+	sudo apt upgrade -y && \
+	sudo apt remove tmux && \
+	sudo apt autoremove -y && \
+	rm -rf .tmux
+	sudo apt install -y libevent-dev ncurses-dev build-essential bison	
+	git clone https://github.com/tmux/tmux.git ~/apps/tmux
+	cd ~/apps/tmux && \
+	sh autogen.sh && \
+	./configure && \
+	make && \
+	sudo make install
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de tmux      \n"
+	printf "  =========================================\n"
+fi
+
+# 15 PACKER
 if [ "$choice" = "packer" ]; then
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	printf "  =========================================\n"
@@ -268,7 +289,7 @@ if [ "$choice" = "packer" ]; then
 	printf "  =========================================\n"
 fi
 
-# 15 PYNVIM
+# 16 PYNVIM
 if [ "$choice" = "pynvim" ]; then
 	cd ~ && \
 	pip3 install pynvim --break-system-packages
@@ -277,7 +298,7 @@ if [ "$choice" = "pynvim" ]; then
 	printf "  =========================================\n"
 fi
 
-# 16 NEOVIM (A TESTER) 
+# 17 NEOVIM (A TESTER) 
 if [ "$choice" = "neovim" ]; then
 	cd ~ && \
 	sudo apt install build-essential software-properties-common -y
@@ -297,6 +318,7 @@ if [ "$choice" = "neovim" ]; then
 	printf "        Fin de l'installation de neovim    \n"
 	printf "  =========================================\n"
 fi
+
 
 if [ "$choice" = "q" ]; then
 	printf "  =========================================\n"
