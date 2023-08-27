@@ -26,19 +26,21 @@ printf "                 by Moumax (v1.00)             \n"
 printf "  =============================================\n"
 printf "\n"
 printf "\n"
+printf "  ----------------MAINTENANCE------------------\n"
+printf "\n"
+printf "  | 0 -- update -- Update, Upgrade du système |\n"
+printf "\n"
 printf "  ----------------DEPENDANCES------------------\n"
 printf "\n"
-printf "  | dep -- Installations de dépendances       |\n"
+printf "  | 1 -- dep -- Installations de dépendances  |\n"
 printf "\n"
 printf "  ----------------ENVIRONNEMENT----------------\n"
 printf "\n"
-printf "  | update -- Update et Upgrade du système    |\n"
-printf "  | folders -- Création de l'archi dossier    |\n"
-printf "  | git -- Installation de l'env git          |\n"
-printf "  | folders -- Création de l'archi dossier    |\n"
-printf "  | git -- Installation de l'env git          |\n"
-printf "  | rust -- Installation de rust & cargo      |\n"
-printf "  | node -- Installation de NVM pour node     |\n"
+printf "  | 2 -- folders -- Architecture des dossiers |\n"
+printf "  | 3 -- git -- Installation de l'env git     |\n"
+printf "  | 4 -- node -- Installation de nodeJS       |\n"
+printf "  | 5 -- rust -- Installation de rust         |\n"
+printf "  | 6 -- dotfiles -- Install des dotfiles     |\n"
 printf "\n"
 printf "  --------------------OUTILS-------------------\n"
 printf "\n"
@@ -56,6 +58,7 @@ printf "  ---------------------------------------------\n"
 
 read -p "Votre choix ? " choice
 
+# 0 UPDATE
 if [ "$choice" = "update" ]; then
 	cd ~
 	sudo apt upgrade
@@ -65,6 +68,22 @@ if [ "$choice" = "update" ]; then
 	printf "  =========================================\n"
 fi
 
+# 1 DEPENDANCES
+if [ "$choice" = "dep" ]; then
+	sudo apt update && \
+	sudo apt upgrade -y && \
+	sudo apt install -y git zsh zsh-syntax-highlighting curl i3 rofi compton \
+	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
+	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
+	libssl-dev wget && \
+	sudo apt autoremove -y && \
+	sudo apt autoclean -y
+	printf "  =========================================\n"
+	printf "    Fin de l'installation des dependances  \n"
+	printf "  =========================================\n"
+fi
+
+# 2 FOLDERS
 if [ "$choice" = "folders" ]; then
 	mkdir -p ~/dev &&\
 	mkdir -p ~/apps &&\
@@ -72,6 +91,73 @@ if [ "$choice" = "folders" ]; then
 	sudo rm -rf ~/Bureau ~/Images ~/Musique ~/Vidéos ~/Documents ~/Modèles ~/Public ~/Téléchargements
 	printf "  =========================================\n"
 	printf "          Les dossiers ont été crées       \n"
+	printf "  =========================================\n"
+fi
+
+# 3 GIT
+if [ "$choice" = "git" ]; then
+	read -p "Ton email ? : " EmailGit
+
+	if [ "$EmailGit" = "" ]; then
+		printf "\n"
+		printf "Tu dois rentrer un email valide\n"
+		continue
+	fi
+	
+	cd ~/.ssh 
+	ssh-keygen -t ed25519 -C "$EmailGit"
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_ed25519
+	cat ~/.ssh/id_25519.pub
+	printf "  =========================================\n"
+	printf "     Fin de l'installation de l'auth git   \n"
+	printf "  =========================================\n"
+fi
+
+# 4 NODE
+if [ "$choice" = "node" ]; then
+	cd ~ && \
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	nvm install 18 && \
+	nvm install 16 && \
+	nvm use 18
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "  =========================================\n"
+fi
+
+# 5 RUST
+if [ "$choice" = "rust" ]; then
+	cd ~ && \
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	printf "  =========================================\n"
+	printf "         Fin de l'installation de rust     \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "            REDEMARREZ LE TERMINAL         \n"
+	printf "  =========================================\n"
+fi
+
+# 6 DOTFILES
+if [ "$choice" = "dotfiles" ]; then
+	cd ~ 
+	read -p "Adresse de vos dotfiles " dotfiles
+	printf "Le dossier sera crée dans votre fichier perso home/votrePseudo/LeDossier \n"
+	printf "exemple : dev/dotfiles -- clonera dans home/votrePseudo/dev/dotfiles\n"
+	read -p "Dossier destinataire " folderToPaste
+	if [ ! -d "$folderToPaste" ]; then
+		printf "Le dossier de destination n'existe pas. Création du dossier..."
+		mkdir -p "$folderToPaste"
+	fi
+
+	git clone "$dotfiles" "$folderToPaste"
+
+	if [ $? -eq 0 ]; then
+		printf "Le dépôt a été cloné avec succès dans $folderToPaste."
+	else
+		printf "Une erreur s'est produite lors du clonage du dépôt."
+	fi
+	printf "  =========================================\n"
+	printf "      Fin de l'installation des dotfiles   \n"
 	printf "  =========================================\n"
 fi
 
@@ -140,15 +226,7 @@ if [ "$choice" = "btop" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "rust" ]; then
-	cd ~ && \
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	printf "  =========================================\n"
-	printf "         Fin de l'installation de rust     \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
-	printf "  =========================================\n"
-fi
+
 
 if [ "$choice" = "gitui" ]; then
 	cd ~ && \
@@ -161,24 +239,7 @@ if [ "$choice" = "gitui" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "git" ]; then
-	read -p "Ton email ? : " EmailGit
 
-	if [ "$EmailGit" = "" ]; then
-		printf "\n"
-		printf "Tu dois rentrer un email valide\n"
-		continue
-	fi
-	
-	cd ~/.ssh 
-	ssh-keygen -t ed25519 -C "$EmailGit"
-	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_ed25519
-	cat ~/.ssh/id_25519.pub
-	printf "  =========================================\n"
-	printf "     Fin de l'installation de l'auth git   \n"
-	printf "  =========================================\n"
-fi
 
 if [ "$choice" = "glow" ]; then
 	sudo mkdir -p /etc/apt/keyrings && \
@@ -190,31 +251,10 @@ if [ "$choice" = "glow" ]; then
 	printf "  =========================================\n"
 fi
 
-if [ "$choice" = "node" ]; then
-	cd ~ && \
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	nvm install 18 && \
-	nvm install 16 && \
-	nvm use 18
-	printf "  =========================================\n"
-	printf "        Fin de l'installation de nodeJs    \n"
-	printf "  =========================================\n"
-fi
 
 
-if [ "$choice" = "dep" ]; then
-	sudo apt update && \
-	sudo apt upgrade -y && \
-	sudo apt install -y git zsh zsh-syntax-highlighting curl i3 rofi compton \
-	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
-	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
-	libssl-dev wget && \
-	sudo apt autoremove -y && \
-	sudo apt autoclean -y
-	printf "  =========================================\n"
-	printf "    Fin de l'installation des dependances  \n"
-	printf "  =========================================\n"
-fi
+
+
 
 if [ "$choice" = "q" ]; then
 	printf "  =========================================\n"
