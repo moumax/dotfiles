@@ -55,6 +55,7 @@ printf "\n"
 printf "  -------------------NEOVIM--------------------\n"
 printf "\n"
 printf "  | 14 -- packer -- Install de packer         |\n"
+printf "  | 15 -- pynvim -- Install de pynvim         |\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
 printf "\n"
@@ -261,6 +262,12 @@ fi
 # 14 PACKER
 if [ "$choice" = "packer" ]; then
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
+
+# 15 PYNVIM
+if [ "$choice" = "pynvim" ]; then
+	cd ~ && \
+	pip3 install pynvim --break-system-packages
 fi
 
 if [ "$choice" = "q" ]; then
