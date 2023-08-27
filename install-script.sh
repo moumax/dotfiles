@@ -52,6 +52,9 @@ printf "  | 11 -- gitui -- Install de gitui           |\n"
 printf "  | 12 -- btop -- Install de btop             |\n"
 printf "  | 13 -- glow -- Install de glow             |\n"
 printf "\n"
+printf "  -------------------NEOVIM--------------------\n"
+printf "\n"
+printf "  | 14 -- packer -- Install de packer         |\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
 printf "\n"
@@ -253,6 +256,11 @@ if [ "$choice" = "glow" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de glow      \n"
 	printf "  =========================================\n"
+fi
+
+# 14 PACKER
+if [ "$choice" = "packer" ]; then
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
 
 if [ "$choice" = "q" ]; then
