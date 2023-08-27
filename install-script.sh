@@ -12,11 +12,11 @@ if [ ! "$Os" = "Linux" ]; then
 fi
 
 if ! which node > /dev/null; then
-		printf "\n"
-		printf "  ================================================\n"
-		printf "      Vous devez installer NodeJs en premier      \n"
-		printf "  ================================================\n"
-		exit 1
+	printf "\n"
+	printf "  ================================================\n"
+	printf "      Vous devez installer NodeJs en premier      \n"
+	printf "  ================================================\n"
+	exit 1
 fi
 
 printf "\n"
@@ -44,12 +44,13 @@ printf "  | 6 -- dotfiles -- Install des dotfiles     |\n"
 printf "\n"
 printf "  --------------------OUTILS-------------------\n"
 printf "\n"
-printf "  | gitui -- Installation de gitui            |\n"
-printf "  | font -- Installation de la font hack      |\n"
-printf "  | alacritty -- Installation de Alacritty    |\n"
-printf "  | starship -- Installation de Starship      |\n"
-printf "  | fzf -- Installation de fzf                |\n"
-printf "  | btop -- Installation de btop              |\n"
+printf "  | 7 -- font -- Install la font hack         |\n"
+printf "  | 8 -- alacritty -- Install Alacritty       |\n"
+printf "  | 9 -- starship -- Install de Starship      |\n"
+printf "  | 10 -- fzf -- Install de fzf               |\n"
+printf "  | 11 -- gitui -- Install de gitui           |\n"
+printf "  | 12 -- btop -- Install de btop             |\n"
+printf "  | 13 -- glow -- Install de glow             |\n"
 printf "\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
@@ -161,6 +162,7 @@ if [ "$choice" = "dotfiles" ]; then
 	printf "  =========================================\n"
 fi
 
+# 7 FONT
 if [ "$choice" = "font" ]; then
 	wget -P ~/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
 	cd ~/.local/share && \
@@ -173,6 +175,7 @@ if [ "$choice" = "font" ]; then
 	printf "  =========================================\n"
 fi
 
+# 8 ALACRITTY
 if [ "$choice" = "alacritty" ]; then
 	sudo apt update && sudo apt upgrade
 	sudo add-apt-repository ppa:aslatter/ppa -y
@@ -186,6 +189,7 @@ if [ "$choice" = "alacritty" ]; then
 	printf "  =========================================\n"
 fi
 
+# 9 STARSHIP
 if [ "$choice" = "starship" ]; then
 	cd ~/ && \
 	curl -sS https://starship.rs/install.sh | sh
@@ -199,6 +203,7 @@ if [ "$choice" = "starship" ]; then
 	printf "  =========================================\n"
 fi
 
+# 10 FZF
 if [ "$choice" = "fzf" ]; then
 	cd ~/ && \
 	git clone https://github.com/junegunn/fzf ~/.fzf && \
@@ -210,6 +215,19 @@ if [ "$choice" = "fzf" ]; then
 	printf "  =========================================\n"
 fi
 
+# 11 GITUI
+if [ "$choice" = "gitui" ]; then
+	cd ~ && \
+	cargo install gitui
+	mkdir ~/.config/gitui && \
+	cd ~/dev/dotfiles
+	stow -t ~/.config/gitui gitui
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de gitui     \n"
+	printf "  =========================================\n"
+fi
+
+# 12 BTOP
 if [ "$choice" = "btop" ]; then
 	wget -P ~/downloads https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz && \
 	cd ~/apps && \
@@ -226,21 +244,7 @@ if [ "$choice" = "btop" ]; then
 	printf "  =========================================\n"
 fi
 
-
-
-if [ "$choice" = "gitui" ]; then
-	cd ~ && \
-	cargo install gitui
-	mkdir ~/.config/gitui && \
-	cd ~/dev/dotfiles
-	stow -t ~/.config/gitui gitui
-	printf "  =========================================\n"
-	printf "        Fin de l'installation de gitui     \n"
-	printf "  =========================================\n"
-fi
-
-
-
+# 13 GLOW
 if [ "$choice" = "glow" ]; then
 	sudo mkdir -p /etc/apt/keyrings && \
 	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg && \
@@ -250,11 +254,6 @@ if [ "$choice" = "glow" ]; then
 	printf "        Fin de l'installation de glow      \n"
 	printf "  =========================================\n"
 fi
-
-
-
-
-
 
 if [ "$choice" = "q" ]; then
 	printf "  =========================================\n"
