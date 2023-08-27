@@ -56,6 +56,7 @@ printf "  -------------------NEOVIM--------------------\n"
 printf "\n"
 printf "  | 14 -- packer -- Install de packer         |\n"
 printf "  | 15 -- pynvim -- Install de pynvim         |\n"
+printf "  | 16 -- neovim -- Install de neovim 	      |\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
 printf "\n"
@@ -262,12 +263,39 @@ fi
 # 14 PACKER
 if [ "$choice" = "packer" ]; then
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de packer    \n"
+	printf "  =========================================\n"
 fi
 
 # 15 PYNVIM
 if [ "$choice" = "pynvim" ]; then
 	cd ~ && \
 	pip3 install pynvim --break-system-packages
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de pynvim    \n"
+	printf "  =========================================\n"
+fi
+
+# 16 NEOVIM (A TESTER) 
+if [ "$choice" = "neovim" ]; then
+	cd ~ && \
+	sudo apt install build-essential software-properties-common -y
+	sudo add-apt-repository ppa:neovim-ppa/unstable -y
+	sudo apt-get update
+	sudo apt install neovim -y
+	mkdir ~/.config/nvim
+	npm i -g tree-sitter-cli && \
+	npm i -g neovim
+	cd ~/dev/dotfiles
+	stow -t ~/.config/nvim neovim
+	printf "  =========================================\n"
+	printf "  Pour terminer la configuration de neovim \n"
+	printf "  Rendez-vous dans packer.lua pour install \n"
+	printf "  les dépendances                          \n"
+	printf "\n"
+	printf "        Fin de l'installation de neovim    \n"
+	printf "  =========================================\n"
 fi
 
 if [ "$choice" = "q" ]; then
