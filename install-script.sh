@@ -3,6 +3,9 @@
 set -e pipefail 
 Os="$(uname -s)"
 
+dialog_width=600
+dialog_height=200
+
 if [ ! "$Os" = "Linux" ]; then 
 	printf "\n"
 	printf "  ================================================\n"
@@ -310,6 +313,7 @@ if [ "$choice" = "neovim" ]; then
 	npm i -g neovim
 	cd ~/dev/dotfiles
 	stow -t ~/.config/nvim neovim
+	zenity --info --text="ouvrez packer.lua pour installer les paquets\n puis exécutez :PackerSync" --width=$dialog_width --height=$dialog_height
 	printf "  =========================================\n"
 	printf "  Pour terminer la configuration de neovim \n"
 	printf "  Rendez-vous dans packer.lua pour install \n"
