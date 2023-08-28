@@ -279,6 +279,12 @@ if [ "$choice" = "tmux" ]; then
 	./configure && \
 	make && \
 	sudo make install
+	git clone https://github.com/tmux-plugins/tpm ~/tmux/.tmux/plugins/tpm && \
+	git clone https://github.com/erikw/tmux-powerline.git ~/tmux/.tmux/plugins/tmux-powerline
+	cd ~/dev/dotfiles 
+	stow -t ~/tmux tmux
+	mv ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
+	ln -s ~/dev/dotfiles/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de tmux      \n"
 	printf "  =========================================\n"
