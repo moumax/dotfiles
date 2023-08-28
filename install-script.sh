@@ -65,6 +65,7 @@ printf "  | neovim -- Install de neovim               |\n"
 printf "  ---------------------I3----------------------\n"
 printf "\n"
 printf "  | rofi -- Install de rofi                   |\n"
+printf "  | polybar -- Install de polybar             |\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
 printf "\n"
@@ -353,6 +354,40 @@ if [ "$choice" = "rofi" ]; then
 	stow -t ~/.config/rofi rofi
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rofi      \n"
+	printf "  =========================================\n"
+fi
+
+# POLYBAR 
+if [ "$choice" = "polybar" ]; then
+	cd ~/ && \
+	sudo apt update && \
+	sudo apt upgrade -y && \
+	sudo apt install -y git cmake build-essential cmake-data pkg-config python3-sphinx \
+	libuv1-dev libcairo2-dev libxcb1-dev libcurl4-openssl-dev libnl-genl-3-dev \
+	libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen \
+	xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev \
+	libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev i3-wm \
+	libjsoncpp-dev libmpdclient-dev python3-packaging && \
+	sudo apt autoremove -y
+	wget -P ~/downloads https://github.com/polybar/polybar/releases/download/3.6.3/polybar-3.6.3.tar.gz && \
+	cd ~/downloads && \
+	tar xvzf polybar-3.6.3.tar.gz && \
+	rm -rf polybar-3.6.3.tar.gz
+	mv polybar-3.6.3 ~/apps/Polybar-3.6.3 && \
+	cd ~/apps/Polybar-3.6.3 && \
+	mkdir build && \
+	cd build
+	cmake .. && \
+	make -j$(nproc) && \
+	sudo make install
+	mkdir ~/.config/polybar && \
+	chmod +x ~/dotfiles/polybar/polybar.sh && \
+	cd ~/dotfiles && \
+	stow -t ~/.config/polybar polybar
+	cd ~ && \
+	sudo apt install -y fonts-font-awesome
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de polybar   \n"
 	printf "  =========================================\n"
 fi
 
