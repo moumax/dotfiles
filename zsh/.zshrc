@@ -183,3 +183,6 @@ eval "$(zoxide init zsh)"
 
 # Starship
 eval "$(starship init zsh)"
+
+# Keyboard speed
+xset r rate 250 70

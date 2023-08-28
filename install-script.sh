@@ -31,36 +31,37 @@ printf "\n"
 printf "\n"
 printf "  ----------------MAINTENANCE------------------\n"
 printf "\n"
-printf "  | 0 -- update -- Update, Upgrade du système |\n"
+printf "  | update -- Update, Upgrade du système      |\n"
 printf "\n"
 printf "  ----------------DEPENDANCES------------------\n"
 printf "\n"
-printf "  | 1 -- dep -- Installations de dépendances  |\n"
+printf "  | dep -- Installations de dépendances       |\n"
 printf "\n"
 printf "  ----------------ENVIRONNEMENT----------------\n"
 printf "\n"
-printf "  | 2 -- folders -- Architecture des dossiers |\n"
-printf "  | 3 -- git -- Installation de l'env git     |\n"
-printf "  | 4 -- node -- Installation de nodeJS       |\n"
-printf "  | 5 -- rust -- Installation de rust         |\n"
-printf "  | 6 -- dotfiles -- Install des dotfiles     |\n"
+printf "  | folders -- Architecture des dossiers      |\n"
+printf "  | git -- Installation de l'env git          |\n"
+printf "  | node -- Installation de nodeJS            |\n"
+printf "  | rust -- Installation de rust              |\n"
+printf "  | dotfiles -- Install des dotfiles          |\n"
 printf "\n"
 printf "  --------------------OUTILS-------------------\n"
 printf "\n"
-printf "  | 7 -- font -- Install la font hack         |\n"
-printf "  | 8 -- alacritty -- Install Alacritty       |\n"
-printf "  | 9 -- starship -- Install de Starship      |\n"
-printf "  | 10 -- fzf -- Install de fzf               |\n"
-printf "  | 11 -- gitui -- Install de gitui           |\n"
-printf "  | 12 -- btop -- Install de btop             |\n"
-printf "  | 13 -- glow -- Install de glow             |\n"
-printf "  | 14 -- tmux -- Install de tmux             |\n"
+printf "  | ohmyzsh -- Install d'oh my zsh            |\n"
+printf "  | font -- Install la font hack              |\n"
+printf "  | alacritty -- Install Alacritty            |\n"
+printf "  | starship -- Install de Starship           |\n"
+printf "  | fzf -- Install de fzf                     |\n"
+printf "  | gitui -- Install de gitui                 |\n"
+printf "  | btop -- Install de btop                   |\n"
+printf "  | glow -- Install de glow                   |\n"
+printf "  | tmux -- Install de tmux                   |\n"
 printf "\n"
 printf "  -------------------NEOVIM--------------------\n"
 printf "\n"
-printf "  | 15 -- packer -- Install de packer         |\n"
-printf "  | 16 -- pynvim -- Install de pynvim         |\n"
-printf "  | 17 -- neovim -- Install de neovim 	      |\n"
+printf "  | packer -- Install de packer               |\n"
+printf "  | pynvim -- Install de pynvim               |\n"
+printf "  | neovim -- Install de neovim               |\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
 printf "\n"
@@ -68,7 +69,7 @@ printf "  ---------------------------------------------\n"
 
 read -p "Votre choix ? " choice
 
-# 0 UPDATE
+# UPDATE
 if [ "$choice" = "update" ]; then
 	cd ~
 	sudo apt upgrade
@@ -78,7 +79,7 @@ if [ "$choice" = "update" ]; then
 	printf "  =========================================\n"
 fi
 
-# 1 DEPENDANCES
+# DEPENDANCES
 if [ "$choice" = "dep" ]; then
 	sudo apt update && \
 	sudo apt upgrade -y && \
@@ -93,7 +94,7 @@ if [ "$choice" = "dep" ]; then
 	printf "  =========================================\n"
 fi
 
-# 2 FOLDERS
+# FOLDERS
 if [ "$choice" = "folders" ]; then
 	mkdir -p ~/dev &&\
 	mkdir -p ~/apps &&\
@@ -104,7 +105,7 @@ if [ "$choice" = "folders" ]; then
 	printf "  =========================================\n"
 fi
 
-# 3 GIT
+# GIT
 if [ "$choice" = "git" ]; then
 	read -p "Ton email ? : " EmailGit
 
@@ -124,7 +125,7 @@ if [ "$choice" = "git" ]; then
 	printf "  =========================================\n"
 fi
 
-# 4 NODE
+# NODE
 if [ "$choice" = "node" ]; then
 	cd ~ && \
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -136,7 +137,7 @@ if [ "$choice" = "node" ]; then
 	printf "  =========================================\n"
 fi
 
-# 5 RUST
+# RUST
 if [ "$choice" = "rust" ]; then
 	cd ~ && \
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -147,7 +148,7 @@ if [ "$choice" = "rust" ]; then
 	printf "  =========================================\n"
 fi
 
-# 6 DOTFILES
+# DOTFILES
 if [ "$choice" = "dotfiles" ]; then
 	cd ~ 
 	read -p "Adresse de vos dotfiles " dotfiles
@@ -171,7 +172,20 @@ if [ "$choice" = "dotfiles" ]; then
 	printf "  =========================================\n"
 fi
 
-# 7 FONT
+# OHMYZSH
+if [ "$choice" = "ohmyzsh" ]; then
+#	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#	cd ~/dev/dotfiles
+#	stow -t ~/.oh-my-zsh/custom/themes oh-my-zsh
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	zenity --info --text="Fermez le terminal, logout, login" --width=$dialog_width --height=$dialog_height
+	printf "  =========================================\n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
+	printf "  =========================================\n"
+fi
+
+# FONT
 if [ "$choice" = "font" ]; then
 	wget -P ~/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
 	cd ~/.local/share && \
@@ -184,7 +198,7 @@ if [ "$choice" = "font" ]; then
 	printf "  =========================================\n"
 fi
 
-# 8 ALACRITTY
+# ALACRITTY
 if [ "$choice" = "alacritty" ]; then
 	sudo apt update && sudo apt upgrade
 	sudo add-apt-repository ppa:aslatter/ppa -y
@@ -198,7 +212,7 @@ if [ "$choice" = "alacritty" ]; then
 	printf "  =========================================\n"
 fi
 
-# 9 STARSHIP
+# STARSHIP
 if [ "$choice" = "starship" ]; then
 	cd ~/ && \
 	curl -sS https://starship.rs/install.sh | sh
@@ -212,7 +226,7 @@ if [ "$choice" = "starship" ]; then
 	printf "  =========================================\n"
 fi
 
-# 10 FZF
+# FZF
 if [ "$choice" = "fzf" ]; then
 	cd ~/ && \
 	git clone https://github.com/junegunn/fzf ~/.fzf && \
@@ -224,7 +238,7 @@ if [ "$choice" = "fzf" ]; then
 	printf "  =========================================\n"
 fi
 
-# 11 GITUI
+# GITUI
 if [ "$choice" = "gitui" ]; then
 	cd ~ && \
 	cargo install gitui
@@ -236,7 +250,7 @@ if [ "$choice" = "gitui" ]; then
 	printf "  =========================================\n"
 fi
 
-# 12 BTOP
+# BTOP
 if [ "$choice" = "btop" ]; then
 	wget -P ~/downloads https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz && \
 	cd ~/apps && \
@@ -253,7 +267,7 @@ if [ "$choice" = "btop" ]; then
 	printf "  =========================================\n"
 fi
 
-# 13 GLOW
+# GLOW
 if [ "$choice" = "glow" ]; then
 	sudo mkdir -p /etc/apt/keyrings && \
 	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg && \
@@ -264,7 +278,7 @@ if [ "$choice" = "glow" ]; then
 	printf "  =========================================\n"
 fi
 
-# 14 TMUX (A TESTER) 
+# TMUX (A TESTER) 
 if [ "$choice" = "tmux" ]; then
 	cd ~ && \
 	sudo apt update && \
@@ -290,7 +304,7 @@ if [ "$choice" = "tmux" ]; then
 	printf "  =========================================\n"
 fi
 
-# 15 PACKER
+# PACKER
 if [ "$choice" = "packer" ]; then
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	printf "  =========================================\n"
@@ -298,7 +312,7 @@ if [ "$choice" = "packer" ]; then
 	printf "  =========================================\n"
 fi
 
-# 16 PYNVIM
+# PYNVIM
 if [ "$choice" = "pynvim" ]; then
 	cd ~ && \
 	pip3 install pynvim --break-system-packages
@@ -307,7 +321,7 @@ if [ "$choice" = "pynvim" ]; then
 	printf "  =========================================\n"
 fi
 
-# 17 NEOVIM (A TESTER) 
+# NEOVIM (A TESTER) 
 if [ "$choice" = "neovim" ]; then
 	cd ~ && \
 	sudo apt install build-essential software-properties-common -y
