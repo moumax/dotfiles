@@ -62,6 +62,9 @@ printf "\n"
 printf "  | packer -- Install de packer               |\n"
 printf "  | pynvim -- Install de pynvim               |\n"
 printf "  | neovim -- Install de neovim               |\n"
+printf "  ---------------------I3----------------------\n"
+printf "\n"
+printf "  | rofi -- Install de rofi                   |\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
 printf "\n"
@@ -343,6 +346,15 @@ if [ "$choice" = "neovim" ]; then
 	printf "  =========================================\n"
 fi
 
+# ROFI 
+if [ "$choice" = "rofi" ]; then
+	mkdir ~/.config/rofi && \
+	cd ~/dev/dotfiles && \
+	stow -t ~/.config/rofi rofi
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de rofi      \n"
+	printf "  =========================================\n"
+fi
 
 if [ "$choice" = "q" ]; then
 	printf "  =========================================\n"
