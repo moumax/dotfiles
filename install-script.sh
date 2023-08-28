@@ -66,6 +66,7 @@ printf "  ---------------------I3----------------------\n"
 printf "\n"
 printf "  | rofi -- Install de rofi                   |\n"
 printf "  | polybar -- Install de polybar             |\n"
+printf "  | i3-config -- Fichiers de config i3        |\n"
 printf "  ---------------------------------------------\n"
 printf "  | q -- Quitter le script                    |\n"
 printf "\n"
@@ -388,6 +389,16 @@ if [ "$choice" = "polybar" ]; then
 	sudo apt install -y fonts-font-awesome
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de polybar   \n"
+	printf "  =========================================\n"
+fi
+
+# I3-CONFIG
+if [ "$choice" = "i3-config" ]; then
+	mkdir ~/.config/i3
+	cd ~/dev/dotfiles && \
+	stow -t ~/.config/i3 i3
+	printf "  =========================================\n"
+	printf "        Fin de l'installation d'i3         \n"
 	printf "  =========================================\n"
 fi
 
