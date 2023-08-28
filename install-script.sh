@@ -6,6 +6,16 @@ Os="$(uname -s)"
 dialog_width=600
 dialog_height=200
 
+CRS='\033[0m'
+CR='\033[0;31m'
+CN='\033[0;30m'
+CV='\033[0;32m'
+CJ='\033[0;33m'
+CB='\033[0;34m'
+CVIO='\033[0;35m'
+CC='\033[0;36m'
+CBLA='\033[0;37m'
+
 if [ ! "$Os" = "Linux" ]; then 
 	printf "\n"
 	printf "  ================================================\n"
@@ -24,53 +34,52 @@ fi
 
 printf "\n"
 printf "  =============================================\n"
-printf "       Script d'installation Web dev Ubuntu    \n"
-printf "                 by Moumax (v1.00)             \n"
+printf "    $CR Script d'installation Web dev Ubuntu   \n"
+printf "             by Moumax (v1.00) $CRS            \n"
 printf "  =============================================\n"
 printf "\n"
 printf "\n"
 printf "  ----------------MAINTENANCE------------------\n"
 printf "\n"
-printf "  | update -- Update, Upgrade du système      |\n"
+printf "  $CB update $CRS  -- Update du système       \n"
 printf "\n"
 printf "  ----------------DEPENDANCES------------------\n"
 printf "\n"
-printf "  | dep -- Installations de dépendances       |\n"
+printf "  $CB dep $CRS     -- Install des dépendances    \n"
 printf "\n"
 printf "  ----------------ENVIRONNEMENT----------------\n"
 printf "\n"
-printf "  | folders -- Architecture des dossiers      |\n"
-printf "  | git -- Installation de l'env git          |\n"
-printf "  | node -- Installation de nodeJS            |\n"
-printf "  | rust -- Installation de rust              |\n"
-printf "  | dotfiles -- Install des dotfiles          |\n"
+printf "  $CB folders $CRS -- Archi des dossiers    \n"
+printf "  $CB git $CRS     -- Install de l'env git \n"
+printf "  $CB node $CRS    -- Install de nodeJS   \n"
+printf "  $CB rust $CRS    -- Install de rust     \n"
+printf "  $CB dot $CRS     -- Install des dotfiles \n"
 printf "\n"
 printf "  --------------------OUTILS-------------------\n"
 printf "\n"
-printf "  | ohmyzsh -- Install d'oh my zsh            |\n"
-printf "  | font -- Install la font hack              |\n"
-printf "  | alacritty -- Install Alacritty            |\n"
-printf "  | starship -- Install de Starship           |\n"
-printf "  | fzf -- Install de fzf                     |\n"
-printf "  | gitui -- Install de gitui                 |\n"
-printf "  | btop -- Install de btop                   |\n"
-printf "  | glow -- Install de glow                   |\n"
-printf "  | tmux -- Install de tmux                   |\n"
+printf "  $CB ohmyzsh $CRS -- Install d'oh my zsh    \n"
+printf "  $CB font $CRS    -- Install la font hack      \n"
+printf "  $CB alacr $CRS   -- Install Alacritty    \n"
+printf "  $CB stars $CRS   -- Install de Starship   \n"
+printf "  $CB fzf $CRS     -- Install de fzf             \n"
+printf "  $CB gitui $CRS   -- Install de gitui         \n"
+printf "  $CB btop $CRS    -- Install de btop           \n"
+printf "  $CB glow $CRS    -- Install de glow           \n"
+printf "  $CB tmux $CRS    -- Install de tmux           \n"
 printf "\n"
 printf "  -------------------NEOVIM--------------------\n"
 printf "\n"
-printf "  | packer -- Install de packer               |\n"
-printf "  | pynvim -- Install de pynvim               |\n"
-printf "  | neovim -- Install de neovim               |\n"
+printf "  $CB packer $CRS  -- Install de packer       \n"
+printf "  $CB pynvim $CRS  -- Install de pynvim       \n"
+printf "  $CB neovim $CRS  -- Install de neovim       \n"
 printf "  ---------------------I3----------------------\n"
 printf "\n"
-printf "  | rofi -- Install de rofi                   |\n"
-printf "  | polybar -- Install de polybar             |\n"
-printf "  | i3-config -- Fichiers de config i3        |\n"
+printf "  $CB rofi $CRS    -- Install de rofi           \n"
+printf "  $CB polybar $CRS -- Install de polybar     \n"
+printf "  $CB i3-conf $CRS -- Fichiers de config i3 \n"
 printf "  ---------------------------------------------\n"
-printf "  | q -- Quitter le script                    |\n"
+printf "  $CR q -- $CRS Quitter le script             \n"
 printf "\n"
-printf "  ---------------------------------------------\n"
 
 read -p "Votre choix ? " choice
 
@@ -154,7 +163,7 @@ if [ "$choice" = "rust" ]; then
 fi
 
 # DOTFILES
-if [ "$choice" = "dotfiles" ]; then
+if [ "$choice" = "dot" ]; then
 	cd ~ 
 	read -p "Adresse de vos dotfiles " dotfiles
 	printf "Le dossier sera crée dans votre fichier perso home/votrePseudo/LeDossier \n"
@@ -204,7 +213,7 @@ if [ "$choice" = "font" ]; then
 fi
 
 # ALACRITTY
-if [ "$choice" = "alacritty" ]; then
+if [ "$choice" = "alacr" ]; then
 	sudo apt update && sudo apt upgrade
 	sudo add-apt-repository ppa:aslatter/ppa -y
 	sudo apt install alacritty
@@ -218,7 +227,7 @@ if [ "$choice" = "alacritty" ]; then
 fi
 
 # STARSHIP
-if [ "$choice" = "starship" ]; then
+if [ "$choice" = "stars" ]; then
 	cd ~/ && \
 	curl -sS https://starship.rs/install.sh | sh
 	mkdir -p ~/.config/starship
@@ -393,7 +402,7 @@ if [ "$choice" = "polybar" ]; then
 fi
 
 # I3-CONFIG
-if [ "$choice" = "i3-config" ]; then
+if [ "$choice" = "i3-conf" ]; then
 	mkdir ~/.config/i3
 	cd ~/dev/dotfiles && \
 	stow -t ~/.config/i3 i3
