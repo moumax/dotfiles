@@ -5,6 +5,9 @@ wget -P ~/ https://raw.githubusercontent.com/moumax/dotfiles/main/install-script
 chmod +x ~/install-script.sh
 ```
 
+### ADD GIT KEY
+[github key](https://github.com/settings/keys)
+
 ## Install nvim
 
 ```sh
