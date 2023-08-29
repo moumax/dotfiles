@@ -1,5 +1,10 @@
 # dotfiles
 
+```sh
+wget -P ~/ https://raw.githubusercontent.com/moumax/dotfiles/main/install-script.sh && \
+chmod +x ~/install-script.sh
+```
+
 ## Install nvim
 
 ```sh
