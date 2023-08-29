@@ -146,7 +146,21 @@ if [ "$choice" = "git" ]; then
 		printf "Tu dois rentrer un email valide\n"
 		continue
 	fi
-	
+
+	read -p "Ton nom ? : " NameGit	
+	if [ "$NameGit" = "" ]; then
+		printf "\n"
+		printf "Tu dois rentrer un nom valide\n"
+		continue
+	fi
+
+	git config --global user.name "$NameGit" && \
+	printf "git config --global user.name "$NameGit" \n"
+	git config --global user.email "$EmailGit" && \
+	printf "git config --global user.email "$EmailGit" \n"
+	git config --global init.defaultBranch main && \
+	printf "git config --global init.defaultBranch main \n"
+
 	cd ~/.ssh 
 	ssh-keygen -t ed25519 -C "$EmailGit"
 	eval "$(ssh-agent -s)"
