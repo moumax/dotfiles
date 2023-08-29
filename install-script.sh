@@ -24,14 +24,6 @@ if [ ! "$Os" = "Linux" ]; then
 	exit 1
 fi
 
-if ! which node > /dev/null; then
-	printf "\n"
-	printf "  ================================================\n"
-	printf "      Vous devez installer NodeJs en premier      \n"
-	printf "  ================================================\n"
-	exit 1
-fi
-
 printf "\n"
 printf "  =============================================\n"
 printf "    $CR Script d'installation Web dev Ubuntu   \n"
@@ -46,13 +38,13 @@ printf "\n"
 printf "  ----------------DEPENDANCES------------------\n"
 printf "\n"
 printf "  $CB dep $CRS     -- Install des dépendances    \n"
+printf "  $CB noderust $CRS-- Install de nodeJS & rust   \n"
+printf "  $CB folders $CRS -- Archi des dossiers    \n"
+printf "  $CB chrome $CRS  -- Install de chrome   \n"
 printf "\n"
 printf "  ----------------ENVIRONNEMENT----------------\n"
 printf "\n"
-printf "  $CB folders $CRS -- Archi des dossiers    \n"
 printf "  $CB git $CRS     -- Install de l'env git \n"
-printf "  $CB node $CRS    -- Install de nodeJS   \n"
-printf "  $CB rust $CRS    -- Install de rust     \n"
 printf "  $CB dot $CRS     -- Install des dotfiles \n"
 printf "\n"
 printf "  --------------------OUTILS-------------------\n"
@@ -108,6 +100,20 @@ if [ "$choice" = "dep" ]; then
 	printf "  =========================================\n"
 fi
 
+# NODERUST
+if [ "$choice" = "noderust" ]; then
+	cd ~ && \
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	nvm install 18 && \
+	nvm install 16 && \
+	nvm use 18
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "        Fin de l'installation de rust      \n"
+	printf "  =========================================\n"
+fi
+
 # FOLDERS
 if [ "$choice" = "folders" ]; then
 	mkdir -p ~/dev &&\
@@ -117,6 +123,18 @@ if [ "$choice" = "folders" ]; then
 	printf "  =========================================\n"
 	printf "          Les dossiers ont été crées       \n"
 	printf "  =========================================\n"
+fi
+
+# CHROME
+if [ "$choice" = "chrome" ]; then
+	cd ~/apps && \
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	sudo dpkg -i google-chrome-stable_current_amd64.deb
+	google-chrome
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de Chrome    \n"
+	printf "  =========================================\n"
+
 fi
 
 # GIT
@@ -133,32 +151,9 @@ if [ "$choice" = "git" ]; then
 	ssh-keygen -t ed25519 -C "$EmailGit"
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/id_ed25519
-	cat ~/.ssh/id_25519.pub
+	cat ~/.ssh/id_ed25519.pub
 	printf "  =========================================\n"
 	printf "     Fin de l'installation de l'auth git   \n"
-	printf "  =========================================\n"
-fi
-
-# NODE
-if [ "$choice" = "node" ]; then
-	cd ~ && \
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	nvm install 18 && \
-	nvm install 16 && \
-	nvm use 18
-	printf "  =========================================\n"
-	printf "        Fin de l'installation de nodeJs    \n"
-	printf "  =========================================\n"
-fi
-
-# RUST
-if [ "$choice" = "rust" ]; then
-	cd ~ && \
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	printf "  =========================================\n"
-	printf "         Fin de l'installation de rust     \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
 fi
 
