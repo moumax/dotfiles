@@ -89,7 +89,7 @@ fi
 if [ "$choice" = "dep" ]; then
 	sudo apt update && \
 	sudo apt upgrade -y && \
-	sudo apt install -y git zsh zsh-syntax-highlighting curl i3 rofi compton \
+	sudo apt install -y git  curl i3 rofi compton \
 	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
 	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
 	libssl-dev wget && \
@@ -197,9 +197,12 @@ fi
 
 # OHMYZSH
 if [ "$choice" = "ohmyzsh" ]; then
-#	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#	cd ~/dev/dotfiles
-#	stow -t ~/.oh-my-zsh/custom/themes oh-my-zsh
+	cd ~/ && \
+	sudo apt install zsh zsh-syntax-highlighting
+	stow -t ~/ zsh 
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	cd ~/dev/dotfiles
+	stow -t ~/.oh-my-zsh/custom/themes oh-my-zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	zenity --info --text="Fermez le terminal, logout, login" --width=$dialog_width --height=$dialog_height
