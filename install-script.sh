@@ -403,9 +403,9 @@ if [ "$choice" = "polybar" ]; then
 	make -j$(nproc) && \
 	sudo make install
 	mkdir ~/.config/polybar && \
-	chmod +x ~/dotfiles/polybar/polybar.sh && \
-	cd ~/dotfiles && \
+	cd ~/dev/dotfiles && \
 	stow -t ~/.config/polybar polybar
+	chmod +x ~/.config/polybar/polybar.sh && \
 	cd ~ && \
 	sudo apt install -y fonts-font-awesome
 	printf "  =========================================\n"
