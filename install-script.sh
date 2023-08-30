@@ -74,8 +74,8 @@ read -p "Votre choix ? " choice
 # UPDATE
 if [ "$choice" = "update" ]; then
 	cd ~
-	sudo apt upgrade
 	sudo apt update
+	sudo apt upgrade -y
 	printf "  =========================================\n"
 	printf "            Fin de la mise à jour          \n"
 	printf "  =========================================\n"
@@ -222,9 +222,9 @@ fi
 
 # ALACRITTY
 if [ "$choice" = "alacr" ]; then
-	sudo apt update && sudo apt upgrade
+	sudo apt update && sudo apt upgrade -y
 	sudo add-apt-repository ppa:aslatter/ppa -y
-	sudo apt install alacritty
+	sudo apt install -y alacritty
 	mkdir -p ~/.config/alacritty
 	stow -t ~/.config/alacritty alacritty
 	printf "  =========================================\n"
