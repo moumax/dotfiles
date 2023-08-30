@@ -38,18 +38,14 @@ printf "\n"
 printf "  ----------------DEPENDANCES------------------\n"
 printf "\n"
 printf "  $CB dep $CRS     -- Install des dépendances    \n"
-printf "  $CB noderust $CRS-- Install de nodeJS & rust   \n"
-printf "  $CB folders $CRS -- Archi des dossiers    \n"
-printf "  $CB chrome $CRS  -- Install de chrome   \n"
-printf "\n"
-printf "  ----------------ENVIRONNEMENT----------------\n"
-printf "\n"
 printf "  $CB git $CRS     -- Install de l'env git \n"
-printf "  $CB dot $CRS     -- Install des dotfiles \n"
+printf "  $CB noderust $CRS-- Install de nodeJS & rust   \n"
+printf "  $CB dotfolders $CRS -- Archi des dossiers    \n"
+printf "  $CB chrome $CRS  -- Install de chrome   \n"
 printf "\n"
 printf "  --------------------OUTILS-------------------\n"
 printf "\n"
-printf "  $CB ohmyzsh $CRS -- Install d'oh my zsh    \n"
+printf "  $CB oh $CRS -- Install d'oh my zsh    \n"
 printf "  $CB font $CRS    -- Install la font hack      \n"
 printf "  $CB alacr $CRS   -- Install Alacritty    \n"
 printf "  $CB stars $CRS   -- Install de Starship   \n"
@@ -89,7 +85,7 @@ fi
 if [ "$choice" = "dep" ]; then
 	sudo apt update && \
 	sudo apt upgrade -y && \
-	sudo apt install -y git  curl i3 rofi compton \
+	sudo apt install -y git curl i3 rofi compton \
 	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
 	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
 	libssl-dev wget && \
@@ -98,43 +94,6 @@ if [ "$choice" = "dep" ]; then
 	printf "  =========================================\n"
 	printf "    Fin de l'installation des dependances  \n"
 	printf "  =========================================\n"
-fi
-
-# NODERUST
-if [ "$choice" = "noderust" ]; then
-	cd ~ && \
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	nvm install 18 && \
-	nvm install 16 && \
-	nvm use 18
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	printf "  =========================================\n"
-	printf "        Fin de l'installation de nodeJs    \n"
-	printf "        Fin de l'installation de rust      \n"
-	printf "  =========================================\n"
-fi
-
-# FOLDERS
-if [ "$choice" = "folders" ]; then
-	mkdir -p ~/dev &&\
-	mkdir -p ~/apps &&\
-	mkdir -p ~/downloads &&\
-	sudo rm -rf ~/Bureau ~/Images ~/Musique ~/Vidéos ~/Documents ~/Modèles ~/Public ~/Téléchargements
-	printf "  =========================================\n"
-	printf "          Les dossiers ont été crées       \n"
-	printf "  =========================================\n"
-fi
-
-# CHROME
-if [ "$choice" = "chrome" ]; then
-	cd ~/apps && \
-	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-	sudo dpkg -i google-chrome-stable_current_amd64.deb
-	google-chrome
-	printf "  =========================================\n"
-	printf "        Fin de l'installation de Chrome    \n"
-	printf "  =========================================\n"
-
 fi
 
 # GIT
@@ -171,22 +130,47 @@ if [ "$choice" = "git" ]; then
 	printf "  =========================================\n"
 fi
 
-# DOTFILES
-if [ "$choice" = "dot" ]; then
+# NODERUST
+if [ "$choice" = "noderust" ]; then
+	cd ~ && \
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	sudo nvm install 18 && \
+	sudo nvm install 16 && \
+	sudo nvm use 18
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "  =========================================\n"
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de rust      \n"
+	printf "  =========================================\n"
+fi
+
+# DOTFOLDERS
+if [ "$choice" = "dotfolders" ]; then
+	mkdir -p ~/dev &&\
+	mkdir -p ~/apps &&\
+	mkdir -p ~/downloads &&\
+	printf "  =========================================\n"
+	printf "          Les dossiers ont été crées       \n"
+	printf "  =========================================\n"
+	sudo rm -rf ~/Bureau ~/Images ~/Musique ~/Vidéos ~/Documents ~/Modèles ~/Public ~/Téléchargements
+	printf "  =========================================\n"
+	printf "   Les dossiers inutiles ont été supprimés \n"
+	printf "  =========================================\n"
 	cd ~ 
+	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
 	read -p "Adresse de vos dotfiles " dotfiles
-	printf "Le dossier sera crée dans votre fichier perso home/votrePseudo/LeDossier \n"
-	printf "exemple : dev/dotfiles -- clonera dans home/votrePseudo/dev/dotfiles\n"
-	read -p "Dossier destinataire " folderToPaste
-	if [ ! -d "$folderToPaste" ]; then
+	printf "Le dossier sera crée à la racine ~/dotfiles \n"
+	if [ ! -d "~/dotfiles" ]; then
 		printf "Le dossier de destination n'existe pas. Création du dossier..."
-		mkdir -p "$folderToPaste"
+		mkdir -p "~/dotfiles"
 	fi
 
-	git clone "$dotfiles" "$folderToPaste"
+	git clone "$dotfiles" "~/dotfiles"
 
 	if [ $? -eq 0 ]; then
-		printf "Le dépôt a été cloné avec succès dans $folderToPaste."
+		printf "Le dépôt a été cloné avec succès dans ~/dotfiles"
 	else
 		printf "Une erreur s'est produite lors du clonage du dépôt."
 	fi
@@ -195,13 +179,25 @@ if [ "$choice" = "dot" ]; then
 	printf "  =========================================\n"
 fi
 
+# CHROME
+if [ "$choice" = "chrome" ]; then
+	cd ~/apps && \
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	sudo dpkg -i google-chrome-stable_current_amd64.deb
+	google-chrome
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de Chrome    \n"
+	printf "  =========================================\n"
+fi
+
 # OHMYZSH
-if [ "$choice" = "ohmyzsh" ]; then
-	cd ~/ && \
-	sudo apt install zsh zsh-syntax-highlighting
+if [ "$choice" = "oh" ]; then
+	cd ~/
+	sudo apt install -y zsh zsh-syntax-highlighting
+	cd ~/dotfiles
 	stow -t ~/ zsh 
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	cd ~/dev/dotfiles
+	cd ~/dotfiles
 	stow -t ~/.oh-my-zsh/custom/themes oh-my-zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -243,7 +239,7 @@ if [ "$choice" = "stars" ]; then
 	cd ~/ && \
 	curl -sS https://starship.rs/install.sh | sh
 	mkdir -p ~/.config/starship
-	cd ~/dev/dotfiles && \
+	cd ~/dotfiles && \
 	stow -t ~/.config/starship starship
 	printf "  =========================================\n"
 	printf "      Fin de l'installation de starship    \n"
@@ -269,7 +265,7 @@ if [ "$choice" = "gitui" ]; then
 	cd ~ && \
 	cargo install gitui
 	mkdir ~/.config/gitui && \
-	cd ~/dev/dotfiles
+	cd ~/dotfiles
 	stow -t ~/.config/gitui gitui
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de gitui     \n"
@@ -321,10 +317,10 @@ if [ "$choice" = "tmux" ]; then
 	sudo make install
 	git clone https://github.com/tmux-plugins/tpm ~/tmux/.tmux/plugins/tpm && \
 	git clone https://github.com/erikw/tmux-powerline.git ~/tmux/.tmux/plugins/tmux-powerline
-	cd ~/dev/dotfiles 
+	cd ~/dotfiles 
 	stow -t ~/tmux tmux
 	mv ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
-	ln -s ~/dev/dotfiles/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh
+	ln -s ~/dotfiles/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de tmux      \n"
 	printf "  =========================================\n"
@@ -347,7 +343,7 @@ if [ "$choice" = "pynvim" ]; then
 	printf "  =========================================\n"
 fi
 
-# NEOVIM (A TESTER) 
+# NEOVIM 
 if [ "$choice" = "neovim" ]; then
 	cd ~ && \
 	sudo apt install build-essential software-properties-common -y
@@ -357,7 +353,7 @@ if [ "$choice" = "neovim" ]; then
 	mkdir ~/.config/nvim
 	npm i -g tree-sitter-cli && \
 	npm i -g neovim
-	cd ~/dev/dotfiles
+	cd ~/dotfiles
 	stow -t ~/.config/nvim neovim
 	zenity --info --text="ouvrez packer.lua pour installer les paquets\n puis exécutez :PackerSync" --width=$dialog_width --height=$dialog_height
 	printf "  =========================================\n"
@@ -372,7 +368,7 @@ fi
 # ROFI 
 if [ "$choice" = "rofi" ]; then
 	mkdir ~/.config/rofi && \
-	cd ~/dev/dotfiles && \
+	cd ~/dotfiles && \
 	stow -t ~/.config/rofi rofi
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rofi      \n"
@@ -403,7 +399,7 @@ if [ "$choice" = "polybar" ]; then
 	make -j$(nproc) && \
 	sudo make install
 	mkdir ~/.config/polybar && \
-	cd ~/dev/dotfiles && \
+	cd ~/dotfiles && \
 	stow -t ~/.config/polybar polybar
 	chmod +x ~/.config/polybar/polybar.sh && \
 	cd ~ && \
@@ -416,7 +412,7 @@ fi
 # I3-CONFIG
 if [ "$choice" = "i3-conf" ]; then
 	mkdir ~/.config/i3
-	cd ~/dev/dotfiles && \
+	cd ~/dotfiles && \
 	stow -t ~/.config/i3 i3
 	printf "  =========================================\n"
 	printf "        Fin de l'installation d'i3         \n"
