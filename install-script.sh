@@ -45,7 +45,7 @@ printf "  $CB chrome $CRS  -- Install de chrome   \n"
 printf "\n"
 printf "  --------------------OUTILS-------------------\n"
 printf "\n"
-printf "  $CB oh $CRS -- Install d'oh my zsh    \n"
+printf "  $CB oh $CRS      -- Install d'oh my zsh    \n"
 printf "  $CB font $CRS    -- Install la font hack      \n"
 printf "  $CB alacr $CRS   -- Install Alacritty    \n"
 printf "  $CB stars $CRS   -- Install de Starship   \n"
@@ -54,6 +54,7 @@ printf "  $CB gitui $CRS   -- Install de gitui         \n"
 printf "  $CB btop $CRS    -- Install de btop           \n"
 printf "  $CB glow $CRS    -- Install de glow           \n"
 printf "  $CB tmux $CRS    -- Install de tmux           \n"
+printf "  $CB insomnia $CRS-- Install de insomnia   \n"
 printf "\n"
 printf "  -------------------NEOVIM--------------------\n"
 printf "\n"
@@ -66,6 +67,7 @@ printf "  $CB rofi $CRS    -- Install de rofi           \n"
 printf "  $CB polybar $CRS -- Install de polybar     \n"
 printf "  $CB i3-conf $CRS -- Fichiers de config i3 \n"
 printf "  ---------------------------------------------\n"
+printf "  $CB all -- $CRS Tout installer             \n"
 printf "  $CR q -- $CRS Quitter le script             \n"
 printf "\n"
 
@@ -162,15 +164,15 @@ if [ "$choice" = "dotfolders" ]; then
 	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
 	read -p "Adresse de vos dotfiles " dotfiles
 	printf "Le dossier sera crée à la racine ~/dotfiles \n"
-	if [ ! -d "~/dotfiles" ]; then
+	if [ ! -d "$HOME/dotfiles" ]; then
 		printf "Le dossier de destination n'existe pas. Création du dossier..."
-		mkdir -p "~/dotfiles"
+		mkdir -p "$HOME/dotfiles"
 	fi
 
-	git clone "$dotfiles" "~/dotfiles"
+	git clone "$dotfiles" "$HOME/dotfiles"
 
 	if [ $? -eq 0 ]; then
-		printf "Le dépôt a été cloné avec succès dans ~/dotfiles"
+		printf "Le dépôt a été cloné avec succès dans $HOME/dotfiles"
 	else
 		printf "Une erreur s'est produite lors du clonage du dépôt."
 	fi
@@ -192,12 +194,12 @@ fi
 
 # OHMYZSH
 if [ "$choice" = "oh" ]; then
-	cd ~/
+	cd $HOME
 	sudo apt install -y zsh zsh-syntax-highlighting
-	cd ~/dotfiles
+	cd $HOME/dotfiles
 	stow -t ~/ zsh 
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	cd ~/dotfiles
+	cd $HOME/dotfiles
 	stow -t ~/.oh-my-zsh/custom/themes oh-my-zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -239,7 +241,7 @@ if [ "$choice" = "stars" ]; then
 	cd ~/ && \
 	curl -sS https://starship.rs/install.sh | sh
 	mkdir -p ~/.config/starship
-	cd ~/dotfiles && \
+	cd $HOME/dotfiles && \
 	stow -t ~/.config/starship starship
 	printf "  =========================================\n"
 	printf "      Fin de l'installation de starship    \n"
@@ -265,7 +267,7 @@ if [ "$choice" = "gitui" ]; then
 	cd ~ && \
 	cargo install gitui
 	mkdir ~/.config/gitui && \
-	cd ~/dotfiles
+	cd $HOME/dotfiles
 	stow -t ~/.config/gitui gitui
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de gitui     \n"
@@ -317,7 +319,7 @@ if [ "$choice" = "tmux" ]; then
 	sudo make install
 	git clone https://github.com/tmux-plugins/tpm ~/tmux/.tmux/plugins/tpm && \
 	git clone https://github.com/erikw/tmux-powerline.git ~/tmux/.tmux/plugins/tmux-powerline
-	cd ~/dotfiles 
+	cd $HOME/dotfiles 
 	stow -t ~/tmux tmux
 	mv ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
 	ln -s ~/dotfiles/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh
@@ -353,7 +355,7 @@ if [ "$choice" = "neovim" ]; then
 	mkdir ~/.config/nvim
 	npm i -g tree-sitter-cli && \
 	npm i -g neovim
-	cd ~/dotfiles
+	cd $HOME/dotfiles
 	stow -t ~/.config/nvim neovim
 	zenity --info --text="ouvrez packer.lua pour installer les paquets\n puis exécutez :PackerSync" --width=$dialog_width --height=$dialog_height
 	printf "  =========================================\n"
@@ -368,7 +370,7 @@ fi
 # ROFI 
 if [ "$choice" = "rofi" ]; then
 	mkdir ~/.config/rofi && \
-	cd ~/dotfiles && \
+	cd $HOME/dotfiles && \
 	stow -t ~/.config/rofi rofi
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rofi      \n"
@@ -377,7 +379,7 @@ fi
 
 # POLYBAR 
 if [ "$choice" = "polybar" ]; then
-	cd ~/ && \
+	cd $HOME && \
 	sudo apt update && \
 	sudo apt upgrade -y && \
 	sudo apt install -y git cmake build-essential cmake-data pkg-config python3-sphinx \
@@ -399,7 +401,7 @@ if [ "$choice" = "polybar" ]; then
 	make -j$(nproc) && \
 	sudo make install
 	mkdir ~/.config/polybar && \
-	cd ~/dotfiles && \
+	cd $HOME/dotfiles && \
 	stow -t ~/.config/polybar polybar
 	chmod +x ~/.config/polybar/polybar.sh && \
 	cd ~ && \
@@ -412,10 +414,31 @@ fi
 # I3-CONFIG
 if [ "$choice" = "i3-conf" ]; then
 	mkdir ~/.config/i3
-	cd ~/dotfiles && \
+	cd $HOME/dotfiles && \
 	stow -t ~/.config/i3 i3
 	printf "  =========================================\n"
 	printf "        Fin de l'installation d'i3         \n"
+	printf "  =========================================\n"
+fi
+
+# INSOMNIA
+if [ "$choice" = "insomnia" ] || [ "$choice" = "all" ]; then
+	echo "deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all" | sudo tee -a /etc/apt/sources.list.d/insomnia.list
+	sudo apt update && \
+	sudo apt install -y insomnia && \
+	sudo apt autoremove -y
+	printf "  =========================================\n"
+	printf "        Fin de l'installation d'insomnia   \n"
+	printf "  =========================================\n"
+fi
+
+# DBEAVER
+if [ "$choice" = "dbeaver" ] || [ "$choice" = "all" ]; then
+	sudo add-apt-repository ppa:serge-rider/dbeaver-ce && \
+	sudo apt-get update && \
+	sudo apt-get install -y dbeaver-ce
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de dbeaver   \n"
 	printf "  =========================================\n"
 fi
 
