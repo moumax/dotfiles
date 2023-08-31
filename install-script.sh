@@ -99,6 +99,7 @@ if [ "$choice" = "dep" ]; then
 	printf "  =========================================\n"
 	printf "    Fin de l'installation des dependances  \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # GIT
@@ -133,6 +134,7 @@ if [ "$choice" = "git" ]; then
 	printf "  =========================================\n"
 	printf "     Fin de l'installation de l'auth git   \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # NODERUST
@@ -145,10 +147,12 @@ if [ "$choice" = "noderust" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de nodeJs    \n"
 	printf "  =========================================\n"
+	sleep 1
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rust      \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # DOTFOLDERS
@@ -159,10 +163,12 @@ if [ "$choice" = "dotfolders" ]; then
 	printf "  =========================================\n"
 	printf "          Les dossiers ont été crées       \n"
 	printf "  =========================================\n"
+	sleep 1
 	sudo rm -rf ~/Bureau ~/Images ~/Musique ~/Vidéos ~/Documents ~/Modèles ~/Public ~/Téléchargements
 	printf "  =========================================\n"
 	printf "   Les dossiers inutiles ont été supprimés \n"
 	printf "  =========================================\n"
+	sleep 1
 	cd ~ 
 	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
 	read -p "Adresse de vos dotfiles " dotfiles
@@ -183,6 +189,7 @@ if [ "$choice" = "dotfolders" ]; then
 	printf "  =========================================\n"
 	printf "      Fin de l'installation des dotfiles   \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # CHROME
@@ -194,6 +201,7 @@ if [ "$choice" = "chrome" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de Chrome    \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # OHMYZSH
@@ -211,6 +219,7 @@ if [ "$choice" = "oh" ]; then
 	printf "  =========================================\n"
 	printf "       Fin de l'installation de ohmyzsh    \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # FONT
@@ -224,6 +233,7 @@ if [ "$choice" = "font" ]; then
 	printf "  =========================================\n"
 	printf "       Fin de l'installation de la font    \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # ALACRITTY
@@ -238,6 +248,7 @@ if [ "$choice" = "alacr" ]; then
 	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # STARSHIP
@@ -252,6 +263,7 @@ if [ "$choice" = "stars" ]; then
 	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # FZF
@@ -264,6 +276,7 @@ if [ "$choice" = "fzf" ]; then
 	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # GITUI
@@ -276,6 +289,7 @@ if [ "$choice" = "gitui" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de gitui     \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # BTOP
@@ -293,6 +307,7 @@ if [ "$choice" = "btop" ]; then
 	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # GLOW
@@ -304,6 +319,7 @@ if [ "$choice" = "glow" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de glow      \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # TMUX (A TESTER) 
@@ -330,6 +346,7 @@ if [ "$choice" = "tmux" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de tmux      \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # PACKER
@@ -338,6 +355,7 @@ if [ "$choice" = "packer" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de packer    \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # PYNVIM
@@ -347,6 +365,7 @@ if [ "$choice" = "pynvim" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de pynvim    \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # NEOVIM 
@@ -369,6 +388,7 @@ if [ "$choice" = "neovim" ]; then
 	printf "\n"
 	printf "        Fin de l'installation de neovim    \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # ROFI 
@@ -379,6 +399,7 @@ if [ "$choice" = "rofi" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rofi      \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # POLYBAR 
@@ -413,6 +434,7 @@ if [ "$choice" = "polybar" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de polybar   \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # I3-CONFIG
@@ -423,6 +445,7 @@ if [ "$choice" = "i3-conf" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation d'i3         \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # INSOMNIA
@@ -434,6 +457,7 @@ if [ "$choice" = "insomnia" ] || [ "$choice" = "all" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation d'insomnia   \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # DBEAVER
@@ -444,6 +468,7 @@ if [ "$choice" = "dbeaver" ] || [ "$choice" = "all" ]; then
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de dbeaver   \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 if [ "$choice" = "q" ]; then
