@@ -57,6 +57,8 @@ while true; do
 	printf "  $CB glow $CRS    -- Install de glow           \n"
 	printf "  $CB tmux $CRS    -- Install de tmux           \n"
 	printf "  $CB insomnia $CRS-- Install de insomnia   \n"
+	printf "  $CB dbeaver $CRS -- Install de dbeaver \n"
+	printf "  $CB vscode $CRS  -- Install de vscode  \n"
 	printf "\n"
 	printf "  -------------------NEOVIM--------------------\n"
 	printf "\n"
@@ -467,6 +469,20 @@ if [ "$choice" = "dbeaver" ] || [ "$choice" = "all" ]; then
 	sudo apt-get install -y dbeaver-ce
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de dbeaver   \n"
+	printf "  =========================================\n"
+	sleep 1
+fi
+
+# VSCODE
+if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
+	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+	sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
+	sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+	sudo apt install -y apt-transport-https
+	sudo apt update
+	sudo apt install -y code
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de vscode \n"
 	printf "  =========================================\n"
 	sleep 1
 fi
