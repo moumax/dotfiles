@@ -24,54 +24,56 @@ if [ ! "$Os" = "Linux" ]; then
 	exit 1
 fi
 
-printf "\n"
-printf "  =============================================\n"
-printf "    $CR Script d'installation Web dev Ubuntu   \n"
-printf "             by Moumax (v1.00) $CRS            \n"
-printf "  =============================================\n"
-printf "\n"
-printf "\n"
-printf "  ----------------MAINTENANCE------------------\n"
-printf "\n"
-printf "  $CB update $CRS  -- Update du système       \n"
-printf "\n"
-printf "  ----------------DEPENDANCES------------------\n"
-printf "\n"
-printf "  $CB dep $CRS     -- Install des dépendances    \n"
-printf "  $CB git $CRS     -- Install de l'env git \n"
-printf "  $CB noderust $CRS-- Install de nodeJS & rust   \n"
-printf "  $CB dotfolders $CRS -- Archi des dossiers    \n"
-printf "  $CB chrome $CRS  -- Install de chrome   \n"
-printf "\n"
-printf "  --------------------OUTILS-------------------\n"
-printf "\n"
-printf "  $CB oh $CRS      -- Install d'oh my zsh    \n"
-printf "  $CB font $CRS    -- Install la font hack      \n"
-printf "  $CB alacr $CRS   -- Install Alacritty    \n"
-printf "  $CB stars $CRS   -- Install de Starship   \n"
-printf "  $CB fzf $CRS     -- Install de fzf             \n"
-printf "  $CB gitui $CRS   -- Install de gitui         \n"
-printf "  $CB btop $CRS    -- Install de btop           \n"
-printf "  $CB glow $CRS    -- Install de glow           \n"
-printf "  $CB tmux $CRS    -- Install de tmux           \n"
-printf "  $CB insomnia $CRS-- Install de insomnia   \n"
-printf "\n"
-printf "  -------------------NEOVIM--------------------\n"
-printf "\n"
-printf "  $CB packer $CRS  -- Install de packer       \n"
-printf "  $CB pynvim $CRS  -- Install de pynvim       \n"
-printf "  $CB neovim $CRS  -- Install de neovim       \n"
-printf "  ---------------------I3----------------------\n"
-printf "\n"
-printf "  $CB rofi $CRS    -- Install de rofi           \n"
-printf "  $CB polybar $CRS -- Install de polybar     \n"
-printf "  $CB i3-conf $CRS -- Fichiers de config i3 \n"
-printf "  ---------------------------------------------\n"
-printf "  $CB all -- $CRS Tout installer             \n"
-printf "  $CR q -- $CRS Quitter le script             \n"
-printf "\n"
+while true; do
 
-read -p "Votre choix ? " choice
+	printf "\n"
+	printf "  =============================================\n"
+	printf "    $CR Script d'installation Web dev Ubuntu   \n"
+	printf "             by Moumax (v1.00) $CRS            \n"
+	printf "  =============================================\n"
+	printf "\n"
+	printf "\n"
+	printf "  ----------------MAINTENANCE------------------\n"
+	printf "\n"
+	printf "  $CB update $CRS  -- Update du système       \n"
+	printf "\n"
+	printf "  ----------------DEPENDANCES------------------\n"
+	printf "\n"
+	printf "  $CB dep $CRS     -- Install des dépendances    \n"
+	printf "  $CB git $CRS     -- Install de l'env git \n"
+	printf "  $CB noderust $CRS-- Install de nodeJS & rust   \n"
+	printf "  $CB dotfolders $CRS -- Archi des dossiers    \n"
+	printf "  $CB chrome $CRS  -- Install de chrome   \n"
+	printf "\n"
+	printf "  --------------------OUTILS-------------------\n"
+	printf "\n"
+	printf "  $CB oh $CRS      -- Install d'oh my zsh    \n"
+	printf "  $CB font $CRS    -- Install la font hack      \n"
+	printf "  $CB alacr $CRS   -- Install Alacritty    \n"
+	printf "  $CB stars $CRS   -- Install de Starship   \n"
+	printf "  $CB fzf $CRS     -- Install de fzf             \n"
+	printf "  $CB gitui $CRS   -- Install de gitui         \n"
+	printf "  $CB btop $CRS    -- Install de btop           \n"
+	printf "  $CB glow $CRS    -- Install de glow           \n"
+	printf "  $CB tmux $CRS    -- Install de tmux           \n"
+	printf "  $CB insomnia $CRS-- Install de insomnia   \n"
+	printf "\n"
+	printf "  -------------------NEOVIM--------------------\n"
+	printf "\n"
+	printf "  $CB packer $CRS  -- Install de packer       \n"
+	printf "  $CB pynvim $CRS  -- Install de pynvim       \n"
+	printf "  $CB neovim $CRS  -- Install de neovim       \n"
+	printf "  ---------------------I3----------------------\n"
+	printf "\n"
+	printf "  $CB rofi $CRS    -- Install de rofi           \n"
+	printf "  $CB polybar $CRS -- Install de polybar     \n"
+	printf "  $CB i3-conf $CRS -- Fichiers de config i3 \n"
+	printf "  ---------------------------------------------\n"
+	printf "  $CB all -- $CRS Tout installer             \n"
+	printf "  $CR q -- $CRS Quitter le script             \n"
+	printf "\n"
+
+	read -p "Votre choix ? " choice
 
 # UPDATE
 if [ "$choice" = "update" ]; then
@@ -81,6 +83,7 @@ if [ "$choice" = "update" ]; then
 	printf "  =========================================\n"
 	printf "            Fin de la mise à jour          \n"
 	printf "  =========================================\n"
+	sleep 1
 fi
 
 # DEPENDANCES
@@ -164,6 +167,7 @@ if [ "$choice" = "dotfolders" ]; then
 	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
 	read -p "Adresse de vos dotfiles " dotfiles
 	printf "Le dossier sera crée à la racine ~/dotfiles \n"
+
 	if [ ! -d "$HOME/dotfiles" ]; then
 		printf "Le dossier de destination n'existe pas. Création du dossier..."
 		mkdir -p "$HOME/dotfiles"
@@ -173,7 +177,7 @@ if [ "$choice" = "dotfolders" ]; then
 
 	if [ $? -eq 0 ]; then
 		printf "Le dépôt a été cloné avec succès dans $HOME/dotfiles"
-	else
+		else
 		printf "Une erreur s'est produite lors du clonage du dépôt."
 	fi
 	printf "  =========================================\n"
@@ -448,3 +452,5 @@ if [ "$choice" = "q" ]; then
 	printf "  =========================================\n"
 	exit 1
 fi
+
+done
