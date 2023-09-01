@@ -79,7 +79,7 @@ while true; do
 	read -p "Votre choix ? " choice
 
 # UPDATE
-if [ "$choice" = "update" ]; then
+if [ "$choice" = "update" ] || [ "$choice" = "all" ]; then
 	cd ~
 	sudo apt update
 	sudo apt upgrade -y
@@ -90,7 +90,7 @@ if [ "$choice" = "update" ]; then
 fi
 
 # DEPENDANCES
-if [ "$choice" = "dep" ]; then
+if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
 	sudo apt update && \
 	sudo apt upgrade -y && \
 	sudo apt install -y git curl i3 rofi compton \
@@ -106,7 +106,7 @@ if [ "$choice" = "dep" ]; then
 fi
 
 # GIT
-if [ "$choice" = "git" ]; then
+if [ "$choice" = "git" ] || [ "$choice" = "all" ]; then
 	read -p "Ton email ? : " EmailGit
 
 	if [ "$EmailGit" = "" ]; then
@@ -141,7 +141,7 @@ if [ "$choice" = "git" ]; then
 fi
 
 # NODERUST
-if [ "$choice" = "noderust" ]; then
+if [ "$choice" = "noderust" ] || [ "$choice" = "all" ]; then
 	cd ~ && \
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 	sudo nvm install 18 && \
@@ -159,7 +159,7 @@ if [ "$choice" = "noderust" ]; then
 fi
 
 # DOTFOLDERS
-if [ "$choice" = "dotfolders" ]; then
+if [ "$choice" = "dotfolders" ] || [ "$choice" = "all" ]; then
 	mkdir -p ~/dev &&\
 	mkdir -p ~/apps &&\
 	mkdir -p ~/downloads &&\
@@ -196,7 +196,7 @@ if [ "$choice" = "dotfolders" ]; then
 fi
 
 # CHROME
-if [ "$choice" = "chrome" ]; then
+if [ "$choice" = "chrome" ] || [ "$choice" = "all" ]; then
 	cd ~/apps && \
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
@@ -208,7 +208,7 @@ if [ "$choice" = "chrome" ]; then
 fi
 
 # ZSH&OHMYZSH
-if [ "$choice" = "zsh" ]; then
+if [ "$choice" = "zsh" ] || [ "$choice" = "all" ]; then
 	cd $HOME
 	sudo apt install -y zsh zsh-syntax-highlighting
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -220,7 +220,7 @@ if [ "$choice" = "zsh" ]; then
 fi
 
 # OHMYZSH
-if [ "$choice" = "oh" ]; then
+if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
 	cd $HOME
 	stow -t $HOME/ zsh 
 	cd $HOME/dotfiles
@@ -235,7 +235,7 @@ if [ "$choice" = "oh" ]; then
 fi
 
 # FONT
-if [ "$choice" = "font" ]; then
+if [ "$choice" = "font" ] || [ "$choice" = "all" ]; then
 	wget -P ~/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
 	cd ~/.local/share && \
 	mkdir -p fonts && \
@@ -249,7 +249,7 @@ if [ "$choice" = "font" ]; then
 fi
 
 # ALACRITTY
-if [ "$choice" = "alacr" ]; then
+if [ "$choice" = "alacr" ] || [ "$choice" = "all" ]; then
 	sudo apt update && sudo apt upgrade -y
 	sudo add-apt-repository ppa:aslatter/ppa -y
 	sudo apt install -y alacritty
@@ -262,7 +262,7 @@ if [ "$choice" = "alacr" ]; then
 fi
 
 # STARSHIP
-if [ "$choice" = "stars" ]; then
+if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
 	cd ~/ && \
 	curl -sS https://starship.rs/install.sh | sh
 	mkdir -p ~/.config/starship
@@ -275,7 +275,7 @@ if [ "$choice" = "stars" ]; then
 fi
 
 # FZF
-if [ "$choice" = "fzf" ]; then
+if [ "$choice" = "fzf" ] || [ "$choice" = "all" ]; then
 	cd ~/ && \
 	git clone https://github.com/junegunn/fzf ~/.fzf && \
 	cd ~/.fzf && ./install
@@ -286,7 +286,7 @@ if [ "$choice" = "fzf" ]; then
 fi
 
 # GITUI
-if [ "$choice" = "gitui" ]; then
+if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
 	cd ~ && \
 	cargo install gitui
 	mkdir ~/.config/gitui && \
@@ -299,7 +299,7 @@ if [ "$choice" = "gitui" ]; then
 fi
 
 # BTOP
-if [ "$choice" = "btop" ]; then
+if [ "$choice" = "btop" ] || [ "$choice" = "all" ]; then
 	wget -P ~/downloads https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz && \
 	cd ~/apps && \
 	mkdir -p btop && \
@@ -315,7 +315,7 @@ if [ "$choice" = "btop" ]; then
 fi
 
 # GLOW
-if [ "$choice" = "glow" ]; then
+if [ "$choice" = "glow" ] || [ "$choice" = "all" ]; then
 	sudo mkdir -p /etc/apt/keyrings && \
 	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg && \
 	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list && \
@@ -327,7 +327,7 @@ if [ "$choice" = "glow" ]; then
 fi
 
 # TMUX (A TESTER) 
-if [ "$choice" = "tmux" ]; then
+if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	cd ~ && \
 	sudo apt update && \
 	sudo apt upgrade -y && \
@@ -351,7 +351,7 @@ if [ "$choice" = "tmux" ]; then
 fi
 
 # PACKER
-if [ "$choice" = "packer" ]; then
+if [ "$choice" = "packer" ] || [ "$choice" = "all" ]; then
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de packer    \n"
@@ -360,7 +360,7 @@ if [ "$choice" = "packer" ]; then
 fi
 
 # PYNVIM
-if [ "$choice" = "pynvim" ]; then
+if [ "$choice" = "pynvim" ] || [ "$choice" = "all" ]; then
 	cd ~ && \
 	pip3 install pynvim --break-system-packages
 	printf "  =========================================\n"
@@ -370,7 +370,7 @@ if [ "$choice" = "pynvim" ]; then
 fi
 
 # NEOVIM 
-if [ "$choice" = "neovim" ]; then
+if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 	cd ~ && \
 	sudo apt install build-essential software-properties-common -y
 	sudo add-apt-repository ppa:neovim-ppa/unstable -y
@@ -393,7 +393,7 @@ if [ "$choice" = "neovim" ]; then
 fi
 
 # ROFI 
-if [ "$choice" = "rofi" ]; then
+if [ "$choice" = "rofi" ] || [ "$choice" = "all" ]; then
 	mkdir ~/.config/rofi && \
 	cd $HOME/dotfiles && \
 	stow -t ~/.config/rofi rofi
@@ -404,7 +404,7 @@ if [ "$choice" = "rofi" ]; then
 fi
 
 # POLYBAR 
-if [ "$choice" = "polybar" ]; then
+if [ "$choice" = "polybar" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
 	sudo apt update && \
 	sudo apt upgrade -y && \
@@ -439,7 +439,7 @@ if [ "$choice" = "polybar" ]; then
 fi
 
 # I3-CONFIG
-if [ "$choice" = "i3-conf" ]; then
+if [ "$choice" = "i3-conf" ] || [ "$choice" = "all" ]; then
 	mkdir ~/.config/i3
 	cd $HOME/dotfiles && \
 	stow -t ~/.config/i3 i3
