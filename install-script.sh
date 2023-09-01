@@ -47,6 +47,7 @@ while true; do
 	printf "\n"
 	printf "  --------------------OUTILS-------------------\n"
 	printf "\n"
+	printf "  $CB zsh $CRS      -- Install de zsh    \n"
 	printf "  $CB oh $CRS      -- Install d'oh my zsh    \n"
 	printf "  $CB font $CRS    -- Install la font hack      \n"
 	printf "  $CB alacr $CRS   -- Install Alacritty    \n"
@@ -206,15 +207,24 @@ if [ "$choice" = "chrome" ]; then
 	sleep 1
 fi
 
+# ZSH&OHMYZSH
+if [ "$choice" = "zsh" ]; then
+	cd $HOME
+	sudo apt install -y zsh zsh-syntax-highlighting
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	sudo rm -r .zshrc
+	printf "  =========================================\n"
+	printf "       Fin de l'installation de zsh    \n"
+	printf "  =========================================\n"
+	sleep 1
+fi
+
 # OHMYZSH
 if [ "$choice" = "oh" ]; then
 	cd $HOME
-	sudo apt install -y zsh zsh-syntax-highlighting
+	stow -t $HOME/ zsh 
 	cd $HOME/dotfiles
-	stow -t ~/ zsh 
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	cd $HOME/dotfiles
-	stow -t ~/.oh-my-zsh/custom/themes oh-my-zsh
+	stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	zenity --info --text="Fermez le terminal, logout, login" --width=$dialog_width --height=$dialog_height
@@ -247,8 +257,6 @@ if [ "$choice" = "alacr" ]; then
 	stow -t ~/.config/alacritty alacritty
 	printf "  =========================================\n"
 	printf "      Fin de l'installation d'Alacritty    \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
 	sleep 1
 fi
@@ -262,8 +270,6 @@ if [ "$choice" = "stars" ]; then
 	stow -t ~/.config/starship starship
 	printf "  =========================================\n"
 	printf "      Fin de l'installation de starship    \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
 	sleep 1
 fi
@@ -275,8 +281,6 @@ if [ "$choice" = "fzf" ]; then
 	cd ~/.fzf && ./install
 	printf "  =========================================\n"
 	printf "         Fin de l'installation de fzf      \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
 	sleep 1
 fi
@@ -306,8 +310,6 @@ if [ "$choice" = "btop" ]; then
 	cd btop && sudo make install
 	printf "  =========================================\n"
 	printf "         Fin de l'installation de btop     \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
-	printf "            REDEMARREZ LE TERMINAL         \n"
 	printf "  =========================================\n"
 	sleep 1
 fi
@@ -333,12 +335,6 @@ if [ "$choice" = "tmux" ]; then
 	sudo apt autoremove -y && \
 	rm -rf .tmux
 	sudo apt install -y libevent-dev ncurses-dev build-essential bison	
-#	git clone https://github.com/tmux/tmux.git ~/apps/tmux
-	#	cd ~/apps/tmux && \
-	#	sh autogen.sh && \
-	#	./configure && \
-	#	make && \
-	#	sudo make install
 	sudo apt install -y tmux
 	cd $HOME && \
 	mkdir .tmux .tmux/tmux-powerline-custom-themes

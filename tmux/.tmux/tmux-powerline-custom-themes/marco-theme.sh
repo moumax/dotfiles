@@ -4,7 +4,7 @@
 
 # by Marco
 
-# ~/.tmux/tmux-powerline-custom-themes/flo-theme.sh
+# ~/.tmux/tmux-powerline-custom-themes/marco-theme.sh
 
 
 if patched_font_in_use; then

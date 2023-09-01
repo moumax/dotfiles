@@ -88,10 +88,10 @@ bindsym $mod+a focus parent
 set $ws1 "1: Terminal"
 set $ws2 "2: Chrome"
 set $ws3 "3: Insomnia"
+set $ws4 "4: Files"
 # set $ws4 "4: Compass"
-set $ws5 "5: Files"
 # set $ws6 "6: Telegram"
-set $ws7 "7: Notion"
+# set $ws7 "7: Notion"
 # set $ws8 "8: Tor"
 # set $ws9 "9: Chrome"
 # set $ws10 "10: Opera"
@@ -175,7 +175,7 @@ exec --no-startup-id alacritty
 exec --no-startup-id google-chrome
 # exec --no-startup-id notion-app-enhanced
 # exec --no-startup-id nautilus
-# exec --no-startup-id insomnia
+exec --no-startup-id insomnia
 # exec --no-startup-id mongodb compass
 # exec --no-startup-id telegram-desktop
 

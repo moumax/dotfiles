@@ -9,6 +9,9 @@ local noremap = { noremap = true }
 -- Set leader key as a space.
 vim.g.mapleader = " "
 
+-- jj to replace esc
+key("i", "jj", "<Esc>", full_options)
+
 -- Save and re source current file
 key("n", "<leader>s", ":w | source %<CR>", full_options)
 
@@ -60,26 +63,6 @@ key("n", "<C-Down>", ":resize -2<CR>", full_options)
 key("n", "<C-Left>", ":vertical resize -2<CR>", full_options)
 key("n", "<C-Right>", ":vertical resize +2<CR>", full_options)
 
--- -- Autorun
--- local languages = {
--- 	sh = { exec = './%' },
--- 	rust = { build = 'cargo build', exec = 'cargo run' }
--- }
---
--- for lang, data in pairs(languages) do
--- 	if data.build ~= nil then
--- 		vim.api.nvim_create_autocmd('FileType', {
--- 			pattern = lang,
--- 			command = ':lua nnoremap <Leader>b :!' .. data.build .. '<CR>'
--- 		})
--- 	end
---
--- 	vim.api.nvim_create_autocmd("FileType", {
--- 		pattern = lang,
--- 		command = ':lua nnoremap <Leader>ex :split<CR>:terminal ' .. data.exec .. '<CR>'
--- 	})
--- end
-
 -- #############
 -- # TELESCOPE #
 -- #############
@@ -121,23 +104,23 @@ key("n", "<leader>neo", ":Telescope neoclip<CR>", full_options)
 
 function CurrentDir()
 	builtin.find_files({
-		prompt_title = "🌞 " .. vim.fn.substitute(vim.fn.getcwd(), "/home/floslv", "~", ""),
-		cwd = vim.fn.substitute(vim.fn.getcwd(), "/home/floslv", "~", ""),
+		prompt_title = "🌞 " .. vim.fn.substitute(vim.fn.getcwd(), "/home/", "~", ""),
+		cwd = vim.fn.substitute(vim.fn.getcwd(), "/home/", "~", ""),
 		hidden = true,
 	})
 end
 
 function Flo()
 	builtin.find_files({
-		cwd = "~/Flo",
-		prompt_title = "🏠 ~/Flo",
+		cwd = "$HOME",
+		prompt_title = "🏠 $HOME",
 		hidden = true,
 	})
 end
 
 function Dev()
 	builtin.find_files({
-		cwd = "~/Flo/Dev",
+		cwd = "$HOME/dev",
 		prompt_title = "💻 Dev",
 		hidden = true,
 	})
@@ -147,7 +130,7 @@ function Dotfiles()
 	if
 		pcall(function()
 			builtin.git_files(themes.get_dropdown({
-				cwd = "~/Flo/Dotfiles",
+				cwd = "$HOME/dotfiles",
 				prompt_title = " Dotfiles",
 				hidden = true,
 				previewer = false,
@@ -157,7 +140,7 @@ function Dotfiles()
 	else
 		builtin.find_files(themes.get_dropdown({
 			prompt_title = " Dotfiles",
-			cwd = "~/Flo/Dotfiles",
+			cwd = "$HOME/dotfiles",
 			hidden = true,
 			previewer = false,
 		}))
@@ -256,7 +239,7 @@ key("n", "<leader>aa", ":lua require'harpoon.ui'.toggle_quick_menu()<CR>", full_
 -- # LUASNIP #
 -- ###########
 
-key("n", "<leader>y", ":source ~/Flo/Dotfiles/nvim/plugin/luasnip.lua<CR>", noremap)
+key("n", "<leader>y", ":source ~/dotfiles/nvim/plugin/luasnip.lua<CR>", noremap)
 
 -- ############
 -- # GITSIGNS #

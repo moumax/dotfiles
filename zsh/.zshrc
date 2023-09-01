@@ -40,9 +40,9 @@ alias c="clear"
 
 
 # Change directory aliases
-alias d="cd ~"
-alias dev="cd ~/dev"
-alias dot="cd ~/dev/dotfiles"
+alias d="cd $HOME"
+alias dev="cd $HOME/dev"
+alias dot="cd $HOME/dotfiles"
 
 
 # List aliases
@@ -52,7 +52,7 @@ alias ls="ls --color=tty"
 
 
 # TMUX aliases
-alias tm="tmux -f ~/dev/dotfiles/tmux/.tmux.conf new -s"
+alias tm="tmux -f $HOME/dotfiles/tmux/.tmux.conf new -s"
 alias tma="tmux attach-session" # The last session.
 alias tman="tmux attach-session -t"
 alias tmls="tmux ls"
@@ -76,20 +76,9 @@ alias sd='cd $(fdfind --type d | fzf)'
 alias cdoc="cargo doc --open"
 
 
-# BATCAT alias
-alias b='batcat'
-
-
 # Add Github key to SSH agent.
 alias sa="eval `ssh-agent`"
 alias ss="ssh-add ~/.ssh/id_ed25519"
-
-
-# MongoDB aliases
-alias ms="sudo systemctl start mongod"
-alias mi="sudo systemctl status mongod"
-alias md="sudo systemctl stop mongod"
-alias mr="sudo systemctl restart mongod"
 
 
 # Find the name of WM_CLASS to set in i3 config file.
@@ -163,17 +152,17 @@ export NVM_DIR="$HOME/.nvm"
 
 # Every time I open a new terminal.
 tmux has-session -t Marco || \
-	tmux -f ~/.tmux.conf new -s Marco -n Terminal \; \
+	tmux -f $HOME/.tmux.conf new -s Marco -n term \; \
 	split-window -c ~/ -h \; \
 	split-window -c ~/ -v \; \
 	select-pane -t 3 \; \
 	resize-pane -t 3 -y 20 \; \
-	new-window -c ~/ -n Neovim \; \
-	new-window -c ~/ -n Btop btop \; \
+	new-window -c ~/ -n nvim \; \
+	new-window -c ~/ -n btop btop \; \
 	select-window -t 1 \; \
 	select-pane -t 1 \; \
 	resize-pane -t 1 -x 85 \; \
-	send-keys 'xset r rate 220 50' Enter \; \
+	send-keys 'xset r rate 250 70' Enter \; \
 	send-keys 'clear' Enter \; \
 
 
