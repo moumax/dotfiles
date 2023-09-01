@@ -333,18 +333,21 @@ if [ "$choice" = "tmux" ]; then
 	sudo apt autoremove -y && \
 	rm -rf .tmux
 	sudo apt install -y libevent-dev ncurses-dev build-essential bison	
-	git clone https://github.com/tmux/tmux.git ~/apps/tmux
-	cd ~/apps/tmux && \
-	sh autogen.sh && \
-	./configure && \
-	make && \
-	sudo make install
-	git clone https://github.com/tmux-plugins/tpm ~/tmux/.tmux/plugins/tpm && \
-	git clone https://github.com/erikw/tmux-powerline.git ~/tmux/.tmux/plugins/tmux-powerline
+#	git clone https://github.com/tmux/tmux.git ~/apps/tmux
+	#	cd ~/apps/tmux && \
+	#	sh autogen.sh && \
+	#	./configure && \
+	#	make && \
+	#	sudo make install
+	sudo apt install -y tmux
+	cd $HOME && \
+	mkdir .tmux .tmux/tmux-powerline-custom-themes
+	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm && \
+	git clone https://github.com/erikw/tmux-powerline.git $HOME/.tmux/plugins/tmux-powerline
 	cd $HOME/dotfiles 
-	stow -t ~/tmux tmux
-	mv ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
-	ln -s ~/dotfiles/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh ~/tmux/.tmux/plugins/tmux-powerline/themes/default.sh
+	stow -t $HOME/ tmux
+	mv $HOME/.tmux/plugins/tmux-powerline/themes/default.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
+	ln -s $HOME/dotfiles/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de tmux      \n"
 	printf "  =========================================\n"
