@@ -40,7 +40,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # Start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec Alacritty 
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -88,13 +88,10 @@ bindsym $mod+a focus parent
 set $ws1 "1: Terminal"
 set $ws2 "2: Chrome"
 set $ws3 "3: Insomnia"
-set $ws4 "4: Files"
-# set $ws4 "4: Compass"
-# set $ws6 "6: Telegram"
+set $ws4 "4: Dbeaver"
+set $ws5 "5: Files"
 # set $ws7 "7: Notion"
-# set $ws8 "8: Tor"
 # set $ws9 "9: Chrome"
-# set $ws10 "10: Opera"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -173,36 +170,25 @@ exec_always --no-startup-id ~/.config/polybar/polybar.sh
 # exec --no-startup-id kitty
 exec --no-startup-id alacritty
 exec --no-startup-id google-chrome
+exec --no-startup-id dbeaver 
 # exec --no-startup-id notion-app-enhanced
-# exec --no-startup-id nautilus
+exec --no-startup-id nautilus
 exec --no-startup-id insomnia
 # exec --no-startup-id mongodb compass
-# exec --no-startup-id telegram-desktop
 
 # When opening one of the following app, go directly to the workspace.
-assign [class="alacritty"] $ws1
-for_window [class="alacritty"] focus
-
-assign [class="Insomnia"] $ws3
-for_window [class="Insomnia"] focus
-
-# assign [class="MongoDB Compass"] $ws4
-# for_window [class="MongoDB Compass"] focus
-
-assign [class="Org.gnome.Nautilus"] $ws5
-for_window [class="Org.gnome.Nautilus"] focus
-
-# assign [class="TelegramDesktop"] $ws6
-# for_window [class="TelegramDesktop"] focus
-
-# assign [class="notion-app-enhanced"] $ws7
-# for_window [class="notion-app-enhanced"] focus
-
-# assign [class="Tor Browser"] $ws8
-# for_window [class="Tor Browser"] focus
+assign [class="Alacritty"] $ws1
+for_window [class="Alacritty"] focus
 
 assign [class="Google-chrome"] $ws2
 for_window [class="Google-chrome"] focus
 
-# assign [class="Opera"] $ws10
-# for_window [class="Opera"] focus
+assign [class="Insomnia"] $ws3
+for_window [class="Insomnia"] focus
+
+assign [class="DBeaver"] $ws4
+for_window [class="DBeaver"] focus
+
+assign [class="org.gnome.Nautilus"] $ws5
+for_window [class="org.gnome.Nautilus"] focus
+
