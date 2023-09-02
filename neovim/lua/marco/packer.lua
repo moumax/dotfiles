@@ -84,9 +84,8 @@ packer.startup({
 								group = "Label",
 								action = function()
 									ts_builtin.find_files({
-										cwd = vim.fn.substitute(vim.fn.getcwd(), "/home/floslv", "~", ""),
-										prompt_title = "🌞 "
-											.. vim.fn.substitute(vim.fn.getcwd(), "/home/floslv", "~", ""),
+										cwd = vim.fn.substitute(vim.fn.getcwd(), "/home/", "~", ""),
+										prompt_title = "🌞 " .. vim.fn.substitute(vim.fn.getcwd(), "/home/", "~", ""),
 										hidden = true,
 									})
 								end,
@@ -97,7 +96,7 @@ packer.startup({
 								group = "Label",
 								action = function()
 									ts_builtin.find_files({
-										cwd = "~/Flo/Dev",
+										cwd = "~/dev",
 										prompt_title = "💻 Dev",
 										hidden = true,
 									})
@@ -111,7 +110,7 @@ packer.startup({
 									if
 										pcall(function()
 											ts_builtin.git_files(ts_themes.get_dropdown({
-												cwd = "~/Flo/Dotfiles",
+												cwd = "~/dotfiles",
 												prompt_title = " Dotfiles",
 												hidden = true,
 												previewer = false,
@@ -121,7 +120,7 @@ packer.startup({
 									else
 										ts_builtin.find_files(ts_themes.get_dropdown({
 											prompt_title = " Dotfiles",
-											cwd = "~/Flo/Dotfiles",
+											cwd = "~/dotfiles",
 											previewer = false,
 										}))
 									end
