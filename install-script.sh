@@ -40,9 +40,7 @@ while true; do
 	printf "  ----------------DEPENDANCES------------------\n"
 	printf "\n"
 	printf "  $CB dep $CRS     -- Install des dépendances    \n"
-	printf "  $CB git $CRS     -- Install de l'env git \n"
 	printf "  $CB noderust $CRS-- Install de nodeJS & rust   \n"
-	printf "  $CB dotfolders $CRS -- Archi des dossiers    \n"
 	printf "  $CB chrome $CRS  -- Install de chrome   \n"
 	printf "\n"
 	printf "  --------------------OUTILS-------------------\n"
@@ -105,41 +103,6 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
 	sleep 1
 fi
 
-# GIT
-if [ "$choice" = "git" ] || [ "$choice" = "all" ]; then
-	read -p "Ton email ? : " EmailGit
-
-	if [ "$EmailGit" = "" ]; then
-		printf "\n"
-		printf "Tu dois rentrer un email valide\n"
-		continue
-	fi
-
-	read -p "Ton nom ? : " NameGit	
-	if [ "$NameGit" = "" ]; then
-		printf "\n"
-		printf "Tu dois rentrer un nom valide\n"
-		continue
-	fi
-
-	git config --global user.name "$NameGit" && \
-	printf "git config --global user.name "$NameGit" \n"
-	git config --global user.email "$EmailGit" && \
-	printf "git config --global user.email "$EmailGit" \n"
-	git config --global init.defaultBranch main && \
-	printf "git config --global init.defaultBranch main \n"
-
-	cd ~/.ssh 
-	ssh-keygen -t ed25519 -C "$EmailGit"
-	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_ed25519
-	cat ~/.ssh/id_ed25519.pub
-	printf "  =========================================\n"
-	printf "     Fin de l'installation de l'auth git   \n"
-	printf "  =========================================\n"
-	sleep 1
-fi
-
 # NODERUST
 if [ "$choice" = "noderust" ] || [ "$choice" = "all" ]; then
 	cd ~ && \
@@ -154,43 +117,6 @@ if [ "$choice" = "noderust" ] || [ "$choice" = "all" ]; then
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rust      \n"
-	printf "  =========================================\n"
-	sleep 1
-fi
-
-# DOTFOLDERS
-if [ "$choice" = "dotfolders" ] || [ "$choice" = "all" ]; then
-	mkdir -p ~/dev &&\
-	mkdir -p ~/apps &&\
-	mkdir -p ~/downloads &&\
-	printf "  =========================================\n"
-	printf "          Les dossiers ont été crées       \n"
-	printf "  =========================================\n"
-	sleep 1
-	sudo rm -rf ~/Bureau ~/Images ~/Musique ~/Vidéos ~/Documents ~/Modèles ~/Public ~/Téléchargements
-	printf "  =========================================\n"
-	printf "   Les dossiers inutiles ont été supprimés \n"
-	printf "  =========================================\n"
-	sleep 1
-	cd ~ 
-	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
-	read -p "Adresse de vos dotfiles " dotfiles
-	printf "Le dossier sera crée à la racine ~/dotfiles \n"
-
-	if [ ! -d "$HOME/dotfiles" ]; then
-		printf "Le dossier de destination n'existe pas. Création du dossier..."
-		mkdir -p "$HOME/dotfiles"
-	fi
-
-	git clone "$dotfiles" "$HOME/dotfiles"
-
-	if [ $? -eq 0 ]; then
-		printf "Le dépôt a été cloné avec succès dans $HOME/dotfiles"
-		else
-		printf "Une erreur s'est produite lors du clonage du dépôt."
-	fi
-	printf "  =========================================\n"
-	printf "      Fin de l'installation des dotfiles   \n"
 	printf "  =========================================\n"
 	sleep 1
 fi
