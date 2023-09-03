@@ -1,8 +1,8 @@
 # dotfiles
 
 ```sh
-wget -P ~/ https://raw.githubusercontent.com/moumax/dotfiles/main/pre-install-script.sh && \
-chmod +x ~/pre-install-script.sh
+wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/pre-install-script.sh && \
+chmod +x $HOME/pre-install-script.sh
 ./pre-install.script.sh
 ```
 
@@ -11,7 +11,7 @@ chmod +x ~/pre-install-script.sh
 
 ```sh
 cd $HOME/dotfiles
-chmod +x ~/install-script.sh
+chmod +x $HOME/install-script.sh
 ./install-script.sh
 ```
 
