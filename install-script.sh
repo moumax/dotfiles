@@ -136,24 +136,14 @@ fi
 if [ "$choice" = "zsh" ] || [ "$choice" = "all" ]; then
 	cd $HOME
 	sudo apt install -y zsh zsh-syntax-highlighting
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	sudo rm -r .zshrc
+
+	if [ -e .zshrc ]
+	then
+		echo "Mon fichier existe"
+		sudo rm -r .zshrc
+	fi
 	printf "  =========================================\n"
 	printf "       Fin de l'installation de zsh    \n"
-	printf "  =========================================\n"
-	sleep 1
-fi
-
-# OHMYZSH
-if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
-	cd $HOME/dotfiles
-	stow -t $HOME/ zsh 
-	stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	zenity --info --text="Fermez le terminal, logout, login" --width=$dialog_width --height=$dialog_height
-	printf "  =========================================\n"
-	printf "       Fin de l'installation de ohmyzsh    \n"
 	printf "  =========================================\n"
 	sleep 1
 fi
@@ -178,6 +168,7 @@ if [ "$choice" = "alacr" ] || [ "$choice" = "all" ]; then
 	sudo add-apt-repository ppa:aslatter/ppa -y
 	sudo apt install -y alacritty
 	mkdir -p ~/.config/alacritty
+	cd $HOME/dotfiles
 	stow -t ~/.config/alacritty alacritty
 	printf "  =========================================\n"
 	printf "      Fin de l'installation d'Alacritty    \n"
@@ -212,6 +203,7 @@ fi
 # GITUI
 if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
 	cd ~ && \
+	. .bashrc
 	cargo install gitui
 	mkdir ~/.config/gitui && \
 	cd $HOME/dotfiles
@@ -406,6 +398,21 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
 	sudo apt install -y code
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de vscode \n"
+	printf "  =========================================\n"
+	sleep 1
+fi
+
+# OHMYZSH
+if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	cd $HOME/dotfiles
+	stow -t $HOME/ zsh 
+	stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	zenity --info --text="Fermez le terminal, logout, login" --width=$dialog_width --height=$dialog_height
+	printf "  =========================================\n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
 	printf "  =========================================\n"
 	sleep 1
 fi
