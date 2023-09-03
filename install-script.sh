@@ -132,9 +132,10 @@ if [ "$choice" = "noderust" ] || [ "$choice" = "first" ]; then
 	printf "  =========================================\n"
 	cd ~ && \
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	sudo nvm install 18 && \
-	sudo nvm install 16 && \
-	sudo nvm use 18
+	. ./.nvm/nvm.sh
+	nvm install 18 && \
+	nvm install 16 && \
+	nvm use 18
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de nodeJs    \n"
 	printf "        Fin de l'installation de nodeJs    \n"
@@ -149,6 +150,7 @@ if [ "$choice" = "noderust" ] || [ "$choice" = "first" ]; then
 	printf "             Installation de rust      \n"
 	printf "  =========================================\n"
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	. ./.cargo/env
 	zenity --info --text="Redémarrez le terminal\n Lancez le second script" --width=$dialog_width --height=$dialog_height
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rust      \n"

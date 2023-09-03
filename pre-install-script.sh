@@ -45,7 +45,7 @@ while true; do
 
 # GIT
 if [ "$choice" = "git" ] || [ "$choice" = "all" ]; then
-	sudo apt install git
+	sudo apt install -y git
 	read -p "Ton email ? : " EmailGit
 
 	if [ "$EmailGit" = "" ]; then
