@@ -43,6 +43,72 @@ while true; do
 
 	read -p "Votre choix ? " choice
 
+# DEP
+if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
+	printf "  =========================================\n"
+	printf "         installation des dependances  \n"
+	printf "         installation des dependances  \n"
+	printf "         installation des dependances  \n"
+	printf "         installation des dependances  \n"
+	printf "  =========================================\n"
+	sudo apt update && \
+	sudo apt upgrade -y && \
+	sudo apt install -y git curl compton \
+	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
+	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
+	libssl-dev wget vim zsh && \
+	sudo apt autoremove -y && \
+	sudo apt autoclean -y
+	printf "  =========================================\n"
+	printf "    Fin de l'installation des dependances  \n"
+	printf "    Fin de l'installation des dependances  \n"
+	printf "    Fin de l'installation des dependances  \n"
+	printf "    Fin de l'installation des dependances  \n"
+	printf "  =========================================\n"
+	sleep 2
+fi
+
+# NODE
+if [ "$choice" = "node" ] || [ "$choice" = "all" ]; then
+	printf "  =========================================\n"
+	printf "            Installation de nodeJs    \n"
+	printf "            Installation de nodeJs    \n"
+	printf "            Installation de nodeJs    \n"
+	printf "            Installation de nodeJs    \n"
+	printf "  =========================================\n"
+	cd ~ && \
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	. ./.nvm/nvm.sh
+	nvm install 18 && \
+	nvm install 16 && \
+	nvm use 18
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "  =========================================\n"
+	sleep 2
+fi
+
+# RUST
+if [ "$choice" = "rust" ] || [ "$choice" = "all" ]; then
+	printf "  =========================================\n"
+	printf "             Installation de rust      \n"
+	printf "             Installation de rust      \n"
+	printf "             Installation de rust      \n"
+	printf "             Installation de rust      \n"
+	printf "  =========================================\n"
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	printf "  =========================================\n"
+	printf "        Fin de l'installation de rust      \n"
+	printf "        Fin de l'installation de rust      \n"
+	printf "        Fin de l'installation de rust      \n"
+	printf "        Fin de l'installation de rust      \n"
+	printf "  =========================================\n"
+	sleep 2
+fi
+
 # GIT
 if [ "$choice" = "git" ] || [ "$choice" = "all" ]; then
 	sudo apt install -y git
@@ -68,11 +134,11 @@ if [ "$choice" = "git" ] || [ "$choice" = "all" ]; then
 	git config --global init.defaultBranch main && \
 	printf "git config --global init.defaultBranch main \n"
 
-	cd ~/.ssh 
+	cd $HOME/.ssh 
 	ssh-keygen -t ed25519 -C "$EmailGit"
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/id_ed25519
-	cat ~/.ssh/id_ed25519.pub
+	cat $HOME/.ssh/id_ed25519.pub
 	printf "  =========================================\n"
 	printf "     Fin de l'installation de l'auth git   \n"
 	printf "  =========================================\n"
@@ -81,19 +147,19 @@ fi
 
 # DOTFOLDERS
 if [ "$choice" = "dotfolders" ] || [ "$choice" = "all" ]; then
-	mkdir -p ~/dev &&\
-	mkdir -p ~/apps &&\
-	mkdir -p ~/downloads &&\
+	mkdir -p $HOME/dev &&\
+	mkdir -p $HOME/apps &&\
+	mkdir -p $HOME/downloads &&\
 	printf "  =========================================\n"
 	printf "          Les dossiers ont été crées       \n"
 	printf "  =========================================\n"
 	sleep 1
-	sudo rm -rf ~/Bureau ~/Images ~/Musique ~/Vidéos ~/Documents ~/Modèles ~/Public ~/Téléchargements
+	sudo rm -rf $HOME/Bureau $HOME/Images $HOME/Musique $HOME/Vidéos $HOME/Documents $HOME/Modèles $HOME/Public $HOME/Téléchargements
 	printf "  =========================================\n"
 	printf "   Les dossiers inutiles ont été supprimés \n"
 	printf "  =========================================\n"
 	sleep 1
-	cd ~ 
+	cd $HOME 
 	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
 	read -p "Adresse de vos dotfiles " dotfiles
 	printf "Le dossier sera crée à la racine ~/dotfiles \n"
@@ -116,8 +182,41 @@ if [ "$choice" = "dotfolders" ] || [ "$choice" = "all" ]; then
 	sleep 1
 fi
 
+# OHMYZSH
+if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
+	printf "  =========================================\n"
+	printf "         Installation de ohmyzsh    \n"
+	printf "         Installation de ohmyzsh    \n"
+	printf "         Installation de ohmyzsh    \n"
+	printf "         Installation de ohmyzsh    \n"
+	printf "  =========================================\n"
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	cd $HOME
+	if [ -e .zshrc ]; then
+		echo "Suppression du fichier .zshrc"
+		sudo rm .zshrc
+	fi
+	cd $HOME/dotfiles
+	stow -t $HOME zsh
+	stow -t $HOME .oh-my-zsh/custom/themes oh-my-zsh
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	printf "  =========================================\n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
+	printf "  =========================================\n"
+	sleep 2
+fi
+
 if [ "$choice" = "q" ]; then
 	printf "  =========================================\n"
+	printf "                Fin du script              \n"
+	printf "     FERMEZ LE TERMINAL ET LA SESSION      \n"
+	printf "     FERMEZ LE TERMINAL ET LA SESSION      \n"
+	printf "     FERMEZ LE TERMINAL ET LA SESSION      \n"
+	printf "     FERMEZ LE TERMINAL ET LA SESSION      \n"
 	printf "                Fin du script              \n"
 	printf "  =========================================\n"
 	exit 1
