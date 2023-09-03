@@ -70,25 +70,41 @@ while true; do
 	printf "  $CB polybar $CRS -- Install de polybar     \n"
 	printf "  $CB i3-conf $CRS -- Fichiers de config i3 \n"
 	printf "  ---------------------------------------------\n"
-	printf "  $CB all -- $CRS Tout installer             \n"
-	printf "  $CR q -- $CRS Quitter le script             \n"
+	printf "  $CB first $CRS   --  Premier script \n"
+	printf "  $CB second $CRS  --  Tout installer     \n"
+	printf "  $CR q $CRS       --  Quitter le script    \n"
 	printf "\n"
 
 	read -p "Votre choix ? " choice
 
 # UPDATE
-if [ "$choice" = "update" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "update" ] || [ "$choice" = "first" ]; then
+	printf "  =========================================\n"
+	printf "              Update du système          \n"
+	printf "              Update du système          \n"
+	printf "              Update du système          \n"
+	printf "              Update du système          \n"
+	printf "  =========================================\n"
 	cd ~
 	sudo apt update
 	sudo apt upgrade -y
 	printf "  =========================================\n"
 	printf "            Fin de la mise à jour          \n"
+	printf "            Fin de la mise à jour          \n"
+	printf "            Fin de la mise à jour          \n"
+	printf "            Fin de la mise à jour          \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # DEPENDANCES
-if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "dep" ] || [ "$choice" = "first" ]; then
+	printf "  =========================================\n"
+	printf "         installation des dependances  \n"
+	printf "         installation des dependances  \n"
+	printf "         installation des dependances  \n"
+	printf "         installation des dependances  \n"
+	printf "  =========================================\n"
 	sudo apt update && \
 	sudo apt upgrade -y && \
 	sudo apt install -y git curl i3 rofi compton \
@@ -99,12 +115,21 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
 	sudo apt autoclean -y
 	printf "  =========================================\n"
 	printf "    Fin de l'installation des dependances  \n"
+	printf "    Fin de l'installation des dependances  \n"
+	printf "    Fin de l'installation des dependances  \n"
+	printf "    Fin de l'installation des dependances  \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # NODERUST
-if [ "$choice" = "noderust" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "noderust" ] || [ "$choice" = "first" ]; then
+	printf "  =========================================\n"
+	printf "            Installation de nodeJs    \n"
+	printf "            Installation de nodeJs    \n"
+	printf "            Installation de nodeJs    \n"
+	printf "            Installation de nodeJs    \n"
+	printf "  =========================================\n"
 	cd ~ && \
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 	sudo nvm install 18 && \
@@ -112,44 +137,76 @@ if [ "$choice" = "noderust" ] || [ "$choice" = "all" ]; then
 	sudo nvm use 18
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de nodeJs    \n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "        Fin de l'installation de nodeJs    \n"
+	printf "        Fin de l'installation de nodeJs    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
+	printf "  =========================================\n"
+	printf "             Installation de rust      \n"
+	printf "             Installation de rust      \n"
+	printf "             Installation de rust      \n"
+	printf "             Installation de rust      \n"
+	printf "  =========================================\n"
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	zenity --info --text="Redémarrez le terminal\n Lancez le second script" --width=$dialog_width --height=$dialog_height
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rust      \n"
+	printf "        Fin de l'installation de rust      \n"
+	printf "        Fin de l'installation de rust      \n"
+	printf "        Fin de l'installation de rust      \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # CHROME
-if [ "$choice" = "chrome" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "chrome" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "            Installation de Chrome    \n"
+	printf "            Installation de Chrome    \n"
+	printf "            Installation de Chrome    \n"
+	printf "            Installation de Chrome    \n"
+	printf "  =========================================\n"
 	cd ~/apps && \
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de Chrome    \n"
+	printf "        Fin de l'installation de Chrome    \n"
+	printf "        Fin de l'installation de Chrome    \n"
+	printf "        Fin de l'installation de Chrome    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
-# ZSH&OHMYZSH
-if [ "$choice" = "zsh" ] || [ "$choice" = "all" ]; then
+# ZSH
+if [ "$choice" = "zsh" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "            Installation de zsh    \n"
+	printf "            Installation de zsh    \n"
+	printf "            Installation de zsh    \n"
+	printf "            Installation de zsh    \n"
+	printf "  =========================================\n"
 	cd $HOME
 	sudo apt install -y zsh zsh-syntax-highlighting
 
-	if [ -e .zshrc ]
-	then
-		echo "Mon fichier existe"
-		sudo rm -r .zshrc
-	fi
 	printf "  =========================================\n"
 	printf "       Fin de l'installation de zsh    \n"
+	printf "       Fin de l'installation de zsh    \n"
+	printf "       Fin de l'installation de zsh    \n"
+	printf "       Fin de l'installation de zsh    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # FONT
-if [ "$choice" = "font" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "font" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "          Installation de la font    \n"
+	printf "          Installation de la font    \n"
+	printf "          Installation de la font    \n"
+	printf "          Installation de la font    \n"
+	printf "  =========================================\n"
 	wget -P ~/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
 	cd ~/.local/share && \
 	mkdir -p fonts && \
@@ -158,12 +215,21 @@ if [ "$choice" = "font" ] || [ "$choice" = "all" ]; then
 	unzip Hack.zip
 	printf "  =========================================\n"
 	printf "       Fin de l'installation de la font    \n"
+	printf "       Fin de l'installation de la font    \n"
+	printf "       Fin de l'installation de la font    \n"
+	printf "       Fin de l'installation de la font    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # ALACRITTY
-if [ "$choice" = "alacr" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "alacr" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "          Installation d'Alacritty    \n"
+	printf "          Installation d'Alacritty    \n"
+	printf "          Installation d'Alacritty    \n"
+	printf "          Installation d'Alacritty    \n"
+	printf "  =========================================\n"
 	sudo apt update && sudo apt upgrade -y
 	sudo add-apt-repository ppa:aslatter/ppa -y
 	sudo apt install -y alacritty
@@ -172,12 +238,21 @@ if [ "$choice" = "alacr" ] || [ "$choice" = "all" ]; then
 	stow -t ~/.config/alacritty alacritty
 	printf "  =========================================\n"
 	printf "      Fin de l'installation d'Alacritty    \n"
+	printf "      Fin de l'installation d'Alacritty    \n"
+	printf "      Fin de l'installation d'Alacritty    \n"
+	printf "      Fin de l'installation d'Alacritty    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # STARSHIP
-if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "stars" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "         Installation de starship    \n"
+	printf "         Installation de starship    \n"
+	printf "         Installation de starship    \n"
+	printf "         Installation de starship    \n"
+	printf "  =========================================\n"
 	cd ~/ && \
 	curl -sS https://starship.rs/install.sh | sh
 	mkdir -p ~/.config/starship
@@ -185,37 +260,63 @@ if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
 	stow -t ~/.config/starship starship
 	printf "  =========================================\n"
 	printf "      Fin de l'installation de starship    \n"
+	printf "      Fin de l'installation de starship    \n"
+	printf "      Fin de l'installation de starship    \n"
+	printf "      Fin de l'installation de starship    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # FZF
-if [ "$choice" = "fzf" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "fzf" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "            Installation de fzf      \n"
+	printf "            Installation de fzf      \n"
+	printf "            Installation de fzf      \n"
+	printf "            Installation de fzf      \n"
+	printf "  =========================================\n"
 	cd ~/ && \
 	git clone https://github.com/junegunn/fzf ~/.fzf && \
 	cd ~/.fzf && ./install
 	printf "  =========================================\n"
 	printf "         Fin de l'installation de fzf      \n"
+	printf "         Fin de l'installation de fzf      \n"
+	printf "         Fin de l'installation de fzf      \n"
+	printf "         Fin de l'installation de fzf      \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # GITUI
-if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "gitui" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "           Installation de gitui     \n"
+	printf "           Installation de gitui     \n"
+	printf "           Installation de gitui     \n"
+	printf "           Installation de gitui     \n"
+	printf "  =========================================\n"
 	cd ~ && \
-	. .bashrc
 	cargo install gitui
 	mkdir ~/.config/gitui && \
 	cd $HOME/dotfiles
 	stow -t ~/.config/gitui gitui
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de gitui     \n"
+	printf "        Fin de l'installation de gitui     \n"
+	printf "        Fin de l'installation de gitui     \n"
+	printf "        Fin de l'installation de gitui     \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # BTOP
-if [ "$choice" = "btop" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "btop" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "             Installation de btop     \n"
+	printf "             Installation de btop     \n"
+	printf "             Installation de btop     \n"
+	printf "             Installation de btop     \n"
+	printf "  =========================================\n"
 	wget -P ~/downloads https://github.com/aristocratos/btop/releases/download/v1.2.13/btop-x86_64-linux-musl.tbz && \
 	cd ~/apps && \
 	mkdir -p btop && \
@@ -226,24 +327,42 @@ if [ "$choice" = "btop" ] || [ "$choice" = "all" ]; then
 	cd btop && sudo make install
 	printf "  =========================================\n"
 	printf "         Fin de l'installation de btop     \n"
+	printf "         Fin de l'installation de btop     \n"
+	printf "         Fin de l'installation de btop     \n"
+	printf "         Fin de l'installation de btop     \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # GLOW
-if [ "$choice" = "glow" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "glow" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "            Installation de glow      \n"
+	printf "            Installation de glow      \n"
+	printf "            Installation de glow      \n"
+	printf "            Installation de glow      \n"
+	printf "  =========================================\n"
 	sudo mkdir -p /etc/apt/keyrings && \
 	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg && \
 	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list && \
 	sudo apt update && sudo apt install -y glow && sudo apt autoremove -y
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de glow      \n"
+	printf "        Fin de l'installation de glow      \n"
+	printf "        Fin de l'installation de glow      \n"
+	printf "        Fin de l'installation de glow      \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # TMUX (A TESTER) 
-if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "tmux" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "            Installation de tmux      \n"
+	printf "            Installation de tmux      \n"
+	printf "            Installation de tmux      \n"
+	printf "            Installation de tmux      \n"
+	printf "  =========================================\n"
 	cd ~ && \
 	sudo apt update && \
 	sudo apt upgrade -y && \
@@ -262,38 +381,65 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	ln -s $HOME/dotfiles/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de tmux      \n"
+	printf "        Fin de l'installation de tmux      \n"
+	printf "        Fin de l'installation de tmux      \n"
+	printf "        Fin de l'installation de tmux      \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # PACKER
-if [ "$choice" = "packer" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "packer" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "           Installation de packer    \n"
+	printf "           Installation de packer    \n"
+	printf "           Installation de packer    \n"
+	printf "           Installation de packer    \n"
+	printf "  =========================================\n"
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de packer    \n"
+	printf "        Fin de l'installation de packer    \n"
+	printf "        Fin de l'installation de packer    \n"
+	printf "        Fin de l'installation de packer    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # PYNVIM
-if [ "$choice" = "pynvim" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "pynvim" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "           Installation de pynvim    \n"
+	printf "           Installation de pynvim    \n"
+	printf "           Installation de pynvim    \n"
+	printf "           Installation de pynvim    \n"
+	printf "  =========================================\n"
 	cd ~ && \
 	pip3 install pynvim --break-system-packages
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de pynvim    \n"
+	printf "        Fin de l'installation de pynvim    \n"
+	printf "        Fin de l'installation de pynvim    \n"
+	printf "        Fin de l'installation de pynvim    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # NEOVIM 
-if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "neovim" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "        Installation de neovim    \n"
+	printf "        Installation de neovim    \n"
+	printf "        Installation de neovim    \n"
+	printf "        Installation de neovim    \n"
+	printf "  =========================================\n"
 	cd ~ && \
 	sudo apt install build-essential software-properties-common -y
 	sudo add-apt-repository ppa:neovim-ppa/unstable -y
 	sudo apt-get update
 	sudo apt install neovim -y
 	mkdir ~/.config/nvim
-	npm i -g tree-sitter-cli && \
+	npm i -g tree-sitter-cli
 	npm i -g neovim
 	cd $HOME/dotfiles
 	stow -t ~/.config/nvim neovim
@@ -304,23 +450,41 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 	printf "  les dépendances                          \n"
 	printf "\n"
 	printf "        Fin de l'installation de neovim    \n"
+	printf "        Fin de l'installation de neovim    \n"
+	printf "        Fin de l'installation de neovim    \n"
+	printf "        Fin de l'installation de neovim    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # ROFI 
-if [ "$choice" = "rofi" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "rofi" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "           Installation de rofi      \n"
+	printf "           Installation de rofi      \n"
+	printf "           Installation de rofi      \n"
+	printf "           Installation de rofi      \n"
+	printf "  =========================================\n"
 	mkdir ~/.config/rofi && \
 	cd $HOME/dotfiles && \
 	stow -t ~/.config/rofi rofi
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de rofi      \n"
+	printf "        Fin de l'installation de rofi      \n"
+	printf "        Fin de l'installation de rofi      \n"
+	printf "        Fin de l'installation de rofi      \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # POLYBAR 
-if [ "$choice" = "polybar" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "polybar" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "           Installation de polybar   \n"
+	printf "           Installation de polybar   \n"
+	printf "           Installation de polybar   \n"
+	printf "           Installation de polybar   \n"
+	printf "  =========================================\n"
 	cd $HOME && \
 	sudo apt update && \
 	sudo apt upgrade -y && \
@@ -350,46 +514,82 @@ if [ "$choice" = "polybar" ] || [ "$choice" = "all" ]; then
 	sudo apt install -y fonts-font-awesome
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de polybar   \n"
+	printf "        Fin de l'installation de polybar   \n"
+	printf "        Fin de l'installation de polybar   \n"
+	printf "        Fin de l'installation de polybar   \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # I3-CONFIG
-if [ "$choice" = "i3-conf" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "i3-conf" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "             Installation d'i3         \n"
+	printf "             Installation d'i3         \n"
+	printf "             Installation d'i3         \n"
+	printf "             Installation d'i3         \n"
+	printf "  =========================================\n"
 	mkdir ~/.config/i3
 	cd $HOME/dotfiles && \
 	stow -t ~/.config/i3 i3
 	printf "  =========================================\n"
 	printf "        Fin de l'installation d'i3         \n"
+	printf "        Fin de l'installation d'i3         \n"
+	printf "        Fin de l'installation d'i3         \n"
+	printf "        Fin de l'installation d'i3         \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # INSOMNIA
-if [ "$choice" = "insomnia" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "insomnia" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "           Installation d'insomnia   \n"
+	printf "           Installation d'insomnia   \n"
+	printf "           Installation d'insomnia   \n"
+	printf "           Installation d'insomnia   \n"
+	printf "  =========================================\n"
 	echo "deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all" | sudo tee -a /etc/apt/sources.list.d/insomnia.list
 	sudo apt update && \
 	sudo apt install -y insomnia && \
 	sudo apt autoremove -y
 	printf "  =========================================\n"
 	printf "        Fin de l'installation d'insomnia   \n"
+	printf "        Fin de l'installation d'insomnia   \n"
+	printf "        Fin de l'installation d'insomnia   \n"
+	printf "        Fin de l'installation d'insomnia   \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # DBEAVER
-if [ "$choice" = "dbeaver" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "dbeaver" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "        Installation de dbeaver   \n"
+	printf "        Installation de dbeaver   \n"
+	printf "        Installation de dbeaver   \n"
+	printf "        Installation de dbeaver   \n"
+	printf "  =========================================\n"
 	sudo add-apt-repository ppa:serge-rider/dbeaver-ce && \
 	sudo apt-get update && \
 	sudo apt-get install -y dbeaver-ce
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de dbeaver   \n"
+	printf "        Fin de l'installation de dbeaver   \n"
+	printf "        Fin de l'installation de dbeaver   \n"
+	printf "        Fin de l'installation de dbeaver   \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # VSCODE
-if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "vscode" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "           Installation de vscode \n"
+	printf "           Installation de vscode \n"
+	printf "           Installation de vscode \n"
+	printf "           Installation de vscode \n"
+	printf "  =========================================\n"
 	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 	sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
 	sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
@@ -398,27 +598,47 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
 	sudo apt install -y code
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de vscode \n"
+	printf "        Fin de l'installation de vscode \n"
+	printf "        Fin de l'installation de vscode \n"
+	printf "        Fin de l'installation de vscode \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 # OHMYZSH
-if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
+if [ "$choice" = "oh" ] || [ "$choice" = "second" ]; then
+	printf "  =========================================\n"
+	printf "         Installation de ohmyzsh    \n"
+	printf "         Installation de ohmyzsh    \n"
+	printf "         Installation de ohmyzsh    \n"
+	printf "         Installation de ohmyzsh    \n"
+	printf "  =========================================\n"
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	cd $HOME
+	if [ -e .zshrc ];	then
+		echo "Suppression du fichier .zshrc"
+		sudo rm .zshrc
+	fi
 	cd $HOME/dotfiles
-	stow -t $HOME/ zsh 
-	stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
+	stow -t $HOME zsh 
+	stow -t $HOME .oh-my-zsh/custom/themes oh-my-zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	zenity --info --text="Fermez le terminal, logout, login" --width=$dialog_width --height=$dialog_height
 	printf "  =========================================\n"
 	printf "       Fin de l'installation de ohmyzsh    \n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
+	printf "       Fin de l'installation de ohmyzsh    \n"
 	printf "  =========================================\n"
-	sleep 1
+	sleep 2
 fi
 
 if [ "$choice" = "q" ]; then
 	printf "  =========================================\n"
+	printf "                Fin du script              \n"
+	printf "                Fin du script              \n"
+	printf "                Fin du script              \n"
 	printf "                Fin du script              \n"
 	printf "  =========================================\n"
 	exit 1
