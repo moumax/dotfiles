@@ -96,7 +96,7 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
 	sudo apt install -y git curl i3 rofi compton \
 	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
 	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
-	libssl-dev wget && \
+	libssl-dev wget vim && \
 	sudo apt autoremove -y && \
 	sudo apt autoclean -y
 	printf "  =========================================\n"
@@ -200,7 +200,6 @@ if [ "$choice" = "chrome" ] || [ "$choice" = "all" ]; then
 	cd ~/apps && \
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
-	google-chrome
 	printf "  =========================================\n"
 	printf "        Fin de l'installation de Chrome    \n"
 	printf "  =========================================\n"
@@ -221,9 +220,8 @@ fi
 
 # OHMYZSH
 if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
-	cd $HOME
-	stow -t $HOME/ zsh 
 	cd $HOME/dotfiles
+	stow -t $HOME/ zsh 
 	stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
