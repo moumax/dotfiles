@@ -33,8 +33,15 @@ while true; do
 	printf "  =============================================\n"
 	printf "\n"
 	printf "\n"
-	printf "  $CB git $CRS     -- Install de l'env git \n"
-	printf "  $CB dotfolders $CRS -- Archi des dossiers    \n"
+	printf "  $CB folders $CRS     -- Préparation dossiers \n"
+	printf "  $CB dep $CRS     -- Install dépendences \n"
+	printf "  $CB gitdot $CRS     -- Install de l'env git \n"
+	printf "  $CB oh $CRS     -- Install ohmyzsh \n"
+	printf "  $CB ohfiles $CRS     -- Install fichiers ohmyzsh \n"
+	printf "  $CB nvm $CRS     -- Install nvm \n"
+	printf "  $CB node $CRS     -- Install nodeJs \n"
+	printf "  $CB rust $CRS     -- Install rust \n"
+	printf "  $CB neovim $CRS     -- Install neovim \n"
 	printf "\n"
 	printf "  ---------------------------------------------\n"
 	printf "  $CB all -- $CRS Tout installer             \n"
@@ -43,75 +50,39 @@ while true; do
 
 	read -p "Votre choix ? " choice
 
+# FOLDERS
+if [ "$choice" = "folders" ]; then
+	printf "$CV Dossiers /Bureau, /Images, /Musique, /Vidéos, /Documents, /Modèles, /Public, /Téléchargements \n"
+	printf " en cours de suppression... \n"
+	sudo rm -rf $HOME/Bureau $HOME/Images $HOME/Musique $HOME/Vidéos $HOME/Documents $HOME/Modèles $HOME/Public $HOME/Téléchargements
+	sleep 2
+	printf " Dossiers /dev, /apps, /downloads \n"
+	printf " en cours de création...$CRS \n"
+	mkdir -p $HOME/dev $HOME/apps $HOME/downloads
+	sleep 2
+	printf "$CR Opérations terminées $CRS      \n"
+	sleep 2
+fi
+
 # DEP
-if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
-	printf "  =========================================\n"
-	printf "         installation des dependances  \n"
-	printf "         installation des dependances  \n"
-	printf "         installation des dependances  \n"
-	printf "         installation des dependances  \n"
-	printf "  =========================================\n"
-	sudo apt update && \
-	sudo apt upgrade -y && \
+if [ "$choice" = "dep" ]; then
+	printf "$CV Installation des dependances $CRS \n"
+	sleep 2
+	sudo apt update && sudo apt upgrade -y && \
 	sudo apt install -y git curl compton \
 	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
 	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
 	libssl-dev wget vim zsh && \
 	sudo apt autoremove -y && \
 	sudo apt autoclean -y
-	printf "  =========================================\n"
-	printf "    Fin de l'installation des dependances  \n"
-	printf "    Fin de l'installation des dependances  \n"
-	printf "    Fin de l'installation des dependances  \n"
-	printf "    Fin de l'installation des dependances  \n"
-	printf "  =========================================\n"
+	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2
 fi
 
-# NODE
-if [ "$choice" = "node" ] || [ "$choice" = "all" ]; then
-	printf "  =========================================\n"
-	printf "            Installation de nodeJs    \n"
-	printf "            Installation de nodeJs    \n"
-	printf "            Installation de nodeJs    \n"
-	printf "            Installation de nodeJs    \n"
-	printf "  =========================================\n"
-	cd ~ && \
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	. ./.nvm/nvm.sh
-	nvm install 18 && \
-	nvm install 16 && \
-	nvm use 18
-	printf "  =========================================\n"
-	printf "        Fin de l'installation de nodeJs    \n"
-	printf "        Fin de l'installation de nodeJs    \n"
-	printf "        Fin de l'installation de nodeJs    \n"
-	printf "        Fin de l'installation de nodeJs    \n"
-	printf "  =========================================\n"
+# GITDOTFILES
+if [ "$choice" = "gitdot" ]; then
+	printf "$CV Installation de la clé ssh git $CRS \n"
 	sleep 2
-fi
-
-# RUST
-if [ "$choice" = "rust" ] || [ "$choice" = "all" ]; then
-	printf "  =========================================\n"
-	printf "             Installation de rust      \n"
-	printf "             Installation de rust      \n"
-	printf "             Installation de rust      \n"
-	printf "             Installation de rust      \n"
-	printf "  =========================================\n"
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	printf "  =========================================\n"
-	printf "        Fin de l'installation de rust      \n"
-	printf "        Fin de l'installation de rust      \n"
-	printf "        Fin de l'installation de rust      \n"
-	printf "        Fin de l'installation de rust      \n"
-	printf "  =========================================\n"
-	sleep 2
-fi
-
-# GIT
-if [ "$choice" = "git" ] || [ "$choice" = "all" ]; then
-	sudo apt install -y git
 	read -p "Ton email ? : " EmailGit
 
 	if [ "$EmailGit" = "" ]; then
@@ -137,32 +108,19 @@ if [ "$choice" = "git" ] || [ "$choice" = "all" ]; then
 	cd $HOME/.ssh 
 	ssh-keygen -t ed25519 -C "$EmailGit"
 	eval "$(ssh-agent -s)"
-	ssh-add ~/.ssh/id_ed25519
-	cat $HOME/.ssh/id_ed25519.pub
-	printf "  =========================================\n"
-	printf "     Fin de l'installation de l'auth git   \n"
-	printf "  =========================================\n"
-	sleep 1
-fi
-
-# DOTFOLDERS
-if [ "$choice" = "dotfolders" ] || [ "$choice" = "all" ]; then
-	mkdir -p $HOME/dev &&\
-	mkdir -p $HOME/apps &&\
-	mkdir -p $HOME/downloads &&\
-	printf "  =========================================\n"
-	printf "          Les dossiers ont été crées       \n"
-	printf "  =========================================\n"
-	sleep 1
-	sudo rm -rf $HOME/Bureau $HOME/Images $HOME/Musique $HOME/Vidéos $HOME/Documents $HOME/Modèles $HOME/Public $HOME/Téléchargements
-	printf "  =========================================\n"
-	printf "   Les dossiers inutiles ont été supprimés \n"
-	printf "  =========================================\n"
-	sleep 1
+	ssh-add $HOME/.ssh/id_ed25519
+	printf "$CR Clé ssh à copier coller \n"
+	cat $HOME/.ssh/id_ed25519.pub $CRS
+	printf "$CR Clé git crée $CRS      \n"
+	sleep 2
+	
+	printf "$CV Récupération des dotfiles $CRS \n"
+	sleep 2
 	cd $HOME 
 	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
 	read -p "Adresse de vos dotfiles " dotfiles
-	printf "Le dossier sera crée à la racine ~/dotfiles \n"
+	printf " $CR Le dossier sera crée à la racine ~/dotfiles $CRS\n"
+	sleep 2
 
 	if [ ! -d "$HOME/dotfiles" ]; then
 		printf "Le dossier de destination n'existe pas. Création du dossier..."
@@ -176,38 +134,102 @@ if [ "$choice" = "dotfolders" ] || [ "$choice" = "all" ]; then
 		else
 		printf "Une erreur s'est produite lors du clonage du dépôt."
 	fi
-	printf "  =========================================\n"
-	printf "      Fin de l'installation des dotfiles   \n"
-	printf "  =========================================\n"
-	sleep 1
+	printf "$CR Dossier dotfiles récupéré et installé $CRS      \n"
+	sleep 2
 fi
 
-# OHMYZSH
-if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
-	printf "  =========================================\n"
-	printf "         Installation de ohmyzsh    \n"
-	printf "         Installation de ohmyzsh    \n"
-	printf "         Installation de ohmyzsh    \n"
-	printf "         Installation de ohmyzsh    \n"
-	printf "  =========================================\n"
+# OHMYZSH 
+if [ "$choice" = "oh" ]; then
+	printf "$CV Installation de Oh my Zsh $CRS \n"
+	sleep 2
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+fi
+
+# OHMYZSHFILES 
+if [ "$choice" = "ohfiles" ]; then
+	printf "$CV Installation des plugins Oh my Zsh $CRS \n"
+	sleep 2
 	cd $HOME
-	if [ -e .zshrc ]; then
-		echo "Suppression du fichier .zshrc"
-		sudo rm .zshrc
-	fi
-	cd $HOME/dotfiles
-	stow -t $HOME zsh
-	stow -t $HOME .oh-my-zsh/custom/themes oh-my-zsh
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	printf "  =========================================\n"
-	printf "       Fin de l'installation de ohmyzsh    \n"
-	printf "       Fin de l'installation de ohmyzsh    \n"
-	printf "       Fin de l'installation de ohmyzsh    \n"
-	printf "       Fin de l'installation de ohmyzsh    \n"
-	printf "  =========================================\n"
+	printf "$CV Récupération du thème Oh my zsh $CRS \n"
+	stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
 	sleep 2
+	printf "$CR Opérations terminées $CRS      \n"
+	sleep 2
+fi
+
+# NVM
+if [ "$choice" = "nvm" ]; then
+	printf "$CV Installation de node version manager $CRS \n"
+	sleep 2
+	cd $HOME && \
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+fi
+
+# NODE
+if [ "$choice" = "node" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation des versions 16 et 18 de nodeJs $CRS \n"
+	sleep 2
+	nvm install 18 && nvm install 16 && nvm use 18
+	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+fi
+
+# RUST
+if [ "$choice" = "rust" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de Rust & Cargo $CRS \n"
+	sleep 2
+	cd $HOME
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+fi
+
+# NEOVIM 
+if [ "$choice" = "neovim" ] || [ "$choice" = "second" ]; then
+	printf "$CV Installation de Neovim $CRS \n"
+	sleep 2
+	cd $HOME && \
+	sudo apt install build-essential software-properties-common -y
+	sudo add-apt-repository ppa:neovim-ppa/unstable -y
+	sudo apt-get update && sudo apt install neovim -y
+	printf "$CR Neovim est installé $CRS \n"
+	sleep 2
+
+	printf "$CV Installation de pynvim $CRS \n"
+	sleep 2
+	cd $HOME
+	pip3 install pynvim
+	printf "$CR Pynvim est installé $CRS \n"
+	sleep 2
+	
+	printf "$CV Installation de Packer $CRS \n"
+	sleep 2
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+	printf "$CR Packer est installé $CRS \n"
+	sleep 2
+
+	printf "$CV Installation de tree-sitter-cli $CRS \n"
+	sleep 2
+	cd $HOME 
+	npm i -g tree-sitter-cli
+	printf "$CR tree-sitter-cli est installé $CRS \n"
+	sleep 2
+
+	printf "$CV Installation de neovim-cli $CRS \n"
+	sleep 2
+	cd $HOME
+	npm i -g neovim
+	printf "$CR neovim-cli est installé $CRS \n"
+	sleep 2
+
+	printf "$CV Récupération des dotfiles neovim $CRS \n"
+	sleep 2
+	mkdir ~/.config/nvim
+	cd $HOME/dotfiles
+	stow -t $HOME/.config/nvim neovim
+	zenity --info --text="Ouvrez packer.lua pour installer les paquets\n puis exécutez :PackerSync" --width=$dialog_width --height=$dialog_height
 fi
 
 if [ "$choice" = "q" ]; then

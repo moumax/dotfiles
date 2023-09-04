@@ -24,6 +24,18 @@ if [ ! "$Os" = "Linux" ]; then
 	exit 1
 fi
 
+if ! which node > /dev/null; then
+		printf "\n"
+		printf "  ================================================\n"
+		printf "                                                  \n"
+		printf "                  I am sorry ...                  \n"
+		printf "                                                  \n"
+		printf "        You need to install node.js first !       \n"
+		printf "                                                  \n"
+		printf "  ================================================\n"
+		exit 1
+fi
+
 while true; do
 
 	printf "\n"
