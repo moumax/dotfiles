@@ -109,8 +109,8 @@ if [ "$choice" = "gitdot" ]; then
 	ssh-keygen -t ed25519 -C "$EmailGit"
 	eval "$(ssh-agent -s)"
 	ssh-add $HOME/.ssh/id_ed25519
-	printf "$CR Clé ssh à copier coller \n"
-	cat $HOME/.ssh/id_ed25519.pub $CRS
+	printf "$CR Clé ssh à copier coller $CRS \n"
+	cat $HOME/.ssh/id_ed25519.pub 
 	printf "$CR Clé git crée $CRS      \n"
 	sleep 2
 	
@@ -130,9 +130,9 @@ if [ "$choice" = "gitdot" ]; then
 	git clone "$dotfiles" "$HOME/dotfiles"
 
 	if [ $? -eq 0 ]; then
-		printf "Le dépôt a été cloné avec succès dans $HOME/dotfiles"
+		printf "Le dépôt a été cloné avec succès dans $HOME/dotfiles \n"
 		else
-		printf "Une erreur s'est produite lors du clonage du dépôt."
+		printf "Une erreur s'est produite lors du clonage du dépôt. \n"
 	fi
 	printf "$CR Dossier dotfiles récupéré et installé $CRS      \n"
 	sleep 2
@@ -142,8 +142,8 @@ fi
 if [ "$choice" = "oh" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
 	sleep 2
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # OHMYZSHFILES 
@@ -154,10 +154,13 @@ if [ "$choice" = "ohfiles" ]; then
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	printf "$CV Récupération du thème Oh my zsh $CRS \n"
-	stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
+	cd $HOME/dotfiles
+	sudo stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
+	sudo rm $HOME/.zshrc && stow -t $HOME zsh
 	sleep 2
 	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2
+	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
 fi
 
 # NVM
@@ -173,6 +176,7 @@ fi
 if [ "$choice" = "node" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation des versions 16 et 18 de nodeJs $CRS \n"
 	sleep 2
+	. .nvm/nvm.sh
 	nvm install 18 && nvm install 16 && nvm use 18
 	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
 fi
@@ -200,7 +204,7 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "second" ]; then
 	printf "$CV Installation de pynvim $CRS \n"
 	sleep 2
 	cd $HOME
-	pip3 install pynvim
+	pip3 install pynvim --break-system-packages
 	printf "$CR Pynvim est installé $CRS \n"
 	sleep 2
 	
@@ -213,6 +217,7 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "second" ]; then
 	printf "$CV Installation de tree-sitter-cli $CRS \n"
 	sleep 2
 	cd $HOME 
+	. .nvm/nvm.sh
 	npm i -g tree-sitter-cli
 	printf "$CR tree-sitter-cli est installé $CRS \n"
 	sleep 2
@@ -220,6 +225,7 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "second" ]; then
 	printf "$CV Installation de neovim-cli $CRS \n"
 	sleep 2
 	cd $HOME
+	. .nvm/nvm.sh
 	npm i -g neovim
 	printf "$CR neovim-cli est installé $CRS \n"
 	sleep 2
