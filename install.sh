@@ -162,7 +162,7 @@ if [ "$choice" = "oh" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
 	sleep 2
 	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 fi
 
 # OHMYZSHFILES 
