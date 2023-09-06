@@ -1,9 +1,9 @@
 # dotfiles
 
 ```sh
-wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/install-script.sh && \
-chmod +x $HOME/install-script.sh
-./install-script.sh
+wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/install.sh && \
+chmod +x $HOME/install.sh
+./install.sh
 ```
 
 ### ADD GIT KEY
