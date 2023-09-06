@@ -59,15 +59,55 @@ while true; do
 	printf "  $CB btop $CRS      -- Install de btop \n"
 	printf "\n"
 	printf "  ---------------------------------------------\n"
-	printf "  $CB 1 -- $CRS Première phase d'installation \n"
-	printf "  $CB 2 -- $CRS Seconde phase d'installation \n"
-	printf "  $CB 3 -- $CRS Troisième phase d'installation \n"
-	printf "  $CB 4 -- $CRS Quatrième phase d'installation \n"
-	printf "  $CB 5 -- $CRS Cinquième phase d'installation \n"
+	printf "  $CB 0 -- $CRS Première phase d'installation \n"
+	printf "  $CB 1 -- $CRS Seconde phase d'installation \n"
 	printf "  $CR q -- $CRS Quitter le script             \n"
 	printf "\n"
 
 	read -p "Votre choix ? " choice
+
+# DEP
+if [ "$choice" = "dep" ] || [ "$choice" = "0" ]; then
+	printf "$CV Installation des dependances $CRS \n"
+	sleep 2
+	sudo apt update && sudo apt upgrade -y && \
+	sudo apt install -y git curl compton \
+	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
+	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
+	libssl-dev wget vim zsh && \
+	sudo apt autoremove -y && \
+	sudo apt autoclean -y
+	printf "$CR Opérations terminées $CRS      \n"
+	sleep 2
+fi
+
+# NVM
+if [ "$choice" = "nvm" ] || [ "$choice" = "0" ]; then
+	printf "$CV Installation de node version manager $CRS \n"
+	sleep 2
+	cd $HOME && \
+	mkdir -p .nvm
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+fi
+
+# RUST
+if [ "$choice" = "rust" ] || [ "$choice" = "0" ]; then
+	printf "$CV Installation de Rust & Cargo $CRS \n"
+	sleep 2
+	cd $HOME
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+fi
+
+# NODE
+if [ "$choice" = "node" ] || [ "$choice" = "1" ]; then
+	printf "$CV Installation des versions 16 et 18 de nodeJs $CRS \n"
+	sleep 2
+	. .nvm/nvm.sh
+	nvm install 18 && nvm install 16 && nvm use 18
+	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+fi
 
 # FOLDERS
 if [ "$choice" = "folders" ] || [ "$choice" = "1" ]; then
@@ -79,21 +119,6 @@ if [ "$choice" = "folders" ] || [ "$choice" = "1" ]; then
 	printf " en cours de création...$CRS \n"
 	mkdir -p $HOME/dev $HOME/apps $HOME/downloads
 	sleep 2
-	printf "$CR Opérations terminées $CRS      \n"
-	sleep 2
-fi
-
-# DEP
-if [ "$choice" = "dep" ] || [ "$choice" = "1" ]; then
-	printf "$CV Installation des dependances $CRS \n"
-	sleep 2
-	sudo apt update && sudo apt upgrade -y && \
-	sudo apt install -y git curl compton \
-	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
-	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
-	libssl-dev wget vim zsh && \
-	sudo apt autoremove -y && \
-	sudo apt autoclean -y
 	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2
 fi
@@ -157,61 +182,8 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "1" ]; then
 	sleep 2
 fi
 
-# OHMYZSH 
-if [ "$choice" = "oh" ] || [ "$choice" = "1" ]; then
-	printf "$CV Installation de Oh my Zsh $CRS \n"
-	sleep 2
-	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
-fi
-
-# OHMYZSHFILES 
-if [ "$choice" = "ohfiles" ] || [ "$choice" = "2" ]; then
-	printf "$CV Installation des plugins Oh my Zsh $CRS \n"
-	sleep 2
-	cd $HOME
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	printf "$CV Récupération du thème Oh my zsh $CRS \n"
-	cd $HOME/dotfiles
-	sudo stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
-	sudo rm $HOME/.zshrc && stow -t $HOME zsh
-	sleep 2
-	printf "$CR Opérations terminées $CRS      \n"
-	sleep 2
-	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
-fi
-
-# NVM
-if [ "$choice" = "nvm" ] || [ "$choice" = "3" ]; then
-	printf "$CV Installation de node version manager $CRS \n"
-	sleep 2
-	cd $HOME && \
-	mkdir -p .nvm
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
-fi
-
-# NODE
-if [ "$choice" = "node" ] || [ "$choice" = "4" ]; then
-	printf "$CV Installation des versions 16 et 18 de nodeJs $CRS \n"
-	sleep 2
-	. .nvm/nvm.sh
-	nvm install 18 && nvm install 16 && nvm use 18
-	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
-fi
-
-# RUST
-if [ "$choice" = "rust" ] || [ "$choice" = "4" ]; then
-	printf "$CV Installation de Rust & Cargo $CRS \n"
-	sleep 2
-	cd $HOME
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
-fi
-
 # NEOVIM 
-if [ "$choice" = "neovim" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "neovim" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de Neovim $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -260,7 +232,7 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "5" ]; then
 fi
 
 # FONT
-if [ "$choice" = "font" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "font" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de la font hack $CRS \n"
 	sleep 2
 	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
@@ -274,7 +246,7 @@ if [ "$choice" = "font" ] || [ "$choice" = "5" ]; then
 fi
 
 # ALACRITTY
-if [ "$choice" = "alacr" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "alacr" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation d'alacritty $CRS \n"
 	sleep 2
 	sudo add-apt-repository ppa:aslatter/ppa -y
@@ -287,7 +259,7 @@ if [ "$choice" = "alacr" ] || [ "$choice" = "5" ]; then
 fi
 
 # STARSHIP
-if [ "$choice" = "stars" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "stars" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de starship $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -300,7 +272,7 @@ if [ "$choice" = "stars" ] || [ "$choice" = "5" ]; then
 fi
 
 # FZF
-if [ "$choice" = "fzf" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "fzf" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de fzf $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -311,7 +283,7 @@ if [ "$choice" = "fzf" ] || [ "$choice" = "5" ]; then
 fi
 
 # GITUI
-if [ "$choice" = "gitui" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "gitui" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de gitui $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -324,7 +296,7 @@ if [ "$choice" = "gitui" ] || [ "$choice" = "5" ]; then
 fi
 
 # GLOW
-if [ "$choice" = "glow" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "glow" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de glow $CRS \n"
 	sleep 2
 	sudo mkdir -p /etc/apt/keyrings && \
@@ -336,7 +308,7 @@ if [ "$choice" = "glow" ] || [ "$choice" = "5" ]; then
 fi
 
 # CHROME
-if [ "$choice" = "chrome" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "chrome" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de Google Chrome $CRS \n"
 	sleep 2
 	cd $HOME/apps && \
@@ -347,7 +319,7 @@ if [ "$choice" = "chrome" ] || [ "$choice" = "5" ]; then
 fi
 
 # TMUX 
-if [ "$choice" = "tmux" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "tmux" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de Tmux $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -373,7 +345,7 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "5" ]; then
 fi
 
 # POLYBAR 
-if [ "$choice" = "polybar" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "polybar" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de Polybar $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -390,7 +362,7 @@ if [ "$choice" = "polybar" ] || [ "$choice" = "5" ]; then
 fi
 
 # ROFI 
-if [ "$choice" = "rofi" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "rofi" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de rofi $CRS \n"
 	sleep 2
 	cd $HOME && sudo apt install -y rofi
@@ -401,7 +373,7 @@ if [ "$choice" = "rofi" ] || [ "$choice" = "5" ]; then
 fi
 
 # I3-CONFIG
-if [ "$choice" = "i3-conf" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "i3-conf" ] || [ "$choice" = "1" ]; then
 	printf "$CV Install fichiers de config I3 $CRS \n"
 	sleep 2
 	sudo apt install -y i3 rofi compton 
@@ -413,7 +385,7 @@ if [ "$choice" = "i3-conf" ] || [ "$choice" = "5" ]; then
 fi
 
 # INSOMNIA
-if [ "$choice" = "insomnia" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "insomnia" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de insomnia $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -426,7 +398,7 @@ if [ "$choice" = "insomnia" ] || [ "$choice" = "5" ]; then
 fi
 
 # DBEAVER
-if [ "$choice" = "dbeaver" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "dbeaver" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de dbeaver $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -437,7 +409,7 @@ if [ "$choice" = "dbeaver" ] || [ "$choice" = "5" ]; then
 fi
 
 # VSCODE
-if [ "$choice" = "vscode" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "vscode" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de vscode $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -451,7 +423,7 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "5" ]; then
 fi
 
 # BTOP 
-if [ "$choice" = "btop" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "btop" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de btop $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -460,8 +432,33 @@ if [ "$choice" = "btop" ] || [ "$choice" = "5" ]; then
 	sleep 2
 fi
 
+# OHMYZSH 
+if [ "$choice" = "oh" ] || [ "$choice" = "1" ]; then
+	printf "$CV Installation de Oh my Zsh $CRS \n"
+	sleep 2
+	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
+fi
+
+# OHMYZSHFILES 
+if [ "$choice" = "ohfiles" ] || [ "$choice" = "1" ]; then
+	printf "$CV Installation des plugins Oh my Zsh $CRS \n"
+	sleep 2
+	cd $HOME
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	printf "$CV Récupération du thème Oh my zsh $CRS \n"
+	cd $HOME/dotfiles
+	sudo stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
+	sudo rm $HOME/.zshrc && stow -t $HOME zsh
+	sleep 2
+	printf "$CR Opérations terminées $CRS      \n"
+	sleep 2
+	zenity --info --text="Tapez exit au prochain prompt \n Le script reprendra" --width=$dialog_width --height=$dialog_height
+fi
+
 # ENDING 
-if [ "$choice" = "5" ]; then
+if [ "$choice" = "1" ]; then
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
