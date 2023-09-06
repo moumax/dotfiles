@@ -33,30 +33,30 @@ while true; do
 	printf "  =============================================\n"
 	printf "\n"
 	printf "\n"
-	printf "  $CB folders $CRS     -- Préparation dossiers \n"
-	printf "  $CB dep $CRS     -- Install dépendences \n"
-	printf "  $CB gitdot $CRS     -- Install de l'env git \n"
-	printf "  $CB oh $CRS     -- Install ohmyzsh \n"
-	printf "  $CB ohfiles $CRS     -- Install fichiers ohmyzsh \n"
-	printf "  $CB nvm $CRS     -- Install nvm \n"
-	printf "  $CB node $CRS     -- Install nodeJs \n"
-	printf "  $CB rust $CRS     -- Install rust \n"
-	printf "  $CB neovim $CRS     -- Install neovim \n"
-	printf "  $CB font $CRS     -- Install hack font \n"
+	printf "  $CB folders $CRS   -- Préparation dossiers \n"
+	printf "  $CB dep $CRS       -- Install dépendences \n"
+	printf "  $CB gitdot $CRS    -- Install de l'env git \n"
+	printf "  $CB oh $CRS        -- Install ohmyzsh \n"
+	printf "  $CB ohfiles $CRS   -- Install fichiers ohmyzsh \n"
+	printf "  $CB nvm $CRS       -- Install nvm \n"
+	printf "  $CB node $CRS      -- Install nodeJs \n"
+	printf "  $CB rust $CRS      -- Install rust \n"
+	printf "  $CB neovim $CRS    -- Install neovim \n"
+	printf "  $CB font $CRS      -- Install hack font \n"
 	printf "  $CB alacr $CRS     -- Install allacrity \n"
 	printf "  $CB stars $CRS     -- Install de starship \n"
-	printf "  $CB fzf $CRS     -- Install de fzf \n"
+	printf "  $CB fzf $CRS       -- Install de fzf \n"
 	printf "  $CB gitui $CRS     -- Install de gitui \n"
-	printf "  $CB glow $CRS     -- Install de glow \n"
-	printf "  $CB chrome $CRS     -- Install de google chrome \n"
-	printf "  $CB tmux $CRS     -- Install de tmux \n"
-	printf "  $CB polybar $CRS     -- Install de polybar \n"
-	printf "  $CB rofi $CRS     -- Install de rofi \n"
-	printf "  $CB i3-conf $CRS     -- Install des fichiers I3 \n"
-	printf "  $CB insomnia $CRS     -- Install de insomnia \n"
-	printf "  $CB dbeaver $CRS     -- Install de dbeaver \n"
-	printf "  $CB vscode $CRS     -- Install de vscode \n"
-	printf "  $CB btop $CRS     -- Install de btop \n"
+	printf "  $CB glow $CRS      -- Install de glow \n"
+	printf "  $CB chrome $CRS    -- Install de google chrome \n"
+	printf "  $CB tmux $CRS      -- Install de tmux \n"
+	printf "  $CB polybar $CRS   -- Install de polybar \n"
+	printf "  $CB rofi $CRS      -- Install de rofi \n"
+	printf "  $CB i3-conf $CRS   -- Install des fichiers I3 \n"
+	printf "  $CB insomnia $CRS  -- Install de insomnia \n"
+	printf "  $CB dbeaver $CRS   -- Install de dbeaver \n"
+	printf "  $CB vscode $CRS    -- Install de vscode \n"
+	printf "  $CB btop $CRS      -- Install de btop \n"
 	printf "\n"
 	printf "  ---------------------------------------------\n"
 	printf "  $CB 1 -- $CRS Première phase d'installation \n"
@@ -64,7 +64,6 @@ while true; do
 	printf "  $CB 3 -- $CRS Troisième phase d'installation \n"
 	printf "  $CB 4 -- $CRS Quatrième phase d'installation \n"
 	printf "  $CB 5 -- $CRS Cinquième phase d'installation \n"
-	printf "  $CB 6 -- $CRS Sixième phase d'installation \n"
 	printf "  $CR q -- $CRS Quitter le script             \n"
 	printf "\n"
 
@@ -159,7 +158,7 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "1" ]; then
 fi
 
 # OHMYZSH 
-if [ "$choice" = "oh" ] || [ "$choice" = "2" ]; then
+if [ "$choice" = "oh" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
 	sleep 2
 	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
@@ -167,7 +166,7 @@ if [ "$choice" = "oh" ] || [ "$choice" = "2" ]; then
 fi
 
 # OHMYZSHFILES 
-if [ "$choice" = "ohfiles" ] || [ "$choice" = "3" ]; then
+if [ "$choice" = "ohfiles" ] || [ "$choice" = "2" ]; then
 	printf "$CV Installation des plugins Oh my Zsh $CRS \n"
 	sleep 2
 	cd $HOME
@@ -184,7 +183,7 @@ if [ "$choice" = "ohfiles" ] || [ "$choice" = "3" ]; then
 fi
 
 # NVM
-if [ "$choice" = "nvm" ] || [ "$choice" = "4" ]; then
+if [ "$choice" = "nvm" ] || [ "$choice" = "3" ]; then
 	printf "$CV Installation de node version manager $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -194,7 +193,7 @@ if [ "$choice" = "nvm" ] || [ "$choice" = "4" ]; then
 fi
 
 # NODE
-if [ "$choice" = "node" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "node" ] || [ "$choice" = "4" ]; then
 	printf "$CV Installation des versions 16 et 18 de nodeJs $CRS \n"
 	sleep 2
 	. .nvm/nvm.sh
@@ -203,7 +202,7 @@ if [ "$choice" = "node" ] || [ "$choice" = "5" ]; then
 fi
 
 # RUST
-if [ "$choice" = "rust" ] || [ "$choice" = "5" ]; then
+if [ "$choice" = "rust" ] || [ "$choice" = "4" ]; then
 	printf "$CV Installation de Rust & Cargo $CRS \n"
 	sleep 2
 	cd $HOME
@@ -212,7 +211,7 @@ if [ "$choice" = "rust" ] || [ "$choice" = "5" ]; then
 fi
 
 # NEOVIM 
-if [ "$choice" = "neovim" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "neovim" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de Neovim $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -256,11 +255,12 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "6" ]; then
 	mkdir ~/.config/nvim
 	cd $HOME/dotfiles
 	stow -t $HOME/.config/nvim neovim
-	zenity --info --text="Ouvrez packer.lua pour installer les paquets\n puis exécutez :PackerSync" --width=$dialog_width --height=$dialog_height
+	printf "$CR Les dotfiles neovim ont été installés $CRS      \n"
+	sleep 2
 fi
 
 # FONT
-if [ "$choice" = "font" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "font" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de la font hack $CRS \n"
 	sleep 2
 	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
@@ -274,7 +274,7 @@ if [ "$choice" = "font" ] || [ "$choice" = "6" ]; then
 fi
 
 # ALACRITTY
-if [ "$choice" = "alacr" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "alacr" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation d'alacritty $CRS \n"
 	sleep 2
 	sudo add-apt-repository ppa:aslatter/ppa -y
@@ -283,12 +283,11 @@ if [ "$choice" = "alacr" ] || [ "$choice" = "6" ]; then
 	cd $HOME/dotfiles
 	stow -t $HOME/.config/alacritty alacritty
 	printf "$CR alacritty a été installée $CRS      \n"
-	zenity --info --text="Fermez le terminal et démarrez Alacritty" --width=$dialog_width --height=$dialog_height
 	sleep 2
 fi
 
 # STARSHIP
-if [ "$choice" = "stars" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "stars" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de starship $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -301,7 +300,7 @@ if [ "$choice" = "stars" ] || [ "$choice" = "6" ]; then
 fi
 
 # FZF
-if [ "$choice" = "fzf" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "fzf" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de fzf $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -312,7 +311,7 @@ if [ "$choice" = "fzf" ] || [ "$choice" = "6" ]; then
 fi
 
 # GITUI
-if [ "$choice" = "gitui" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "gitui" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de gitui $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -325,7 +324,7 @@ if [ "$choice" = "gitui" ] || [ "$choice" = "6" ]; then
 fi
 
 # GLOW
-if [ "$choice" = "glow" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "glow" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de glow $CRS \n"
 	sleep 2
 	sudo mkdir -p /etc/apt/keyrings && \
@@ -337,7 +336,7 @@ if [ "$choice" = "glow" ] || [ "$choice" = "6" ]; then
 fi
 
 # CHROME
-if [ "$choice" = "chrome" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "chrome" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de Google Chrome $CRS \n"
 	sleep 2
 	cd $HOME/apps && \
@@ -348,7 +347,7 @@ if [ "$choice" = "chrome" ] || [ "$choice" = "6" ]; then
 fi
 
 # TMUX 
-if [ "$choice" = "tmux" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "tmux" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de Tmux $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -374,7 +373,7 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "6" ]; then
 fi
 
 # POLYBAR 
-if [ "$choice" = "polybar" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "polybar" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de Polybar $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -391,7 +390,7 @@ if [ "$choice" = "polybar" ] || [ "$choice" = "6" ]; then
 fi
 
 # ROFI 
-if [ "$choice" = "rofi" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "rofi" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de rofi $CRS \n"
 	sleep 2
 	cd $HOME && sudo apt install -y rofi
@@ -402,7 +401,7 @@ if [ "$choice" = "rofi" ] || [ "$choice" = "6" ]; then
 fi
 
 # I3-CONFIG
-if [ "$choice" = "i3-conf" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "i3-conf" ] || [ "$choice" = "5" ]; then
 	printf "$CV Install fichiers de config I3 $CRS \n"
 	sleep 2
 	sudo apt install -y i3 rofi compton 
@@ -414,7 +413,7 @@ if [ "$choice" = "i3-conf" ] || [ "$choice" = "6" ]; then
 fi
 
 # INSOMNIA
-if [ "$choice" = "insomnia" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "insomnia" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de insomnia $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -427,7 +426,7 @@ if [ "$choice" = "insomnia" ] || [ "$choice" = "6" ]; then
 fi
 
 # DBEAVER
-if [ "$choice" = "dbeaver" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "dbeaver" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de dbeaver $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -438,7 +437,7 @@ if [ "$choice" = "dbeaver" ] || [ "$choice" = "6" ]; then
 fi
 
 # VSCODE
-if [ "$choice" = "vscode" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "vscode" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de vscode $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -452,20 +451,26 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "6" ]; then
 fi
 
 # BTOP 
-if [ "$choice" = "btop" ] || [ "$choice" = "6" ]; then
+if [ "$choice" = "btop" ] || [ "$choice" = "5" ]; then
 	printf "$CV Installation de btop $CRS \n"
 	sleep 2
 	cd $HOME && \
 	sudo apt install -y btop
+	printf "$CR btop a été installée $CRS      \n"
+	sleep 2
+fi
+
+# ENDING 
+if [ "$choice" = "5" ]; then
+	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
+	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
+	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
+	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
+	sleep 2
 fi
 
 if [ "$choice" = "q" ]; then
 	printf "  =========================================\n"
-	printf "                Fin du script              \n"
-	printf "     FERMEZ LE TERMINAL ET LA SESSION      \n"
-	printf "     FERMEZ LE TERMINAL ET LA SESSION      \n"
-	printf "     FERMEZ LE TERMINAL ET LA SESSION      \n"
-	printf "     FERMEZ LE TERMINAL ET LA SESSION      \n"
 	printf "                Fin du script              \n"
 	printf "  =========================================\n"
 	exit 1
