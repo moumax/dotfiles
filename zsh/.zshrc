@@ -137,7 +137,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 
 # Add ~/.local/bin directory to the PATH
-export PATH="/home/flo/.local/bin:$PATH"
+export PATH="/home/.local/bin:$PATH"
 
 
 # Add ~/.config as XDG_CONFIG_HOME
