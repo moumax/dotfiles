@@ -12,7 +12,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Hack Regular Nerd Font Complete 8
+font pango:Iosevka Nerd Font Mono 8
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -28,6 +28,18 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+
+set $frsMon = eDP-1
+set $sndMon = HDMI-2
+workspace 1 output $sndMon
+workspace 2 output $frsMon
+workspace 3 output $frsMon
+workspace 4 output $frsMon
+workspace 5 output $frsMon
+workspace 6 output $frsMon
+workspace 7 output $frsMon
+workspace 8 output $frsMon
+workspace 9 output $frsMon
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -90,8 +102,6 @@ set $ws2 "2: Chrome"
 set $ws3 "3: Insomnia"
 set $ws4 "4: Dbeaver"
 set $ws5 "5: Files"
-# set $ws7 "7: Notion"
-# set $ws9 "9: Chrome"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -167,14 +177,11 @@ bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 exec_always --no-startup-id ~/.config/polybar/polybar.sh
 
 # At startup, launch apps.
-# exec --no-startup-id kitty
 exec --no-startup-id alacritty
 exec --no-startup-id google-chrome
 exec --no-startup-id dbeaver 
-# exec --no-startup-id notion-app-enhanced
 exec --no-startup-id nautilus
 exec --no-startup-id insomnia
-# exec --no-startup-id mongodb compass
 
 # When opening one of the following app, go directly to the workspace.
 assign [class="Alacritty"] $ws1
