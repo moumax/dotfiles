@@ -57,6 +57,7 @@ while true; do
 	printf "  $CB dbeaver $CRS   -- Install de dbeaver \n"
 	printf "  $CB vscode $CRS    -- Install de vscode \n"
 	printf "  $CB btop $CRS      -- Install de btop \n"
+	printf "  $CB font2 $CRS      -- Install de font2 \n"
 	printf "\n"
 	printf "  ---------------------------------------------\n"
 	printf "  $CB 0 -- $CRS Première phase d'installation \n"
@@ -88,7 +89,8 @@ if [ "$choice" = "nvm" ] || [ "$choice" = "0" ]; then
 	cd $HOME && \
 	mkdir -p .nvm
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+	printf "$CR Installation de nvm terminé $CRS      \n"
+	sleep 2
 fi
 
 # RUST
@@ -97,7 +99,9 @@ if [ "$choice" = "rust" ] || [ "$choice" = "0" ]; then
 	sleep 2
 	cd $HOME
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+	. $HOME/.cargo/env
+	printf "$CR Installation de rust et Cargo terminés $CRS      \n"
+	sleep 2
 fi
 
 # NODE
@@ -107,6 +111,8 @@ if [ "$choice" = "node" ] || [ "$choice" = "1" ]; then
 	. .nvm/nvm.sh
 	nvm install 18 && nvm install 16 && nvm use 18
 	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+	printf "$CR Installation de NodeJs terminé $CRS      \n"
+	sleep 2
 fi
 
 # FOLDERS
@@ -232,16 +238,16 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "1" ]; then
 fi
 
 # FONT
-if [ "$choice" = "font" ] || [ "$choice" = "1" ]; then
-	printf "$CV Installation de la font hack $CRS \n"
+if [ "$choice" = "font2" ] || [ "$choice" = "1" ]; then
+	printf "$CV Installation de la font Iosevka $CRS \n"
 	sleep 2
-	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Hack.zip && \
+	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip && \
 	cd $HOME/.local/share && \
 	mkdir -p fonts && \
 	cd fonts && \
-	mv $HOME/downloads/Hack.zip . && \
-	unzip Hack.zip
-	printf "$CR La font hack a été installée $CRS      \n"
+	mv $HOME/downloads/Iosevka.zip . && \
+	unzip Iosevka.zip
+	printf "$CR La font Iosevka a été installée $CRS      \n"
 	sleep 2
 fi
 
@@ -436,7 +442,7 @@ fi
 if [ "$choice" = "oh" ] || [ "$choice" = "1" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
 	sleep 2
-	zenity --info --text="Fermez le terminal\n Logout et Login\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
+	zenity --info --text="Tapez exit au prochain prompt \n Le script reprendra" --width=$dialog_width --height=$dialog_height
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 fi
 
@@ -454,15 +460,15 @@ if [ "$choice" = "ohfiles" ] || [ "$choice" = "1" ]; then
 	sleep 2
 	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2
-	zenity --info --text="Tapez exit au prochain prompt \n Le script reprendra" --width=$dialog_width --height=$dialog_height
 fi
 
 # ENDING 
 if [ "$choice" = "1" ]; then
-	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
-	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
-	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
-	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE"
+	printf " n\ "
+	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
+	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
+	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
+	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
 	sleep 2
 fi
 
