@@ -438,6 +438,16 @@ if [ "$choice" = "btop" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
+# MYSQL
+if [ "$choice" = "sql" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de mysql $CRS \n"
+	sleep 2
+	sudo apt install mysql-server
+	sudo update-rc.d mysql defaults
+	printf "$CR mysql a été installée $CRS      \n"
+	sleep 2
+fi
+
 # OHMYZSH 
 if [ "$choice" = "oh" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
@@ -463,7 +473,7 @@ if [ "$choice" = "ohfiles" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; th
 fi
 
 # ENDING 
-if [ "$choice" = "1" ]; then
+if [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf " n\ "
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
