@@ -57,18 +57,18 @@ while true; do
 	printf "  $CB dbeaver $CRS   -- Install de dbeaver \n"
 	printf "  $CB vscode $CRS    -- Install de vscode \n"
 	printf "  $CB btop $CRS      -- Install de btop \n"
-	printf "  $CB font2 $CRS      -- Install de font2 \n"
 	printf "\n"
 	printf "  ---------------------------------------------\n"
-	printf "  $CB 0 -- $CRS Première phase d'installation \n"
-	printf "  $CB 1 -- $CRS Seconde phase d'installation \n"
-	printf "  $CR q -- $CRS Quitter le script             \n"
+	printf "  $CB all   -- $CRS Full install \n"
+	printf "  $CB 0     -- $CRS Première phase d'installation \n"
+	printf "  $CB 1     -- $CRS Seconde phase d'installation \n"
+	printf "  $CR q     -- $CRS Quitter le script             \n"
 	printf "\n"
 
 	read -p "Votre choix ? " choice
 
 # DEP
-if [ "$choice" = "dep" ] || [ "$choice" = "0" ]; then
+if [ "$choice" = "dep" ] || [ "$choice" = "0" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation des dependances $CRS \n"
 	sleep 2
 	sudo apt update && sudo apt upgrade -y && \
@@ -83,7 +83,7 @@ if [ "$choice" = "dep" ] || [ "$choice" = "0" ]; then
 fi
 
 # NVM
-if [ "$choice" = "nvm" ] || [ "$choice" = "0" ]; then
+if [ "$choice" = "nvm" ] || [ "$choice" = "0" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de node version manager $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -94,7 +94,7 @@ if [ "$choice" = "nvm" ] || [ "$choice" = "0" ]; then
 fi
 
 # RUST
-if [ "$choice" = "rust" ] || [ "$choice" = "0" ]; then
+if [ "$choice" = "rust" ] || [ "$choice" = "0" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Rust & Cargo $CRS \n"
 	sleep 2
 	cd $HOME
@@ -105,7 +105,7 @@ if [ "$choice" = "rust" ] || [ "$choice" = "0" ]; then
 fi
 
 # NODE
-if [ "$choice" = "node" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "node" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation des versions 16 et 18 de nodeJs $CRS \n"
 	sleep 2
 	. .nvm/nvm.sh
@@ -116,7 +116,7 @@ if [ "$choice" = "node" ] || [ "$choice" = "1" ]; then
 fi
 
 # FOLDERS
-if [ "$choice" = "folders" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "folders" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Dossiers /Bureau, /Images, /Musique, /Vidéos, /Documents, /Modèles, /Public, /Téléchargements \n"
 	printf " en cours de suppression... \n"
 	sudo rm -rf $HOME/Bureau $HOME/Images $HOME/Musique $HOME/Vidéos $HOME/Documents $HOME/Modèles $HOME/Public $HOME/Téléchargements
@@ -130,7 +130,7 @@ if [ "$choice" = "folders" ] || [ "$choice" = "1" ]; then
 fi
 
 # GITDOTFILES
-if [ "$choice" = "gitdot" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "gitdot" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de la clé ssh git $CRS \n"
 	sleep 2
 	read -p "Ton email ? : " EmailGit
@@ -189,7 +189,7 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "1" ]; then
 fi
 
 # NEOVIM 
-if [ "$choice" = "neovim" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "neovim" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Neovim $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -238,7 +238,7 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "1" ]; then
 fi
 
 # FONT
-if [ "$choice" = "font2" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "font" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de la font Iosevka $CRS \n"
 	sleep 2
 	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip && \
@@ -252,7 +252,7 @@ if [ "$choice" = "font2" ] || [ "$choice" = "1" ]; then
 fi
 
 # ALACRITTY
-if [ "$choice" = "alacr" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "alacr" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation d'alacritty $CRS \n"
 	sleep 2
 	sudo add-apt-repository ppa:aslatter/ppa -y
@@ -265,7 +265,7 @@ if [ "$choice" = "alacr" ] || [ "$choice" = "1" ]; then
 fi
 
 # STARSHIP
-if [ "$choice" = "stars" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "stars" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de starship $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -278,7 +278,7 @@ if [ "$choice" = "stars" ] || [ "$choice" = "1" ]; then
 fi
 
 # FZF
-if [ "$choice" = "fzf" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "fzf" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de fzf $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -289,7 +289,7 @@ if [ "$choice" = "fzf" ] || [ "$choice" = "1" ]; then
 fi
 
 # GITUI
-if [ "$choice" = "gitui" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "gitui" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de gitui $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -302,7 +302,7 @@ if [ "$choice" = "gitui" ] || [ "$choice" = "1" ]; then
 fi
 
 # GLOW
-if [ "$choice" = "glow" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "glow" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de glow $CRS \n"
 	sleep 2
 	sudo mkdir -p /etc/apt/keyrings && \
@@ -314,7 +314,7 @@ if [ "$choice" = "glow" ] || [ "$choice" = "1" ]; then
 fi
 
 # CHROME
-if [ "$choice" = "chrome" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "chrome" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Google Chrome $CRS \n"
 	sleep 2
 	cd $HOME/apps && \
@@ -325,7 +325,7 @@ if [ "$choice" = "chrome" ] || [ "$choice" = "1" ]; then
 fi
 
 # TMUX 
-if [ "$choice" = "tmux" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "tmux" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Tmux $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -351,7 +351,7 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "1" ]; then
 fi
 
 # POLYBAR 
-if [ "$choice" = "polybar" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "polybar" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Polybar $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -368,7 +368,7 @@ if [ "$choice" = "polybar" ] || [ "$choice" = "1" ]; then
 fi
 
 # ROFI 
-if [ "$choice" = "rofi" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "rofi" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de rofi $CRS \n"
 	sleep 2
 	cd $HOME && sudo apt install -y rofi
@@ -379,7 +379,7 @@ if [ "$choice" = "rofi" ] || [ "$choice" = "1" ]; then
 fi
 
 # I3-CONFIG
-if [ "$choice" = "i3-conf" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "i3-conf" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Install fichiers de config I3 $CRS \n"
 	sleep 2
 	sudo apt install -y i3 rofi compton 
@@ -391,7 +391,7 @@ if [ "$choice" = "i3-conf" ] || [ "$choice" = "1" ]; then
 fi
 
 # INSOMNIA
-if [ "$choice" = "insomnia" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "insomnia" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de insomnia $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -404,7 +404,7 @@ if [ "$choice" = "insomnia" ] || [ "$choice" = "1" ]; then
 fi
 
 # DBEAVER
-if [ "$choice" = "dbeaver" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "dbeaver" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de dbeaver $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -415,7 +415,7 @@ if [ "$choice" = "dbeaver" ] || [ "$choice" = "1" ]; then
 fi
 
 # VSCODE
-if [ "$choice" = "vscode" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "vscode" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de vscode $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -429,7 +429,7 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "1" ]; then
 fi
 
 # BTOP 
-if [ "$choice" = "btop" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "btop" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de btop $CRS \n"
 	sleep 2
 	cd $HOME && \
@@ -439,7 +439,7 @@ if [ "$choice" = "btop" ] || [ "$choice" = "1" ]; then
 fi
 
 # OHMYZSH 
-if [ "$choice" = "oh" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "oh" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
 	sleep 2
 	zenity --info --text="Tapez exit au prochain prompt \n Le script reprendra" --width=$dialog_width --height=$dialog_height
@@ -447,7 +447,7 @@ if [ "$choice" = "oh" ] || [ "$choice" = "1" ]; then
 fi
 
 # OHMYZSHFILES 
-if [ "$choice" = "ohfiles" ] || [ "$choice" = "1" ]; then
+if [ "$choice" = "ohfiles" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation des plugins Oh my Zsh $CRS \n"
 	sleep 2
 	cd $HOME
