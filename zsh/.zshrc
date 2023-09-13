@@ -94,7 +94,7 @@ alias settings="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
 
 
 # Launch gitui app.
-alias ui="gitui"
+alias ui="lazygit"
 
 
 # Set VIM as default editor
@@ -152,17 +152,17 @@ export NVM_DIR="$HOME/.nvm"
 
 # Every time I open a new terminal.
 tmux has-session -t Marco || \
-	tmux -f $HOME/.tmux.conf new -s Marco -n term \; \
+	tmux -f $HOME/.tmux.conf new -s Marco -n server \; \
 	split-window -c ~/ -h \; \
 	split-window -c ~/ -v \; \
 	select-pane -t 3 \; \
 	resize-pane -t 3 -y 20 \; \
-	new-window -c ~/ -n nvim \; \
-	new-window -c ~/ -n btop btop \; \
+	new-window -c ~/ -n nvim1 \; \
+	new-window -c ~/ -n nvim2 \; \
+	new-window -c ~/ -n lazygit lazygit\; \
 	select-window -t 1 \; \
 	select-pane -t 1 \; \
 	resize-pane -t 1 -x 85 \; \
-	send-keys 'xset r rate 250 70' Enter \; \
 	send-keys 'clear' Enter \; \
 
 
@@ -174,4 +174,4 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 # Keyboard speed
-xset r rate 250 70
+# xset r rate 250 70
