@@ -88,7 +88,7 @@ fi
 
 
 ##################
-# Others otpions #
+# Others options #
 ##################
 
 #"now_playing 234 37" \
