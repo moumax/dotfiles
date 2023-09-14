@@ -330,6 +330,7 @@ fi
 if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
 	sleep 1
+  sudo pacman -S zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	printf "$CV Installation de Oh my Zsh effectué $CRS \n"
   sleep 1
