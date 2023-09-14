@@ -99,7 +99,7 @@ if [ "$choice" = "nvm" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de node version manager $CRS \n"
 	sleep 1
 	cd $HOME && \
-  yay -S nvm
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 	mkdir -p .nvm
 	printf "$CR Installation de nvm terminé $CRS      \n"
 	sleep 1
