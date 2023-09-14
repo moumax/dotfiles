@@ -1,15 +1,12 @@
 ############
 ## .zshrc ##
 ############
-
 # by Marco
-
 # ~/.zshrc
 
 
 # Path to oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
 
 ZSH_THEME="marco"
 
@@ -71,31 +68,21 @@ alias gpo='git pull origin'
 alias fd="fdfind"
 alias sd='cd $(fdfind --type d | fzf)'
 
-
-# Rust aliases
-alias cdoc="cargo doc --open"
-
-
 # Add Github key to SSH agent.
 alias sa="eval `ssh-agent`"
 alias ss="ssh-add ~/.ssh/id_ed25519"
 
-
 # Find the name of WM_CLASS to set in i3 config file.
 alias xg="xprop | grep WM_CLASS"
-
 
 # If UBUNTU SOFTWARE does not load anymore.
 alias ubuntu-software="killall snap-store"
 
-
 # Launch Gnome Control Center
 alias settings="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
 
-
 # Launch gitui app.
-alias ui="lazygit"
-
+alias ui="gitui"
 
 # Set VIM as default editor
 export VISUAL=nvim
@@ -139,10 +126,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Add ~/.local/bin directory to the PATH
 export PATH="/home/.local/bin:$PATH"
 
-
 # Add ~/.config as XDG_CONFIG_HOME
 export XDG_CONFIG_HOME=$HOME/.config
-
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -167,11 +152,10 @@ tmux has-session -t Marco || \
 
 
 # Zoxide
-eval "$(zoxide init zsh)"
-
+# eval "$(zoxide init zsh)"
 
 # Starship
 eval "$(starship init zsh)"
 
 # Keyboard speed
-# xset r rate 250 70
+xset r rate 250 70
