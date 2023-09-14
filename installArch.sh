@@ -235,7 +235,7 @@ if [ "$choice" = "stars" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de starship $CRS \n"
 	sleep 2
 	cd $HOME && \
-	curl -sS https://starship.rs/install.sh | sh
+  sudo pacman -S starship
 	mkdir -p $HOME/.config/starship
 	cd $HOME/dotfiles && \
 	stow -t $HOME/.config/starship starship
@@ -261,16 +261,9 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "1" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Tmux $CRS \n"
 	sleep 2
 	cd $HOME && \
-	sudo apt update && \
-	sudo apt upgrade -y && \
-	sudo apt remove tmux && \
-	sudo apt install -y libevent-dev ncurses-dev build-essential bison tmux	
-	sudo apt autoremove -y && \
-	sudo rm -rf .tmux
-	cd $HOME && \
+  sudo pacman -S tmux
 	mkdir -p .tmux
 	mkdir -p .tmux/tmux-powerline-custom-themes
-	sudo apt install -y tmux
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm && \
 	git clone https://github.com/erikw/tmux-powerline.git $HOME/.tmux/plugins/tmux-powerline
 	wget -P $HOME/ "https://raw.githubusercontent.com/moumax/dotfiles/main/tmux/.tmux.powerlinerc"
