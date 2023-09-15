@@ -34,6 +34,7 @@ while true; do
 	printf "\n"
 	printf "\n"
 	printf "  $CB maj $CRS       -- Mise à jour système \n"
+	printf "  $CB dep $CRS       -- Dépendances  \n"
 	printf "  $CB folders $CRS   -- Préparation dossiers \n"
 	printf "  $CB stow $CRS      -- Install stow \n"
 	printf "  $CB nvm $CRS       -- Install nvm \n"
@@ -73,6 +74,14 @@ if [ "$choice" = "maj" ] || [ "$choice" = "all" ]; then
   yay -Syu
 	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2
+fi
+
+# DEPENDANCES 
+if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
+  printf "$CV Installation des dépendances $CRS \n"
+  sudo systemctl enable --now BLUETOOTH
+  sudo pacman -S blueman
+	printf "$CR Opérations terminées $CRS      \n"
 fi
 
 # FOLDERS
