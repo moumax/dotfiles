@@ -11,4 +11,9 @@ chmod +x $HOME/installArch.sh
 ## ADD GIT KEY
 
 [github key](https://github.com/settings/keys)
+
+## ACTIVATE BLUETOOTH
+```sh 
+sudo systemctl enable --now BLUETOOTH
+sudo pacman -S blueman
 <br /><br /><br />
