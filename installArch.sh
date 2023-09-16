@@ -81,6 +81,8 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
   printf "$CV Installation des dépendances $CRS \n"
   sudo systemctl enable --now BLUETOOTH
   sudo pacman -S blueman
+  yay -S google-chrome
+  yay -S picom
 	printf "$CR Opérations terminées $CRS      \n"
 fi
 
