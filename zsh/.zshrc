@@ -68,10 +68,6 @@ alias gpo='git pull origin'
 alias fd="fdfind"
 alias sd='cd $(fdfind --type d | fzf)'
 
-# Add Github key to SSH agent.
-alias sa="eval `ssh-agent`"
-alias ss="ssh-add ~/.ssh/id_ed25519"
-
 # Find the name of WM_CLASS to set in i3 config file.
 alias xg="xprop | grep WM_CLASS"
 
