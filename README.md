@@ -16,4 +16,20 @@ chmod +x $HOME/installArch.sh
 ```sh 
 sudo systemctl enable --now BLUETOOTH
 sudo pacman -S blueman
+```
+
+## SOME KEYBINDINGS
+
+win+f => thunar
+ctrl + h/j => switch between tmux windows
+
+## SOME TIPS
+
+To modify startups programs => /i3/conf
+To modify screen => /i3/conf
+
+## USEFULL COMMANDS
+
+xrandr => show all screens connected or not (usefull to give i3 apps on certain screens)
+xprop => show the name of programs to put name on i3 file
 <br /><br /><br />
