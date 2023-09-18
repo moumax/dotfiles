@@ -63,4 +63,17 @@ To modify startups programs => /i3/conf To modify screen => /i3/conf
 
 xrandr => show all screens connected or not (usefull to give i3 apps on certain
 screens) xprop => show the name of programs to put name on i3 file
+
+## MYSQL2 TO MARIADB
+Change collation : 
+
+```mysql
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+to
+
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+```
+
+Change all collate in database.sql
 <br /><br /><br />
