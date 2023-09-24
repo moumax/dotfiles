@@ -33,10 +33,10 @@ while true; do
 	printf "  =============================================\n"
 	printf "\n"
 	printf "\n"
+	printf "  $CB stow $CRS      -- Install stow \n"
 	printf "  $CB maj $CRS       -- Mise à jour système \n"
 	printf "  $CB dep $CRS       -- Dépendances  \n"
 	printf "  $CB folders $CRS   -- Préparation dossiers \n"
-	printf "  $CB stow $CRS      -- Install stow \n"
 	printf "  $CB nvm $CRS       -- Install nvm \n"
 	printf "  $CB node $CRS      -- Install nodeJs \n"
 	printf "  $CB rust $CRS      -- Install rust \n"
@@ -64,84 +64,83 @@ while true; do
 
 	read -p "Votre choix ? " choice
 
+# STOW
+if [ "$choice" = "stow" ] || [ "$choice" = "all" ]; then
+	printf " $CR ================================================\n"
+	printf "                  Installation de stow       \n"
+	printf "  ================================================ $CRS\n"
+  sleep 1 
+  sudo pacman -S stow --noconfirm
+fi
+
 # MAJ 
 if [ "$choice" = "maj" ] || [ "$choice" = "all" ]; then
-	printf "$CV Mise à jour du système $CRS \n"
-	sleep 2
-	printf "$CV Mise à jour pacman $CRS \n"
-  sleep 2
+	printf " $CR ================================================\n"
+	printf "                 Mise à jour du système                 \n"
+	printf "  ================================================ $CRS\n"
+	sleep 1
   sudo pacman -Syyu
-	printf "$CV Mise à jour yay $CRS \n"
-  sleep 2
   yay -Syu
-	printf "$CR Opérations terminées $CRS      \n"
-	sleep 2
 fi
 
 # DEPENDANCES 
 if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
-  printf "$CV Installation des dépendances $CRS \n"
+	printf " $CR ================================================\n"
+	printf "               Installation des dépendances           \n"
+	printf "  ================================================ $CRS\n"
   sudo systemctl enable --now bluetooth
-  sudo pacman -S blueman
-  yay -S google-chrome
-  yay -S picom
-	printf "$CR Opérations terminées $CRS      \n"
+  sudo pacman -S blueman --noconfirm
+  yay -S google-chrome --noconfirm
+  yay -S picom --noconfirm
 fi
 
 # FOLDERS
 if [ "$choice" = "folders" ] || [ "$choice" = "all" ]; then
-	printf "$CV Dossiers /dev de travail $CRS \n"
-	printf "$CV en cours de création...$CRS \n"
-  sleep 2
-	mkdir -p $HOME/dev 
-	printf "$CR Opérations terminées $CRS      \n"
-	sleep 2
-fi
-
-# STOW
-if [ "$choice" = "stow" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de stow $CRS \n"
-  sleep 1 
-  sudo pacman -S stow
-	printf "$CR Opérations terminées $CRS      \n"
+	printf " $CR ================================================\n"
+	printf "                Dossier /dev de travail           \n"
+	printf "                 en cours de création           \n"
+	printf "  ================================================ $CRS\n"
   sleep 1
+	mkdir -p $HOME/dev 
 fi
 
 # NVM
 if [ "$choice" = "nvm" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de node version manager $CRS \n"
+	printf " $CR ================================================\n"
+	printf "           Installation de node version manager           \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 	mkdir -p .nvm
-	printf "$CR Installation de nvm terminé $CRS      \n"
-	sleep 1
 fi
 
 # RUST
 if [ "$choice" = "rust" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de Rust & Cargo $CRS \n"
+	printf " $CR ================================================\n"
+	printf "              Installation de Rust & Cargo           \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 	. $HOME/.cargo/env
-	printf "$CR Installation de rust et Cargo terminés $CRS      \n"
-	sleep 1
 fi
 
 # NODE
 if [ "$choice" = "node" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation des versions 16 et 18 de nodeJs $CRS \n"
+	printf " $CR ================================================\n"
+	printf "       Installation des versions 16 et 18 de nodeJs    \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	. .nvm/nvm.sh
 	nvm install 18 && nvm install 16 && nvm use 18
-	printf "$CR Installation de NodeJs terminé $CRS      \n"
-	sleep 1
 fi
 
 # GITDOTFILES
 if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de la clé ssh git $CRS \n"
+	printf " $CR ================================================\n"
+	printf "            Installation de la clé ssh git \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	read -p "Ton email ? : " EmailGit
 
@@ -194,19 +193,28 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 		else
 		printf "Une erreur s'est produite lors du clonage du dépôt. \n"
 	fi
-	printf "$CR Dossier dotfiles récupéré et installé $CRS      \n"
+	printf " $CR ================================================\n"
+	printf "      Copie des dotfiles dans les dossiers logiciels\n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
+  sudo rm -r $HOME/.config/i3
+  mkdir $HOME/.config/i3
+	cd $HOME/dotfiles
+	stow -t $HOME/.config/i3 i3
+	stow -t $HOME/.config/ picom
 fi
 
 # NVCHAD 
 if [ "$choice" = "nvchad" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation des dépendances pour nvchad $CRS \n"
+	printf " $CR ================================================\n"
+	printf "        Installation des dépendances pour nvchad  \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S neovim
-	printf "$CR Neovim est installé $CRS \n"
-  sleep 1
-	printf "$CV Installation de la font Iosevka $CRS \n"
+  sudo pacman -S neovim --noconfirm
+	printf " $CR ================================================\n"
+	printf "            Installation de la font Iosevka  \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip && \
 	cd $HOME/.local/share && \
@@ -214,69 +222,69 @@ if [ "$choice" = "nvchad" ] || [ "$choice" = "all" ]; then
 	cd fonts && \
 	mv $HOME/downloads/Iosevka.zip . && \
 	unzip Iosevka.zip
-	printf "$CR La font Iosevka a été installée $CRS      \n"
-	sleep 1
-	printf "$CV Installation de ripgrep $CRS \n"
+	printf " $CR ================================================\n"
+	printf "                Installation de ripgrep \n"
+	printf "  ================================================ $CRS\n"
   sleep 1
- 	sudo pacman -S ripgrep
-	printf "$CR ripgrep a été installé $CRS      \n"
-  sleep 1
-	printf "$CV Suppression des fichiers nvim $CRS \n"
+ 	sudo pacman -S ripgrep --noconfirm
+	printf " $CR ================================================\n"
+  printf "                Suppression des fichiers nvim \n"
+	printf "  ================================================ $CRS\n"
   sleep 1
   rm -rf ~/.config/nvim
   rm -rf ~/.local/share/nvim
-	printf "$CR Les fichiers nvim ont été supprimés $CRS      \n"
-	sleep 1
-	printf "$CV Installation de nvchad $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                   Installation de nvchad \n"
+	printf "  ================================================ $CRS\n"
 	git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
-	printf "$CR Nvchad a été installé $CRS      \n"
-  sleep 1
 fi
 
 # ALACRITTY
 if [ "$choice" = "alacr" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation d'alacritty $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                 Installation d'alacritty \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
-  sudo pacman -S alacritty
+  sudo pacman -S alacritty --noconfirm
 	mkdir -p $HOME/.config/alacritty
 	cd $HOME/dotfiles
 	stow -t $HOME/.config/alacritty alacritty
-	printf "$CR alacritty a été installée $CRS      \n"
-	sleep 1
 fi
 
 # STARSHIP
 if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de starship $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                Installation de starship \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S starship
+  sudo pacman -S starship --noconfim
 	mkdir -p $HOME/.config/starship
 	cd $HOME/dotfiles && \
 	stow -t $HOME/.config/starship starship
-	printf "$CR starship a été installée $CRS      \n"
-	sleep 1
 fi
 
 # GITUI
 if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de gitui $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                Installation de gitui  \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S gitui
+  sudo pacman -S gitui --noconfim
 	mkdir $HOME/.config/gitui && \
 	cd $HOME/dotfiles
 	stow -t $HOME/.config/gitui gitui
-	printf "$CR gitui a été installée $CRS      \n"
-	sleep 1
 fi
 
 # TMUX 
 if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de Tmux $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                  Installation de Tmux \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S tmux
+  sudo pacman -S tmux --noconfirm
 	mkdir -p .tmux
 	mkdir -p .tmux/tmux-powerline-custom-themes
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm && \
@@ -286,92 +294,92 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	wget -P $HOME/.tmux/tmux-powerline-custom-themes "https://raw.githubusercontent.com/moumax/dotfiles/main/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh"
 	mv $HOME/.tmux/plugins/tmux-powerline/themes/default.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
 	ln -s $HOME/.tmux/tmux-powerline-custom-themes/marco-theme.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh
-	printf "$CR Tmux a été installée $CRS      \n"
-	sleep 1
 fi
 
 # INSOMNIA
 if [ "$choice" = "insomnia" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de insomnia $CRS \n"
+	printf " $CR ================================================\n"
+  printf "               Installation de insomnia \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  yay -S insomnia-bin
-	printf "$CR insomnia a été installée $CRS      \n"
-	sleep 1
+  yay -S insomnia-bin --noconfim
 fi
 
 # DBEAVER
 if [ "$choice" = "dbeaver" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de dbeaver $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                 Installation de dbeaver \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S dbeaver
-	printf "$CR dbeaver a été installée $CRS      \n"
-	sleep 1
+  sudo pacman -S dbeaver --noconfim
 fi
 
 # VSCODE
 if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de vscode $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                Installation de vscode \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  yay -S visual-studio-code-bin
-	printf "$CR vscode a été installée $CRS      \n"
-	sleep 1
+  yay -S visual-studio-code-bin --noconfirm
 fi
 
 # BTOP 
 if [ "$choice" = "btop" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de btop $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                Installation de btop \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S btop
-	printf "$CR btop a été installée $CRS      \n"
-	sleep 1
+  sudo pacman -S btop --noconfirm
 fi
 
 # OBSIDIAN
 if [ "$choice" = "obsidian" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de obsidian $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                Installation de obsidian \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
-  sudo pacman -S obsidian
-	printf "$CR obsidian a été installée $CRS      \n"
-	sleep 1
+  sudo pacman -S obsidian --noconfirm
 fi
 
 # MARIADB
 if [ "$choice" = "sql" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de mariadb $CRS \n"
+	printf " $CR ================================================\n"
+  printf "                Installation de mariadb \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
-  sudo pacman -S mariadb
-	printf "$CR mariadb a été installée $CRS      \n"
-	sleep 1
+  sudo pacman -S mariadb --noconfirm
 fi
 
 # OHMYZSH 
 if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de Oh my Zsh $CRS \n"
+	printf " $CR ================================================\n"
+  printf "               Installation de Oh my Zsh  \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
-  sudo pacman -S zsh
+  sudo pacman -S zsh --noconfirm
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	printf "$CV Installation de Oh my Zsh effectué $CRS \n"
-  sleep 1
 fi
 
 # OHMYZSHFILES 
 if [ "$choice" = "ohfiles" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation des plugins Oh my Zsh $CRS \n"
+	printf " $CR ================================================\n"
+  printf "            Installation des plugins Oh my Zsh  \n"
+	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	printf "$CV Récupération du thème Oh my zsh $CRS \n"
+	printf " $CR ================================================\n"
+  printf "            Récupération du thème Oh my zsh \n"
+	printf "  ================================================ $CRS\n"
+  sleep 1
 	cd $HOME/dotfiles
 	sudo stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
 	sudo rm $HOME/.zshrc && stow -t $HOME zsh
-	sleep 1
-	printf "$CR Opérations terminées $CRS      \n"
-	sleep 1
 fi
 
 # ENDING 
@@ -381,7 +389,7 @@ if [ "$choice" = "all" ]; then
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
-	sleep 1
+	sleep 3
 fi
 
 if [ "$choice" = "q" ]; then
