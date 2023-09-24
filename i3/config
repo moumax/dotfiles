@@ -22,7 +22,7 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango: Iosevka nerd font mono 20
+font pango: Iosevka Nerd Font Mono 20
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -303,7 +303,7 @@ set $ws2 "2:Vscode"
 set $ws3 "3:chrome"
 set $ws4 "4:Dbeaver"
 set $ws5 "5:Insomnia"
-set $ws6 "6"
+set $ws6 "6:Obsidian"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -318,19 +318,32 @@ set $ws10 "10"
 #workspace $ws4 output HDMI-0
 #workspace $ws5 output HDMI-0
 
-# bind program to workspace and focus to them on startup:
-assign [class="alacritty"] $ws1
-assign [class="code"] $ws2
-assign [class="google-chrome-stable"] $ws3
-assign [class="Dbeaver"] $ws4
-assign [class="Insomnia"] $ws5
+# Start program at system startup
+exec --no-startup-id alacritty;
+exec --no-startup-id code;
+exec --no-startup-id google-chrome-stable;
+exec --no-startup-id dbeaver;
+exec --no-startup-id insomnia;
+exec --no-startup-id obsidian;
 
-# automatic set focus new window if it opens on another workspace than the current:
-for_window [class=alacritty] focus
-for_window [class=google-chrome-stable] focus
-for_window [class=Dbeaver] focus
-for_window [class=Insomnia] focus
-for_window [class=code] focus
+# bind program to workspace and focus to them on startup:
+assign [class="Alacritty"] $ws1
+for_window [class="Alacritty"] focus
+
+assign [class="Code"] $ws2
+for_window [class="Code"] focus
+
+assign [class="Google-chrome"] $ws3
+for_window [class="Google-chrome"] focus
+
+assign [class="DBeaver"] $ws4
+for_window [class="DBeaver"] focus
+
+assign [class="Insomnia"] $ws5
+for_window [class="Insomnia"] focus
+
+assign [class="obsidian"] $ws6
+for_window [class="obsidian"] focus
 
 ##############
 # compositor #
@@ -428,7 +441,6 @@ exec --no-startup-id /usr/bin/dunst
 
 # Autostart apps as you like
 #exec --no-startup-id sleep 2 && xfce4-terminal
-exec --no-startup-id sleep 7 && firefox https://github.com/endeavouros-team/endeavouros-i3wm-setup/blob/main/force-knowledge.md
 #exec --no-startup-id sleep 3 && thunar
 
 ###############
