@@ -22,7 +22,7 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango: Noto Sans Regular 10
+font pango: Iosevka nerd font mono 20
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -171,8 +171,7 @@ bindcode $mod+Shift+90 	 move container to workspace  $ws10
 ######################################
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
-
+bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+q kill
 
@@ -286,7 +285,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+p exec /usr/local/bin/switch-audio-port
 
 ## App shortcuts
-bindsym $mod+w exec /usr/bin/firefox
+bindsym $mod+w exec /usr/bin/google-chrome-stable
 bindsym $mod+n exec /usr/bin/thunar
 bindsym Print exec scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
 
@@ -299,11 +298,11 @@ bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
+set $ws1 "1:Terminal"
+set $ws2 "2:Vscode"
+set $ws3 "3:chrome"
+set $ws4 "4:Dbeaver"
+set $ws5 "5:Insomnia"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
@@ -320,18 +319,18 @@ set $ws10 "10"
 #workspace $ws5 output HDMI-0
 
 # bind program to workspace and focus to them on startup:
-assign [class="Xfce4-terminal"] $ws1
-assign [class="(?i)firefox"] $ws2
-assign [class="Thunar"] $ws3
-assign [class="thunderbird"] $ws4
-assign [class="TelegramDesktop"] $ws5
+assign [class="alacritty"] $ws1
+assign [class="code"] $ws2
+assign [class="google-chrome-stable"] $ws3
+assign [class="Dbeaver"] $ws4
+assign [class="Insomnia"] $ws5
 
 # automatic set focus new window if it opens on another workspace than the current:
-for_window [class=Xfce4-terminal] focus
-for_window [class=(?i)firefox] focus
-for_window [class=Thunar] focus
-for_window [class=Thunderbird] focus
-for_window [class=TelegramDesktop] focus
+for_window [class=alacritty] focus
+for_window [class=google-chrome-stable] focus
+for_window [class=Dbeaver] focus
+for_window [class=Insomnia] focus
+for_window [class=code] focus
 
 ##############
 # compositor #
@@ -357,10 +356,10 @@ for_window [class=TelegramDesktop] focus
 # For modifications, it can be copied to ~/.config/picom/picom.conf or ~/.config/picom.conf
 # install picom package (yay -S picom)
 # start using default config 
-#exec_always --no-startup-id picom -b
+# exec_always --no-startup-id picom -b
 #
 # for custom config:
-#exec_always --no-startup-id picom --config  ~/.config/picom.conf
+exec_always --no-startup-id picom --config  $HOME/.config/picom.conf
 
 #############################################
 # autostart applications/services on login: #
@@ -506,7 +505,7 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
 bar {
-		font pango: Noto Sans Regular 10
+		font pango: Iosevka Nerd Font Mono 10
 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	    	position bottom
 #	    	i3bar_command i3bar --transparency
