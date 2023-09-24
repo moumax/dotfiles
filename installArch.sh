@@ -64,6 +64,13 @@ while true; do
 
 	read -p "Votre choix ? " choice
 
+# WALLPAPER
+if [ "$choice" = "wall" ] || [ "$choice" = "all" ]; then
+  wget -P $HOME/downloads https://github.com/EndeavourOS-Community-Editions/Community-wallpapers/blob/main/eos_wallpapers_community/APOLLO-MOON.png
+  cd $HOME/downloads/
+ sudo mv APOLLO-MOON.png /usr/share/endeavouros/backgrounds/
+fi
+
 # STOW
 if [ "$choice" = "stow" ] || [ "$choice" = "all" ]; then
 	printf " $CR ================================================\n"

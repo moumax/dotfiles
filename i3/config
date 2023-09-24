@@ -300,7 +300,7 @@ bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:Terminal"
 set $ws2 "2:Vscode"
-set $ws3 "3:chrome"
+set $ws3 "3:Chrome"
 set $ws4 "4:Dbeaver"
 set $ws5 "5:Insomnia"
 set $ws6 "6:Obsidian"
@@ -407,7 +407,7 @@ exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
-exec --no-startup-id sleep 1 && feh --bg-fill /usr/share/endeavouros/backgrounds/endeavouros-wallpaper.png
+exec --no-startup-id sleep 1 && feh --bg-fill /usr/share/endeavouros/backgrounds/endeavouros-wallpaper.png  
 
 # set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
@@ -517,10 +517,10 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
 bar {
-		font pango: Iosevka Nerd Font Mono 10
+		font pango: Iosevka Nerd Font Mono 12
 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	    	position bottom
-#	    	i3bar_command i3bar --transparency
+	    	position top
+	    	i3bar_command i3bar --transparency
 # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
 # reference: https://i3wm.org/docs/userguide.html#_tray_output
 		    #tray_output primary
