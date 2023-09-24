@@ -167,7 +167,7 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 
   mkdir $HOME/.ssh && cd $HOME/.ssh
 	ssh-keygen -t ed25519 -C "$EmailGit"
-	eval "$(ssh-agent -s)"
+  eval `ssh-agent -s`
 	ssh-add $HOME/.ssh/id_ed25519
 	printf "$CR Clé ssh à copier coller $CRS \n"
 	cat $HOME/.ssh/id_ed25519.pub 

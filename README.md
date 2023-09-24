@@ -76,4 +76,13 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ```
 
 Change all collate in database.sql
+
+## GITUI BUG
+When pushing is not working anymore :
+
+```sh
+eval `ssh-agent -s`
+ssh-add ~/.ssh/id_ed25519
+```
+
 <br /><br /><br />
