@@ -51,6 +51,8 @@ while true; do
 	printf "  $CB vscode $CRS    -- Install de vscode \n"
 	printf "  $CB sql $CRS       -- Install de mariadb \n"
 	printf "  $CB btop $CRS      -- Install de btop \n"
+	printf "  $CB obsidian $CRS  -- Install de obsidian \n"
+	printf "  $CB mariadb $CRS   -- Install de mariadb \n"
 	printf "  $CB oh $CRS        -- Install ohmyzsh \n"
 	printf "  $CB ohfiles $CRS   -- Install fichiers ohmyzsh \n"
 	printf "\n"
@@ -79,7 +81,7 @@ fi
 # DEPENDANCES 
 if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
   printf "$CV Installation des dépendances $CRS \n"
-  sudo systemctl enable --now BLUETOOTH
+  sudo systemctl enable --now bluetooth
   sudo pacman -S blueman
   yay -S google-chrome
   yay -S picom
@@ -325,6 +327,15 @@ if [ "$choice" = "btop" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
   sudo pacman -S btop
 	printf "$CR btop a été installée $CRS      \n"
+	sleep 1
+fi
+
+# OBSIDIAN
+if [ "$choice" = "obsidian" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de obsidian $CRS \n"
+	sleep 1
+  sudo pacman -S obsidian
+	printf "$CR obsidian a été installée $CRS      \n"
 	sleep 1
 fi
 
