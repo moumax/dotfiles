@@ -22,7 +22,7 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango: Iosevka Nerd Font Mono 20
+font pango: Iosevka Nerd Font Mono 12
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -53,8 +53,8 @@ new_window pixel 1
 # hide_edge_borders both
 
 # Set inner/outer gaps
-gaps inner 6
-gaps outer 3
+gaps inner 1
+gaps outer 1
 
 # show window title bars (not officially supported with i3gaps)
 #default_border normal
@@ -298,12 +298,12 @@ bindsym $mod+Shift+p exec ~/.config/i3/scripts/power-profiles
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:Terminal"
-set $ws2 "2:Vscode"
-set $ws3 "3:Chrome"
-set $ws4 "4:Dbeaver"
-set $ws5 "5:Insomnia"
-set $ws6 "6:Obsidian"
+set $ws1 "1:Term"
+set $ws2 "2:Code"
+set $ws3 "3:Brows"
+set $ws4 "4:beaver"
+set $ws5 "5:Inso"
+set $ws6 "6:Obsi"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -322,10 +322,10 @@ workspace $ws7 output eDP-1
 
 # Start program at system startup
 exec --no-startup-id alacritty;
-exec --no-startup-id code;
+# exec --no-startup-id code;
 exec --no-startup-id google-chrome-stable;
-exec --no-startup-id dbeaver;
-exec --no-startup-id insomnia;
+# exec --no-startup-id dbeaver;
+# exec --no-startup-id insomnia;
 exec --no-startup-id obsidian;
 
 # bind program to workspace and focus to them on startup:
@@ -507,7 +507,7 @@ set $yellowbrown	#e1b700
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused		    	$lightblue	$darkblue	$white		$mediumgrey	$mediumgrey
+client.focused		    	$lightblue	$lightblue $white		$mediumgrey	$mediumgrey
 client.unfocused	    	$darkblue	$darkblue	$grey		$darkgrey	$darkgrey
 client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
 client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
@@ -539,7 +539,7 @@ strip_workspace_numbers yes
 		    background         $darkgrey
 		    statusline         $white
 #                          		border 		        bg		txt		indicator
-		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
+		focused_workspace	$mediumgrey	   	$purple $darkgrey	$purple
 		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
 		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
 		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
