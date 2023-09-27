@@ -53,13 +53,13 @@ else:
 
     # stands for charging
     color = config.get("color_charging", "yellow")
-    FA_LIGHTNING = "<span color='{}'>CHARGING...</span>".format(color)
+    FA_LIGHTNING = "<span color='{}'>CHARGIN'...</span>".format(color)
 
     # stands for plugged in
-    FA_PLUG = "PLUGGED IN"
+    FA_PLUG = "ON PLUG"
 
     # stands for using battery
-    FA_BATTERY = "BATTERY"
+    FA_BATTERY = "ON BAT"
 
     # stands for unknown status of battery
     FA_QUESTION = "???"
