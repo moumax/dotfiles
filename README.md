@@ -46,7 +46,11 @@ exit
 
 ## SOME KEYBINDINGS
 
-win+f => thunar <br /> ctrl + h/j => switch between tmux windows
+win+f => thunar <br />
+
+### tmux
+ctrl + h/j => switch between tmux windows<br />
+ctrl + s + up/down => to ajust splitted terminal on tmux
 
 ## SOME TIPS
 
