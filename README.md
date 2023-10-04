@@ -3,9 +3,17 @@
 ## START THE SCRIPT AND FOLLOW STEPS
 
 ```sh
+# FOR ARCH LINUX
 wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/installArch.sh && \
 chmod +x $HOME/installArch.sh
 ./installArch.sh
+```
+
+```sh
+# FOR POP OS
+wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/install_pop.sh && \
+chmod +x $HOME/install_pop.sh
+./install_pop.sh
 ```
 
 ## ADD GIT KEY
@@ -19,30 +27,15 @@ sudo systemctl enable --now BLUETOOTH
 sudo pacman -S blueman
 ```
 
-## INSTALL MARIADB
+## AFTER INSTALLING MARIADB
 
 ```sh
+# There is no password for root
 sudo mariadb-secure-installation
-
-sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-
-sudo systemctl stop mariadb
-sudo mysqld_safe --skip-grant-tables --skip-networking &
-mysql -u root
-```
-
-```mysql
-SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new_password');
-```
-
-Restart computer
-
-```sh
-sudo mysql_secure_installation
 ```
 
 ```sh
-mysql -h 127.0.0.1 -P 3306 -u root -p
+sudo mysql -u root -p
 ```
 
 ```mysql
