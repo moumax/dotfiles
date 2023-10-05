@@ -46,8 +46,9 @@ while true; do
 	printf "  $CB fzf $CRS       -- Install de fzf \n"
 	printf "  $CB gitui $CRS     -- Install de gitui \n"
 	printf "  $CB glow $CRS      -- Install de glow \n"
-	printf "  $CB brave $CRS    -- Install de brave \n"
+	printf "  $CB brave $CRS     -- Install de brave \n"
 	printf "  $CB tmux $CRS      -- Install de tmux \n"
+	printf "  $CB vlc $CRS       -- Install de vlc \n"
 	printf "  $CB qbit $CRS      -- Install de qbittorrent \n"
 	printf "  $CB insomnia $CRS  -- Install de insomnia \n"
 	printf "  $CB dbeaver $CRS   -- Install de dbeaver \n"
@@ -342,6 +343,15 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	mv $HOME/.tmux/plugins/tmux-powerline/themes/default.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
 	ln -s $HOME/.tmux/tmux-powerline-custom-themes/marco-theme.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh
 	printf "$CR Tmux a été installée $CRS      \n"
+	sleep 2
+fi
+# VLC
+if [ "$choice" = "vlc" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de vlc $CRS \n"
+	sleep 2
+	cd $HOME && \
+	sudo apt install -y vlc
+	printf "$CR vlc a été installée $CRS      \n"
 	sleep 2
 fi
 
