@@ -57,11 +57,11 @@ alias tmk="tmux kill-session -t"
 
 
 # Git aliases
-alias g='git'
 alias gs='git status'
-alias ga='git add'
-alias gc='git commit -m'
+alias gaa='git add .'
+alias gcmsg='git commit -m'
 alias gpo='git pull origin'
+alias gp='git push'
 
 
 # fdfind alias

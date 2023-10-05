@@ -1,6 +1,6 @@
-!/bin/sh 
+!/bin/sh
 
-set -e pipefail 
+set -e pipefail
 Os="$(uname -s)"
 
 dialog_width=600
@@ -16,7 +16,7 @@ CVIO='\033[0;35m'
 CC='\033[0;36m'
 CBLA='\033[0;37m'
 
-if [ ! "$Os" = "Linux" ]; then 
+if [ ! "$Os" = "Linux" ]; then
 	printf "\n"
 	printf "  ================================================\n"
 	printf "         Script uniquement compatible Linux       \n"
@@ -48,6 +48,7 @@ while true; do
 	printf "  $CB glow $CRS      -- Install de glow \n"
 	printf "  $CB brave $CRS    -- Install de brave \n"
 	printf "  $CB tmux $CRS      -- Install de tmux \n"
+	printf "  $CB qbit $CRS      -- Install de qbittorrent \n"
 	printf "  $CB insomnia $CRS  -- Install de insomnia \n"
 	printf "  $CB dbeaver $CRS   -- Install de dbeaver \n"
 	printf "  $CB vscode $CRS    -- Install de vscode \n"
@@ -133,7 +134,7 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 		continue
 	fi
 
-	read -p "Ton nom ? : " NameGit	
+	read -p "Ton nom ? : " NameGit
 	if [ "$NameGit" = "" ]; then
 		printf "\n"
 		printf "Tu dois rentrer un nom valide\n"
@@ -147,18 +148,18 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 	git config --global init.defaultBranch main && \
 	printf "git config --global init.defaultBranch main \n"
 
-	cd $HOME/.ssh 
+	cd $HOME/.ssh
 	ssh-keygen -t ed25519 -C "$EmailGit"
 	eval "$(ssh-agent -s)"
 	ssh-add $HOME/.ssh/id_ed25519
 	printf "$CR Clé ssh à copier coller $CRS \n"
-	cat $HOME/.ssh/id_ed25519.pub 
+	cat $HOME/.ssh/id_ed25519.pub
 	printf "$CR Clé git crée $CRS      \n"
 	sleep 2
-	
+
 	printf "$CV Récupération des dotfiles $CRS \n"
 	sleep 2
-	cd $HOME 
+	cd $HOME
 	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
 	read -p "Adresse de vos dotfiles " dotfiles
 	printf " $CR Le dossier sera crée dans $HOME/dev/dotfiles $CRS\n"
@@ -180,7 +181,7 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
-# NEOVIM 
+# NEOVIM
 if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Neovim $CRS \n"
 	sleep 2
@@ -194,10 +195,10 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de pynvim $CRS \n"
 	sleep 2
 	cd $HOME
-	pip3 install pynvim 
+	pip3 install pynvim
 	printf "$CR Pynvim est installé $CRS \n"
 	sleep 2
-	
+
 	printf "$CV Installation de Packer $CRS \n"
 	sleep 2
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -206,7 +207,7 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 
 	printf "$CV Installation de tree-sitter-cli $CRS \n"
 	sleep 2
-	cd $HOME 
+	cd $HOME
 	. .nvm/nvm.sh
 	npm i -g tree-sitter-cli
 	printf "$CR tree-sitter-cli est installé $CRS \n"
@@ -318,7 +319,7 @@ if [ "$choice" = "brave" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
-# TMUX 
+# TMUX
 if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Tmux $CRS \n"
 	sleep 2
@@ -326,7 +327,7 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	sudo apt update && \
 	sudo apt upgrade -y && \
 	sudo apt remove tmux && \
-	sudo apt install -y libevent-dev ncurses-dev build-essential bison tmux	
+	sudo apt install -y libevent-dev ncurses-dev build-essential bison tmux
 	sudo apt autoremove -y && \
 	sudo rm -rf .tmux
 	cd $HOME && \
@@ -341,6 +342,16 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	mv $HOME/.tmux/plugins/tmux-powerline/themes/default.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
 	ln -s $HOME/.tmux/tmux-powerline-custom-themes/marco-theme.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh
 	printf "$CR Tmux a été installée $CRS      \n"
+	sleep 2
+fi
+
+# QBITTORENT
+if [ "$choice" = "qbit" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de qbittorrent $CRS \n"
+	sleep 2
+	cd $HOME && \
+	sudo apt install -y qbittorrent
+	printf "$CR qbittorent a été installée $CRS      \n"
 	sleep 2
 fi
 
@@ -382,7 +393,7 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
-# BTOP 
+# BTOP
 if [ "$choice" = "btop" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de btop $CRS \n"
 	sleep 2
@@ -402,7 +413,7 @@ if [ "$choice" = "mariadb" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
-# OHMYZSH 
+# OHMYZSH
 if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
 	sleep 2
@@ -410,7 +421,7 @@ if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 fi
 
-# OHMYZSHFILES 
+# OHMYZSHFILES
 if [ "$choice" = "ohfiles" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation des plugins Oh my Zsh $CRS \n"
 	sleep 2
@@ -426,7 +437,7 @@ if [ "$choice" = "ohfiles" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
-# ENDING 
+# ENDING
 if [ "$choice" = "all" ]; then
 	printf " n\ "
 	printf "$CR PROCESS D'INSTALLATION TERMINE, REDEMARREZ LA MACHINE \n "
@@ -444,4 +455,3 @@ if [ "$choice" = "q" ]; then
 fi
 
 done
-
