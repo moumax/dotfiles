@@ -74,8 +74,7 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
 	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
 	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
 	libssl-dev wget vim zsh && \
-	sudo apt autoremove -y && \
-	sudo apt autoclean -y
+	sudo apt autoremove -y && sudo apt autoclean -y
 	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2
 fi
@@ -224,8 +223,7 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 	printf "$CV Récupération des dotfiles neovim $CRS \n"
 	sleep 2
 	mkdir ~/.config/nvim
-	cd $HOME/dev/dotfiles
-	stow -t $HOME/.config/nvim neovim
+	cd $HOME/dev/dotfiles && stow -t $HOME/.config/nvim neovim
 	printf "$CR Les dotfiles neovim ont été installés $CRS      \n"
 	sleep 2
 fi
@@ -236,10 +234,7 @@ if [ "$choice" = "font" ] || [ "$choice" = "all" ]; then
 	sleep 2
 	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip && \
 	cd $HOME/.local/share && \
-	mkdir -p fonts && \
-	cd fonts && \
-	mv $HOME/downloads/Iosevka.zip . && \
-	unzip Iosevka.zip
+	mkdir -p fonts && cd fonts && mv $HOME/downloads/Iosevka.zip . && unzip Iosevka.zip
 	printf "$CR La font Iosevka a été installé $CRS      \n"
 	sleep 2
 fi
@@ -249,9 +244,7 @@ if [ "$choice" = "alacr" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation d'alacritty $CRS \n"
 	sleep 2
 	sudo add-apt-repository ppa:aslatter/ppa -y
-	sudo apt install -y alacritty
-	mkdir -p $HOME/.config/alacritty
-	cd $HOME/dev/dotfiles
+	sudo apt install -y alacritty && mkdir -p $HOME/.config/alacritty && cd $HOME/dev/dotfiles
 	stow -t $HOME/.config/alacritty alacritty
 	printf "$CR alacritty a été installé $CRS      \n"
 	sleep 2
@@ -264,8 +257,7 @@ if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
 	curl -sS https://starship.rs/install.sh | sh
 	mkdir -p $HOME/.config/starship
-	cd $HOME/dev/dotfiles && \
-	stow -t $HOME/.config/starship starship
+	cd $HOME/dev/dotfiles && stow -t $HOME/.config/starship starship
 	printf "$CR starship a été installé $CRS      \n"
 	sleep 2
 fi
@@ -287,8 +279,7 @@ if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
 	sleep 2
 	cd $HOME && \
 	cargo install gitui
-	mkdir $HOME/.config/gitui && \
-	cd $HOME/dev/dotfiles
+	mkdir $HOME/.config/gitui && cd $HOME/dev/dotfiles
 	stow -t $HOME/.config/gitui gitui
 	printf "$CR gitui a été installé $CRS      \n"
 	sleep 2
@@ -313,8 +304,7 @@ if [ "$choice" = "brave" ] || [ "$choice" = "all" ]; then
 	cd $HOME/ && \
 	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-	sudo apt update
-	sudo apt install brave-browser
+	sudo apt update && sudo apt install brave-browser
 	printf "$CR Brave a été installé $CRS      \n"
 	sleep 2
 fi
@@ -324,15 +314,10 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Tmux $CRS \n"
 	sleep 2
 	cd $HOME && \
-	sudo apt update && \
-	sudo apt upgrade -y && \
-	sudo apt remove tmux && \
-	sudo apt install -y libevent-dev ncurses-dev build-essential bison tmux
-	sudo apt autoremove -y && \
-	sudo rm -rf .tmux
+	sudo apt remove tmux && sudo apt install -y libevent-dev ncurses-dev build-essential bison tmux
+	sudo apt autoremove -y && sudo rm -rf .tmux
 	cd $HOME && \
-	mkdir -p .tmux
-	mkdir -p .tmux/tmux-powerline-custom-themes
+	mkdir -p .tmux && mkdir -p .tmux/tmux-powerline-custom-themes
 	sudo apt install -y tmux
 	git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm && \
 	git clone https://github.com/erikw/tmux-powerline.git $HOME/.tmux/plugins/tmux-powerline
@@ -370,9 +355,7 @@ if [ "$choice" = "insomnia" ] || [ "$choice" = "all" ]; then
 	sleep 2
 	cd $HOME && \
 	echo "deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all" | sudo tee -a /etc/apt/sources.list.d/insomnia.list
-	sudo apt update && \
-	sudo apt install -y insomnia && \
-	sudo apt autoremove -y
+	sudo apt update && sudo apt install -y insomnia && sudo apt autoremove -y
 	printf "$CR insomnia a été installé $CRS      \n"
 	sleep 2
 fi
@@ -396,8 +379,7 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
 	curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 	sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
 	sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-	sudo apt install -y apt-transport-https
-	sudo apt update && sudo apt install -y code
+	sudo apt install -y apt-transport-https && sudo apt update && sudo apt install -y code
 	printf "$CR vscode a été installé $CRS      \n"
 	sleep 2
 fi
@@ -416,8 +398,7 @@ fi
 if [ "$choice" = "mariadb" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de mariadb $CRS \n"
 	sleep 2
-	sudo apt update
-	sudo apt install mariadb-server
+	sudo apt update && sudo apt install mariadb-server
 	printf "$CR mysql a été installé $CRS      \n"
 	sleep 2
 fi
