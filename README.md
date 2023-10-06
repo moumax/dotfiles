@@ -2,32 +2,34 @@
 
 ## START THE SCRIPT AND FOLLOW STEPS
 
+### FOR ARCH LINUX
+
 ```sh
-# FOR ARCH LINUX
 wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/installArch.sh && \
 chmod +x $HOME/installArch.sh
 ./installArch.sh
 ```
 
+### FOR POP OS
+
 ```sh
-# FOR POP OS
 wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/install_pop.sh && \
 chmod +x $HOME/install_pop.sh
 ./install_pop.sh
 ```
 
-## ADD GIT KEY
+### ADD GIT KEY
 
 [github key](https://github.com/settings/keys)
 
-## ACTIVATE BLUETOOTH
+### ACTIVATE BLUETOOTH
 
 ```sh
 sudo systemctl enable --now BLUETOOTH
 sudo pacman -S blueman
 ```
 
-## AFTER INSTALLING MARIADB
+### AFTER INSTALLING MARIADB
 
 ```sh
 # There is no password for root
@@ -44,12 +46,13 @@ GRANT ALL PRIVILEGES ON *.* TO 'marco'@'localhost';
 exit
 ```
 
-## SOME KEYBINDINGS
+### SOME KEYBINDINGS
 
-win+f => thunar <br />
+win+f => thunar
 
 ### tmux
-ctrl + h/j => switch between tmux windows<br />
+
+ctrl + h/j => switch between tmux windows
 ctrl + s + up/down => to ajust splitted terminal on tmux
 
 ## SOME TIPS
@@ -61,8 +64,9 @@ To modify startups programs => /i3/conf To modify screen => /i3/conf
 xrandr => show all screens connected or not (usefull to give i3 apps on certain
 screens) xprop => show the name of programs to put name on i3 file
 
-## MYSQL2 TO MARIADB
-Change collation : 
+### MYSQL2 TO MARIADB
+
+Change collation :
 
 ```mysql
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -74,12 +78,11 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 Change all collate in database.sql
 
-## GITUI BUG
+### GITUI BUG
+
 When pushing is not working anymore :
 
 ```sh
 eval `ssh-agent -s`
 ssh-add ~/.ssh/id_ed25519
 ```
-
-<br /><br /><br />
