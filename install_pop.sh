@@ -166,7 +166,7 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 	sleep 2
 
 	if [ ! -d "$HOME/dev/dotfiles" ]; then
-		printf "Le dossier de destination n'existe pas. Création du dossier..."
+		printf "Le dossier de destination n'existe pas. Création du dossier... \n"
 		mkdir -p "$HOME/dev/dotfiles"
 	fi
 
@@ -224,7 +224,7 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 	printf "$CV Récupération des dotfiles neovim $CRS \n"
 	sleep 2
 	mkdir ~/.config/nvim
-	cd $HOME/dotfiles
+	cd $HOME/dev/dotfiles
 	stow -t $HOME/.config/nvim neovim
 	printf "$CR Les dotfiles neovim ont été installés $CRS      \n"
 	sleep 2
@@ -251,7 +251,7 @@ if [ "$choice" = "alacr" ] || [ "$choice" = "all" ]; then
 	sudo add-apt-repository ppa:aslatter/ppa -y
 	sudo apt install -y alacritty
 	mkdir -p $HOME/.config/alacritty
-	cd $HOME/dotfiles
+	cd $HOME/dev/dotfiles
 	stow -t $HOME/.config/alacritty alacritty
 	printf "$CR alacritty a été installé $CRS      \n"
 	sleep 2
@@ -264,7 +264,7 @@ if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
 	curl -sS https://starship.rs/install.sh | sh
 	mkdir -p $HOME/.config/starship
-	cd $HOME/dotfiles && \
+	cd $HOME/dev/dotfiles && \
 	stow -t $HOME/.config/starship starship
 	printf "$CR starship a été installé $CRS      \n"
 	sleep 2
@@ -288,7 +288,7 @@ if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
 	cargo install gitui
 	mkdir $HOME/.config/gitui && \
-	cd $HOME/dotfiles
+	cd $HOME/dev/dotfiles
 	stow -t $HOME/.config/gitui gitui
 	printf "$CR gitui a été installé $CRS      \n"
 	sleep 2
@@ -437,7 +437,7 @@ if [ "$choice" = "ohfiles" ] || [ "$choice" = "all" ]; then
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 	printf "$CV Récupération du thème Oh my zsh $CRS \n"
-	cd $HOME/dotfiles
+	cd $HOME/dev/dotfiles
 	sudo stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
 	sudo rm $HOME/.zshrc && stow -t $HOME zsh
 	sleep 2
