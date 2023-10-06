@@ -34,6 +34,7 @@ while true; do
 	printf "\n"
 	printf "\n"
 	printf "  $CB dep $CRS       -- Install dépendences \n"
+	printf "  $CB clean $CRS     -- Clean popos install \n"
 	printf "  $CB nvm $CRS       -- Install nvm \n"
 	printf "  $CB rust $CRS      -- Install rust \n"
 	printf "  $CB node $CRS      -- Install nodeJs \n"
@@ -76,6 +77,18 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
 	libssl-dev wget vim zsh && \
 	sudo apt autoremove -y && sudo apt autoclean -y
 	printf "$CR Opérations terminées $CRS      \n"
+	sleep 2
+fi
+
+# CLEAN
+if [ "$choice" = "clean" ] || [ "$choice" = "all" ]; then
+	printf "$CV Nettoyage de la distribution $CRS \n"
+	sleep 2
+	cd $HOME && \
+	sudo apt remove libreoffice-base-core libreoffice-common libreoffice-core \
+	libreoffice-style-colibre libreoffice-style-elementary \
+	libreoffice-style-yaru geary 
+	printf "$CR Nettoyage terminé $CRS      \n"
 	sleep 2
 fi
 

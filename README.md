@@ -22,6 +22,22 @@ chmod +x $HOME/install_pop.sh
 
 [github key](https://github.com/settings/keys)
 
+### ACTIVATE NVIM
+
+```sh
+cd .config/nvim/lua/marco
+nvim packer.lua
+```
+
+=> :PackerUpdate
+=> :q
+
+```sh
+nvim packer.lua
+```
+
+=> Let Neovim install all plugings
+
 ### ACTIVATE BLUETOOTH
 
 ```sh
@@ -31,8 +47,9 @@ sudo pacman -S blueman
 
 ### AFTER INSTALLING MARIADB
 
+### There is no password for root
+
 ```sh
-# There is no password for root
 sudo mariadb-secure-installation
 ```
 
@@ -46,20 +63,16 @@ GRANT ALL PRIVILEGES ON *.* TO 'marco'@'localhost';
 exit
 ```
 
-### SOME KEYBINDINGS
-
-win+f => thunar
-
 ### tmux
 
 ctrl + h/j => switch between tmux windows
 ctrl + s + up/down => to ajust splitted terminal on tmux
 
-## SOME TIPS
+### SOME TIPS
 
 To modify startups programs => /i3/conf To modify screen => /i3/conf
 
-## USEFULL COMMANDS
+### USEFULL COMMANDS
 
 xrandr => show all screens connected or not (usefull to give i3 apps on certain
 screens) xprop => show the name of programs to put name on i3 file
