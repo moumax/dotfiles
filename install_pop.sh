@@ -108,14 +108,13 @@ if [ "$choice" = "node" ] || [ "$choice" = "all" ]; then
 	sleep 2
 	. .nvm/nvm.sh
 	nvm install 18 && nvm install 16 && nvm use 18
-	zenity --info --text="Fermez le terminal\n Reouvrir le terminal" --width=$dialog_width --height=$dialog_height
 	printf "$CR Installation de NodeJs terminé $CRS      \n"
 	sleep 2
 fi
 
 # FOLDERS
 if [ "$choice" = "folders" ] || [ "$choice" = "all" ]; then
-	printf " $CV Dossiers /dev enb cours de création... \n"
+	printf " $CV Dossiers /dev en cours de création... \n"
 	sleep 2
 	mkdir -p $HOME/dev
 	sleep 2
@@ -149,7 +148,7 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 	git config --global init.defaultBranch main && \
 	printf "git config --global init.defaultBranch main \n"
 
-	cd $HOME/.ssh
+	mkdir $HOME/.ssh && cd $HOME/.ssh
 	ssh-keygen -t ed25519 -C "$EmailGit"
 	eval "$(ssh-agent -s)"
 	ssh-add $HOME/.ssh/id_ed25519
@@ -241,7 +240,7 @@ if [ "$choice" = "font" ] || [ "$choice" = "all" ]; then
 	cd fonts && \
 	mv $HOME/downloads/Iosevka.zip . && \
 	unzip Iosevka.zip
-	printf "$CR La font Iosevka a été installée $CRS      \n"
+	printf "$CR La font Iosevka a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -254,7 +253,7 @@ if [ "$choice" = "alacr" ] || [ "$choice" = "all" ]; then
 	mkdir -p $HOME/.config/alacritty
 	cd $HOME/dotfiles
 	stow -t $HOME/.config/alacritty alacritty
-	printf "$CR alacritty a été installée $CRS      \n"
+	printf "$CR alacritty a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -267,7 +266,7 @@ if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
 	mkdir -p $HOME/.config/starship
 	cd $HOME/dotfiles && \
 	stow -t $HOME/.config/starship starship
-	printf "$CR starship a été installée $CRS      \n"
+	printf "$CR starship a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -278,7 +277,7 @@ if [ "$choice" = "fzf" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
 	git clone https://github.com/junegunn/fzf $HOME/.fzf && \
 	cd $HOME/.fzf && ./install
-	printf "$CR fzf a été installée $CRS      \n"
+	printf "$CR fzf a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -291,7 +290,7 @@ if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
 	mkdir $HOME/.config/gitui && \
 	cd $HOME/dotfiles
 	stow -t $HOME/.config/gitui gitui
-	printf "$CR gitui a été installée $CRS      \n"
+	printf "$CR gitui a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -303,7 +302,7 @@ if [ "$choice" = "glow" ] || [ "$choice" = "all" ]; then
 	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg && \
 	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list && \
 	sudo apt update && sudo apt install -y glow && sudo apt autoremove -y
-	printf "$CR glow a été installée $CRS      \n"
+	printf "$CR glow a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -316,7 +315,7 @@ if [ "$choice" = "brave" ] || [ "$choice" = "all" ]; then
 	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 	sudo apt update
 	sudo apt install brave-browser
-	printf "$CR Brave a été installée $CRS      \n"
+	printf "$CR Brave a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -342,7 +341,7 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	wget -P $HOME/.tmux/tmux-powerline-custom-themes "https://raw.githubusercontent.com/moumax/dotfiles/main/tmux/.tmux/tmux-powerline-custom-themes/marco-theme.sh"
 	mv $HOME/.tmux/plugins/tmux-powerline/themes/default.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh.old && \
 	ln -s $HOME/.tmux/tmux-powerline-custom-themes/marco-theme.sh $HOME/.tmux/plugins/tmux-powerline/themes/default.sh
-	printf "$CR Tmux a été installée $CRS      \n"
+	printf "$CR Tmux a été installé $CRS      \n"
 	sleep 2
 fi
 # VLC
@@ -351,7 +350,7 @@ if [ "$choice" = "vlc" ] || [ "$choice" = "all" ]; then
 	sleep 2
 	cd $HOME && \
 	sudo apt install -y vlc
-	printf "$CR vlc a été installée $CRS      \n"
+	printf "$CR vlc a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -361,7 +360,7 @@ if [ "$choice" = "qbit" ] || [ "$choice" = "all" ]; then
 	sleep 2
 	cd $HOME && \
 	sudo apt install -y qbittorrent
-	printf "$CR qbittorent a été installée $CRS      \n"
+	printf "$CR qbittorent a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -374,7 +373,7 @@ if [ "$choice" = "insomnia" ] || [ "$choice" = "all" ]; then
 	sudo apt update && \
 	sudo apt install -y insomnia && \
 	sudo apt autoremove -y
-	printf "$CR insomnia a été installée $CRS      \n"
+	printf "$CR insomnia a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -385,7 +384,7 @@ if [ "$choice" = "dbeaver" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
 	sudo add-apt-repository ppa:serge-rider/dbeaver-ce && \
 	sudo apt update && sudo apt install -y dbeaver-ce
-	printf "$CR dbeaver a été installée $CRS      \n"
+	printf "$CR dbeaver a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -399,7 +398,7 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
 	sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 	sudo apt install -y apt-transport-https
 	sudo apt update && sudo apt install -y code
-	printf "$CR vscode a été installée $CRS      \n"
+	printf "$CR vscode a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -409,7 +408,7 @@ if [ "$choice" = "btop" ] || [ "$choice" = "all" ]; then
 	sleep 2
 	cd $HOME && \
 	sudo apt install -y btop
-	printf "$CR btop a été installée $CRS      \n"
+	printf "$CR btop a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -419,7 +418,7 @@ if [ "$choice" = "mariadb" ] || [ "$choice" = "all" ]; then
 	sleep 2
 	sudo apt update
 	sudo apt install mariadb-server
-	printf "$CR mysql a été installée $CRS      \n"
+	printf "$CR mysql a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -427,7 +426,6 @@ fi
 if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
 	sleep 2
-	zenity --info --text="Tapez exit au prochain prompt \n Le script reprendra" --width=$dialog_width --height=$dialog_height
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 fi
 

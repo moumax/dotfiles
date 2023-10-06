@@ -59,7 +59,7 @@ alias tmk="tmux kill-session -t"
 # Git aliases
 alias gs='git status'
 alias gaa='git add .'
-alias gcmsg='git commit -m'
+alias gc='git commit -m'
 alias gpo='git pull origin'
 alias gp='git push'
 
