@@ -2,6 +2,16 @@
 
 ## START THE SCRIPT AND FOLLOW STEPS
 
+### FOR WINDOWS WSL
+
+```sh
+wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/install_wsl.sh && \
+chmod +x $HOME/install_wsl.sh
+./install_pop.sh
+```
+
+- Open windows_installation.md
+
 ### FOR ARCH LINUX
 
 ```sh
