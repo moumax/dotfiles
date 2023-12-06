@@ -33,17 +33,16 @@ while true; do
 	printf "  =============================================\n"
 	printf "\n"
 	printf "\n"
-	printf "  $CB dep $CRS       -- Install dépendences \n"
-	printf "  $CB nvm $CRS       -- Install nvm \n"
-	printf "  $CB rust $CRS      -- Install rust \n"
-	printf "  $CB node $CRS      -- Install nodeJs \n"
-	printf "  $CB folders $CRS   -- Préparation dossiers \n"
-	printf "  $CB gitdot $CRS    -- Install de l'env git \n"
-	printf "  $CB neovim $CRS    -- Install neovim \n"
-	printf "  $CB font $CRS      -- Install Iosevka font \n"
-	printf "  $CB stars $CRS     -- Install de starship \n"
-	printf "  $CB fzf $CRS       -- Install de fzf \n"
-	printf "  $CB glow $CRS      -- Install de glow \n"
+	printf "  $CB dep $CRS       -- Installation des dépendences obligatoires \n"
+	printf "  $CB nvm $CRS       -- Installation de nvm \n"
+	printf "  $CB rust $CRS      -- Installation de rust \n"
+	printf "  $CB node $CRS      -- Installation de nodeJs \n"
+	printf "  $CB folders $CRS   -- Création d'un dossier dev à la racine \n"
+	printf "  $CB gitdot $CRS    -- Installation de l'environnement git \n"
+	printf "  $CB neovim $CRS    -- Installation de neovim \n"
+	printf "  $CB font $CRS      -- Installation de la font Iosevka \n"
+	printf "  $CB stars $CRS     -- Installation de starship \n"
+	printf "  $CB lazy $CRS      -- Installation de lazygit\n"
 	printf "  $CB tmux $CRS      -- Install de tmux \n"
 	printf "  $CB oh $CRS        -- Install ohmyzsh \n"
 	printf "  $CB ohfiles $CRS   -- Install fichiers ohmyzsh \n"
@@ -181,40 +180,11 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 	printf "$CR Neovim est installé $CRS \n"
 	sleep 2
 
-	printf "$CV Installation de pynvim $CRS \n"
-	sleep 2
-	cd $HOME
-	pip3 install pynvim
-	printf "$CR Pynvim est installé $CRS \n"
-	sleep 2
-
-	printf "$CV Installation de Packer $CRS \n"
-	sleep 2
-	git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
-	printf "$CR Packer est installé $CRS \n"
-	sleep 2
-
-	printf "$CV Installation de tree-sitter-cli $CRS \n"
-	sleep 2
-	cd $HOME
-	. .nvm/nvm.sh
-	npm i -g tree-sitter-cli
-	printf "$CR tree-sitter-cli est installé $CRS \n"
-	sleep 2
-
-	printf "$CV Installation de neovim-cli $CRS \n"
-	sleep 2
-	cd $HOME
-	. .nvm/nvm.sh
-	npm i -g neovim
-	printf "$CR neovim-cli est installé $CRS \n"
-	sleep 2
-
 	printf "$CV Récupération des dotfiles neovim $CRS \n"
 	sleep 2
 	mkdir ~/.config/nvim
 	cd $HOME/dev/dotfiles && stow -t $HOME/.config/nvim neovim
-	printf "$CR Les dotfiles neovim ont été installés $CRS      \n"
+	printf "$CR Le dotfile neovim a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -241,26 +211,16 @@ if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
-# FZF
-if [ "$choice" = "fzf" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de fzf $CRS \n"
+# LAZYGIT
+if [ "$choice" = "lazy" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de Lazygit $CRS \n"
 	sleep 2
 	cd $HOME && \
-	git clone https://github.com/junegunn/fzf $HOME/.fzf && \
-	cd $HOME/.fzf && ./install
-	printf "$CR fzf a été installé $CRS      \n"
-	sleep 2
-fi
-
-# GLOW
-if [ "$choice" = "glow" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de glow $CRS \n"
-	sleep 2
-	sudo mkdir -p /etc/apt/keyrings && \
-	curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg && \
-	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list && \
-	sudo apt update && sudo apt install -y glow && sudo apt autoremove -y
-	printf "$CR glow a été installé $CRS      \n"
+	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*') && \
+	curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" && \
+	tar xf lazygit.tar.gz lazygit && \
+	sudo install lazygit /usr/local/bin && \
+	printf "$CR Lazygit a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -302,7 +262,7 @@ if [ "$choice" = "ohfiles" ] || [ "$choice" = "all" ]; then
 	printf "$CV Récupération du thème Oh my zsh $CRS \n"
 	cd $HOME/dev/dotfiles
 	sudo stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
-	sudo rm $HOME/.zshrc && stow -t $HOME zsh
+	sudo rm $HOME/.zshrc && stow -t $HOME wsl-dotfiles/zsh
 	sleep 2
 	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2
