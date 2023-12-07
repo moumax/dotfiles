@@ -44,7 +44,6 @@ while true; do
 	printf "  $CB folders $CRS   -- Création d'un dossier dev à la racine \n"
 	printf "  $CB gitdot $CRS    -- Installation de l'environnement git \n"
 	printf "  $CB neovim $CRS    -- Installation de neovim \n"
-	printf "  $CB font $CRS      -- Installation de la font Iosevka \n"
 	printf "  $CB stars $CRS     -- Installation de starship \n"
 	printf "  $CB lazy $CRS      -- Installation de lazygit\n"
 	printf "  $CB tmux $CRS      -- Installation de tmux \n"
@@ -214,10 +213,10 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation des dependances $CRS \n"
 	sleep 2
 	sudo apt update && sudo apt upgrade -y && \
-	sudo apt install -y git curl compton \
+	sudo apt install git curl compton \
 	tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
 	neofetch stow mlocate zoxide python3-pip libsqlite3-dev \
-	libssl-dev wget vim zsh && \
+	libssl-dev wget vim zsh -y && \
 	sudo apt autoremove -y && sudo apt autoclean -y
 	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2
@@ -366,20 +365,12 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 
 	printf "$CV Récupération des dotfiles neovim $CRS \n"
 	sleep 2
-	mkdir ~/.config/nvim
+	cd $HOME
+	mkdir .config
+	cd $HOME/.config
+	mkdir nvim
 	cd $HOME/dev/dotfiles && stow -t $HOME/.config/nvim neovim
 	printf "$CR Les dotfiles neovim ont été installés $CRS      \n"
-	sleep 2
-fi
-
-# FONT
-if [ "$choice" = "font" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de la font Iosevka $CRS \n"
-	sleep 2
-	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip && \
-	cd $HOME/.local/share && \
-	mkdir -p fonts && cd fonts && mv $HOME/downloads/Iosevka.zip . && unzip Iosevka.zip
-	printf "$CR La font Iosevka a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -413,7 +404,7 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Tmux $CRS \n"
 	sleep 2
 	cd $HOME && \
-	sudo apt remove tmux && sudo apt install -y libevent-dev ncurses-dev build-essential bison tmux
+	sudo apt remove tmux && sudo apt install libevent-dev ncurses-dev build-essential bison tmux -y
 	sudo apt autoremove -y && sudo rm -rf .tmux
 	cd $HOME && \
 	mkdir -p .tmux && mkdir -p .tmux/tmux-powerline-custom-themes
@@ -434,7 +425,7 @@ if [ "$choice" = "mariadb" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de MariaDB $CRS \n"
 	sleep 2
 	cd $HOME && \
-	sudo apt install mariadb-server
+	sudo apt install mariadb-server -y
 	printf "$CR MariaDB a été installé $CRS      \n"
 	sleep 2
 fi
