@@ -4,6 +4,57 @@
 
 ### FOR WINDOWS WSL
 
+#### Install wsl
+
+- Open powershell in admin mod
+
+```powershell
+    wsl --list --online
+```
+
+```powershell
+    wsl --install -d <Distribution Name>
+```
+
+#### Install choco softwares
+
+- If chocolatey is not installed
+
+```powershell
+    Set-ExecutionPolicy AllSigned
+```
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+- If chocolatey is installed
+
+  - Open powershell in admin mod
+
+For laptops
+
+```powershell
+    choco install vlc runjs dbeaver adobereader ocenaudio vscode insomnia-rest-api-client
+```
+
+For desktops
+
+```powershell
+    choco install nvidia-display-driver vlc runjs adobereader ocenaudio dbeaver vscode msiafterburner steam insomnia-rest-api-client
+```
+
+REBOOT THE MACHINE !!!
+
+#### Install terminal preview edition
+
+- Open windows store and find terminal preview
+- Delete terminal in apps on windows
+
+#### Install Iosevka font on windows
+
+<https://github.com/moumax/dotfiles/raw/main/Iosevka.zip>
+
 ```sh
 wget -P $HOME/ https://raw.githubusercontent.com/moumax/dotfiles/main/install_wsl.sh && \
 chmod +x $HOME/install_wsl.sh
