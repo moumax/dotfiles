@@ -33,6 +33,10 @@ while true; do
 	printf "  =============================================\n"
 	printf "\n"
 	printf "\n"
+	printf "  $CV update $CRS    -- Mise à jour de la distribution et des paquets \n"
+	printf "\n"
+	printf "\n"
+	printf "  $CB prep $CRS      -- Préparation de windows \n"
 	printf "  $CB dep $CRS       -- Installation des dépendences obligatoires \n"
 	printf "  $CB nvm $CRS       -- Installation de nvm \n"
 	printf "  $CB rust $CRS      -- Installation de rust \n"
@@ -43,9 +47,10 @@ while true; do
 	printf "  $CB font $CRS      -- Installation de la font Iosevka \n"
 	printf "  $CB stars $CRS     -- Installation de starship \n"
 	printf "  $CB lazy $CRS      -- Installation de lazygit\n"
-	printf "  $CB tmux $CRS      -- Install de tmux \n"
-	printf "  $CB oh $CRS        -- Install ohmyzsh \n"
-	printf "  $CB ohfiles $CRS   -- Install fichiers ohmyzsh \n"
+	printf "  $CB tmux $CRS      -- Installation de tmux \n"
+	printf "  $CB mariadb $CRS   -- Installation de mariadb \n"
+	printf "  $CB oh $CRS        -- Installation ohmyzsh \n"
+	printf "  $CB ohfiles $CRS   -- Installation des fichiers ohmyzsh \n"
 	printf "\n"
 	printf "  ---------------------------------------------\n"
 	printf "  $CB all   -- $CRS Full install \n"
@@ -53,6 +58,156 @@ while true; do
 	printf "\n"
 
 	read -p "Votre choix ? " choice
+
+# UPDATE
+if [ "$choice" = "update" ]; then
+	printf "$CV Mise à jour du système et des logiciels $CRS \n"
+	sleep 2
+	sudo apt update && sudo apt upgrade -y && \
+	sudo apt autoremove -y && sudo apt autoclean -y
+	printf "$CR Opérations terminées $CRS      \n"
+	sleep 2
+fi
+
+# PREP
+if [ "$choice" = "prep" ] || [ "$choice" = "all" ]; then
+    printf "$CV Préparation de windows $CRS \n"
+	printf " \n"
+    printf "$CV Suivez les instructions $CRS \n"
+    sleep 2
+
+    while true; do
+        printf "  $CB INSTALLATION DE WSL $CRS \n"
+		printf " \n"
+        printf "  $CV Lancez powershell en mode administrateur $CRS \n"
+		printf " \n"
+        read -p "Passer à l'étape suivante ? (Appuyez sur y/Y pour continuer, n/N pour annuler) " confirm
+
+        if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+            break
+        elif [ "$confirm" = "n" ] || ["$confirm" = "N"]; then
+            printf "$CR Opérations annulées $CRS \n"
+            exit 1
+        else
+            printf "$CR Choix non valide. Veuillez répondre avec 'y/Y' ou 'n/N' $CRS \n"
+        fi
+    done
+
+    while true; do
+        printf "  $CB POUR LISTER LES DISTRIBUTIONS WSL :$CRS \n"
+		printf " \n"
+        printf "  $CV wsl --list --online $CRS \n"
+		printf " \n"
+        printf "  $CB POUR INSTALLER WSL :$CRS \n"
+		printf " \n"
+        printf "  $CV wsl --install -d Ubuntu-22.04 $CRS \n"
+		printf " \n"
+        read -p "Passer à l'étape suivante ? (Appuyez sur y/Y pour continuer, n/N pour annuler) " confirm
+
+        if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+            break
+        elif [ "$confirm" = "n" ] || ["$confirm" = "N"]; then
+            printf "$CR Opérations annulées $CRS \n"
+            exit 1
+        else
+            printf "$CR Choix non valide. Veuillez répondre avec 'y/Y' ou 'n/N' $CRS \n"
+        fi
+    done
+
+    while true; do
+        printf "  $CB POUR INSTALLER LES APPLICATIONS CHOCOLATEY :$CRS \n"
+		printf " \n"
+		printf " $CB Si chocolatey n'est pas installé => $CRS\n"
+		printf " \n"
+		printf " $CV Set-ExecutionPolicy AllSigned $CRS\n"
+		printf " $CV Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) $CRS\n"
+		printf " \n"
+		printf " $CB Si chocolatey est déjà installé => $CRS\n"
+		printf " \n"
+        printf "  $CV choco install nvidia-display-driver vlc runjs adobereader ocenaudio dbeaver vscode msiafterburner steam vivaldi $CRS \n"
+        read -p "Passer à l'étape suivante ? (Appuyez sur y/Y pour continuer, n/N pour annuler) " confirm
+
+        if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+            break
+        elif [ "$confirm" = "n" ] || ["$confirm" = "N"]; then
+            printf "$CR Opérations annulées $CRS \n"
+            exit 1
+        else
+            printf "$CR Choix non valide. Veuillez répondre avec 'y/Y' ou 'n/N' $CRS \n"
+        fi
+    done
+
+    while true; do
+        printf "  $CB POUR AUGMENTER LA VITESSE DE FRAPPE DU CLAVIER :$CRS \n"
+		printf " \n"
+        printf "  $CV Se rendre dans le registre windows (regedit) $CRS \n"
+		printf " \n"
+        printf "  $CV Allez sur ce lien : HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response $CRS \n"
+		printf " \n"
+        printf "  $CV Modifier les valeurs suivantes : $CRS \n"
+		printf " \n"
+        printf "  $CV AutoRepeatDelay = 200 $CRS \n"
+        printf "  $CV AutoRepeatRate= 9 $CRS \n"
+        printf "  $CV DelayBeforeAcceptance = 0 $CRS \n"
+        printf "  $CV flags = 59 $CRS \n"
+		printf " \n"
+        read -p "Passer à l'étape suivante ? (Appuyez sur y/Y pour continuer, n/N pour annuler) " confirm
+
+        if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+            break
+        elif [ "$confirm" = "n" ] || ["$confirm" = "N"]; then
+            printf "$CR Opérations annulées $CRS \n"
+            exit 1
+        else
+            printf "$CR Choix non valide. Veuillez répondre avec 'y/Y' ou 'n/N' $CRS \n"
+        fi
+    done
+
+    while true; do
+        printf "  $CB INSTALLATION DE LA FONT IOSEVKA :$CRS \n"
+		printf " \n"
+        printf "  $CV Téléchargez ce fichier : $CRS \n"
+		printf " \n"
+        printf "  $CV https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/IosevkaTerm.zip $CRS \n"
+		printf " \n"
+        printf "  $CV Décompressez toutes les polices $CRS \n"
+		printf " \n"
+        printf "  $CV Les installer en cliquant droit $CRS \n"
+		printf " \n"
+        read -p "Passer à l'étape suivante ? (Appuyez sur y/Y pour continuer, n/N pour annuler) " confirm
+
+        if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+            break
+        elif [ "$confirm" = "n" ] || ["$confirm" = "N"]; then
+            printf "$CR Opérations annulées $CRS \n"
+            exit 1
+        else
+            printf "$CR Choix non valide. Veuillez répondre avec 'y/Y' ou 'n/N' $CRS \n"
+        fi
+    done
+
+    while true; do
+        printf "  $CB INSTALLATION DU TERMINAL WINDOWS :$CRS \n"
+		printf " \n"
+        printf "  $CV Dans le windows store, téléchargez la version preview du terminal $CRS \n"
+		printf " \n"
+        printf "  $CV Pensez à mettre l'opacité sur 80% et à régler la police sur Iosevka en semi light $CRS \n"
+		printf " \n"
+        read -p "Passer à l'étape suivante ? (Appuyez sur y/Y pour continuer, n/N pour annuler) " confirm
+
+        if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+            break
+        elif [ "$confirm" = "n" ] || ["$confirm" = "N"]; then
+            printf "$CR Opérations annulées $CRS \n"
+            exit 1
+        else
+            printf "$CR Choix non valide. Veuillez répondre avec 'y/Y' ou 'n/N' $CRS \n"
+        fi
+    done
+
+    printf "$CR Opérations terminées $CRS      \n"
+    sleep 2
+fi
 
 # DEP
 if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
@@ -180,11 +335,40 @@ if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
 	printf "$CR Neovim est installé $CRS \n"
 	sleep 2
 
+	printf "$CV Installation de pynvim $CRS \n"
+	sleep 2
+	cd $HOME
+	pip3 install pynvim
+	printf "$CR Pynvim est installé $CRS \n"
+	sleep 2
+
+	printf "$CV Installation de Packer $CRS \n"
+	sleep 2
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+	printf "$CR Packer est installé $CRS \n"
+	sleep 2
+
+	printf "$CV Installation de tree-sitter-cli $CRS \n"
+	sleep 2
+	cd $HOME
+	. .nvm/nvm.sh
+	npm i -g tree-sitter-cli
+	printf "$CR tree-sitter-cli est installé $CRS \n"
+	sleep 2
+
+	printf "$CV Installation de neovim-cli $CRS \n"
+	sleep 2
+	cd $HOME
+	. .nvm/nvm.sh
+	npm i -g neovim
+	printf "$CR neovim-cli est installé $CRS \n"
+	sleep 2
+
 	printf "$CV Récupération des dotfiles neovim $CRS \n"
 	sleep 2
 	mkdir ~/.config/nvim
 	cd $HOME/dev/dotfiles && stow -t $HOME/.config/nvim neovim
-	printf "$CR Le dotfile neovim a été installé $CRS      \n"
+	printf "$CR Les dotfiles neovim ont été installés $CRS      \n"
 	sleep 2
 fi
 
@@ -245,6 +429,16 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
+# MARIADB
+if [ "$choice" = "mariadb" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de MariaDB $CRS \n"
+	sleep 2
+	cd $HOME && \
+	sudo apt install mariadb-server
+	printf "$CR MariaDB a été installé $CRS      \n"
+	sleep 2
+fi
+
 # OHMYZSH
 if [ "$choice" = "oh" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de Oh my Zsh $CRS \n"
@@ -262,7 +456,8 @@ if [ "$choice" = "ohfiles" ] || [ "$choice" = "all" ]; then
 	printf "$CV Récupération du thème Oh my zsh $CRS \n"
 	cd $HOME/dev/dotfiles
 	sudo stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
-	sudo rm $HOME/.zshrc && stow -t $HOME wsl-dotfiles/zsh
+	cd $HOME/dev/dotfiles/wsl-dotfiles
+	sudo rm $HOME/.zshrc && stow -t $HOME zsh
 	sleep 2
 	printf "$CR Opérations terminées $CRS      \n"
 	sleep 2

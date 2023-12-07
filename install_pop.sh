@@ -87,7 +87,7 @@ if [ "$choice" = "clean" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
 	sudo apt remove libreoffice-base-core libreoffice-common libreoffice-core \
 	libreoffice-style-colibre libreoffice-style-elementary \
-	libreoffice-style-yaru geary 
+	libreoffice-style-yaru geary
 	printf "$CR Nettoyage terminé $CRS      \n"
 	sleep 2
 fi
