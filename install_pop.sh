@@ -33,6 +33,9 @@ while true; do
 	printf "  =============================================\n"
 	printf "\n"
 	printf "\n"
+	printf "  $CV update $CRS    -- Mise à jour de la distribution et des paquets \n"
+	printf "\n"
+	printf "\n"
 	printf "  $CB dep $CRS       -- Install dépendences \n"
 	printf "  $CB clean $CRS     -- Clean popos install \n"
 	printf "  $CB nvm $CRS       -- Install nvm \n"
@@ -45,15 +48,13 @@ while true; do
 	printf "  $CB alacr $CRS     -- Install allacrity \n"
 	printf "  $CB stars $CRS     -- Install de starship \n"
 	printf "  $CB fzf $CRS       -- Install de fzf \n"
-	printf "  $CB gitui $CRS     -- Install de gitui \n"
+	printf "  $CB lazy $CRS      -- Install de lazygit \n"
 	printf "  $CB glow $CRS      -- Install de glow \n"
-	printf "  $CB brave $CRS     -- Install de brave \n"
 	printf "  $CB tmux $CRS      -- Install de tmux \n"
 	printf "  $CB vlc $CRS       -- Install de vlc \n"
-	printf "  $CB qbit $CRS      -- Install de qbittorrent \n"
-	printf "  $CB insomnia $CRS  -- Install de insomnia \n"
 	printf "  $CB dbeaver $CRS   -- Install de dbeaver \n"
 	printf "  $CB vscode $CRS    -- Install de vscode \n"
+	printf "  $CB bruno $CRS     -- Install de bruno \n"
 	printf "  $CB btop $CRS      -- Install de btop \n"
 	printf "  $CB mariadb $CRS   -- Install de mariadb \n"
 	printf "  $CB oh $CRS        -- Install ohmyzsh \n"
@@ -65,6 +66,16 @@ while true; do
 	printf "\n"
 
 	read -p "Votre choix ? " choice
+
+# UPDATE
+if [ "$choice" = "update" ]; then
+	printf "$CV Mise à jour du système et des logiciels $CRS \n"
+	sleep 2
+	sudo apt update && sudo apt upgrade -y && \
+	sudo apt autoremove -y && sudo apt autoclean -y
+	printf "$CR Opérations terminées $CRS      \n"
+	sleep 2
+fi
 
 # DEP
 if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
@@ -286,15 +297,16 @@ if [ "$choice" = "fzf" ] || [ "$choice" = "all" ]; then
 	sleep 2
 fi
 
-# GITUI
-if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de gitui $CRS \n"
+# LAZYGIT
+if [ "$choice" = "lazy" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de Lazygit $CRS \n"
 	sleep 2
 	cd $HOME && \
-	cargo install gitui
-	mkdir $HOME/.config/gitui && cd $HOME/dev/dotfiles
-	stow -t $HOME/.config/gitui gitui
-	printf "$CR gitui a été installé $CRS      \n"
+	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*') && \
+	curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" && \
+	tar xf lazygit.tar.gz lazygit && \
+	sudo install lazygit /usr/local/bin && \
+	printf "$CR Lazygit a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -307,18 +319,6 @@ if [ "$choice" = "glow" ] || [ "$choice" = "all" ]; then
 	echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list && \
 	sudo apt update && sudo apt install -y glow && sudo apt autoremove -y
 	printf "$CR glow a été installé $CRS      \n"
-	sleep 2
-fi
-
-# BRAVE
-if [ "$choice" = "brave" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de Brave  $CRS \n"
-	sleep 2
-	cd $HOME/ && \
-	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-	sudo apt update && sudo apt install brave-browser
-	printf "$CR Brave a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -342,6 +342,7 @@ if [ "$choice" = "tmux" ] || [ "$choice" = "all" ]; then
 	printf "$CR Tmux a été installé $CRS      \n"
 	sleep 2
 fi
+
 # VLC
 if [ "$choice" = "vlc" ] || [ "$choice" = "all" ]; then
 	printf "$CV Installation de vlc $CRS \n"
@@ -349,27 +350,6 @@ if [ "$choice" = "vlc" ] || [ "$choice" = "all" ]; then
 	cd $HOME && \
 	sudo apt install -y vlc
 	printf "$CR vlc a été installé $CRS      \n"
-	sleep 2
-fi
-
-# QBITTORENT
-if [ "$choice" = "qbit" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de qbittorrent $CRS \n"
-	sleep 2
-	cd $HOME && \
-	sudo apt install -y qbittorrent
-	printf "$CR qbittorent a été installé $CRS      \n"
-	sleep 2
-fi
-
-# INSOMNIA
-if [ "$choice" = "insomnia" ] || [ "$choice" = "all" ]; then
-	printf "$CV Installation de insomnia $CRS \n"
-	sleep 2
-	cd $HOME && \
-	echo "deb [trusted=yes arch=amd64] https://download.konghq.com/insomnia-ubuntu/ default all" | sudo tee -a /etc/apt/sources.list.d/insomnia.list
-	sudo apt update && sudo apt install -y insomnia && sudo apt autoremove -y
-	printf "$CR insomnia a été installé $CRS      \n"
 	sleep 2
 fi
 
@@ -394,6 +374,18 @@ if [ "$choice" = "vscode" ] || [ "$choice" = "all" ]; then
 	sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 	sudo apt install -y apt-transport-https && sudo apt update && sudo apt install -y code
 	printf "$CR vscode a été installé $CRS      \n"
+	sleep 2
+fi
+
+# BRUNO
+if [ "$choice" = "bruno" ] || [ "$choice" = "all" ]; then
+	printf "$CV Installation de vscode $CRS \n"
+	sleep 2
+	sudo mkdir -p /etc/apt/keyrings
+	sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/bruno.gpg --keyserver keyserver.ubuntu.com --recv-keys 9FA6017ECABE0266
+	echo "deb [signed-by=/etc/apt/keyrings/bruno.gpg] http://debian.usebruno.com/ bruno stable" | sudo tee /etc/apt/sources.list.d/bruno.list
+	sudo apt update
+	sudo apt install bruno
 	sleep 2
 fi
 
