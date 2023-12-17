@@ -59,20 +59,19 @@ schemes:
 colors: *tokyo-night-storm
 font:
   normal:
-    family: "Iosevka Nerd Font Mono"
-    style: Regular
+    family: "Iosevka Nerd Font"
+    style: ExtraLight
   bold:
-    family: "Iosevka Nerd Font Mono"
-    style: Bold
+    family: "Iosevka Nerd Font"
+    style: ExtraLight
   italic:
-    family: "Iosevka Nerd Font Mono"
-    style: Italic
+    family: "Iosevka Nerd Font"
+    style: ExtraLightItalic
   bold_italic:
-    family: "Iosevka Nerd Font Mono"
+    family: "Iosevka Nerd Font"
     style: Bold Italic
-  # size: 9.0 # on my laptop
-  size: 12.0 # on my VM's
+  size: 10.0 # on my VM's
 
 window :
-  opacity: 0.9
+  opacity: 0.7
 
