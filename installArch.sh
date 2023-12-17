@@ -33,6 +33,7 @@ while true; do
 	printf "  =============================================\n"
 	printf "\n"
 	printf "\n"
+	printf "  $CB wall $CRS      -- Installation du wallpaper \n"
 	printf "  $CB stow $CRS      -- Install stow \n"
 	printf "  $CB maj $CRS       -- Mise à jour système \n"
 	printf "  $CB dep $CRS       -- Dépendances  \n"
@@ -184,15 +185,15 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 	cd $HOME 
 	printf "$CR Liens git clone ssh des dotfiles\n $CRS"
 	read -p "Adresse de vos dotfiles " dotfiles
-	printf " $CR Le dossier sera crée à la racine ~/dotfiles $CRS\n"
+	printf " $CR Le dossier sera crée dans $HOME/dev/dotfiles $CRS\n"
 	sleep 1
 
-	if [ ! -d "$HOME/dotfiles" ]; then
+	if [ ! -d "$HOME/dev/dotfiles" ]; then
 		printf "Le dossier de destination n'existe pas. Création du dossier..."
-		mkdir -p "$HOME/dotfiles"
+		mkdir -p "$HOME/dev/dotfiles"
 	fi
 
-	git clone "$dotfiles" "$HOME/dotfiles"
+	git clone "$dotfiles" "$HOME/dev/dotfiles"
 
 	if [ $? -eq 0 ]; then
 		printf "Le dépôt a été cloné avec succès dans $HOME/dotfiles \n"
@@ -346,6 +347,7 @@ if [ "$choice" = "sql" ] || [ "$choice" = "all" ]; then
 	printf "  ================================================ $CRS\n"
 	sleep 1
   sudo pacman -S mariadb --noconfirm
+  mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 fi
 
 # OHMYZSH 
