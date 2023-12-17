@@ -39,7 +39,7 @@ alias c="clear"
 # Change directory aliases
 alias d="cd $HOME"
 alias dev="cd $HOME/dev"
-alias dot="cd $HOME/dotfiles"
+alias dot="cd $HOME/dev/dotfiles"
 
 
 # List aliases
@@ -78,7 +78,7 @@ alias ubuntu-software="killall snap-store"
 alias settings="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
 
 # Launch gitui app.
-alias ui="gitui"
+alias lazy="lazygit"
 
 # Set VIM as default editor
 export VISUAL=nvim
@@ -134,21 +134,13 @@ export NVM_DIR="$HOME/.nvm"
 # Every time I open a new terminal.
 tmux has-session -t Marco || \
 	tmux -f $HOME/.tmux.conf new -s Marco -n server \; \
-	split-window -c ~/ -h \; \
-	split-window -c ~/ -v \; \
-	select-pane -t 3 \; \
-	resize-pane -t 3 -y 20 \; \
 	new-window -c ~/ -n nvim1 \; \
 	new-window -c ~/ -n nvim2 \; \
-	new-window -c ~/ -n lazygit lazygit\; \
+	new-window -c ~/ -n nvim3 \; \
 	select-window -t 1 \; \
 	select-pane -t 1 \; \
 	resize-pane -t 1 -x 85 \; \
 	send-keys 'clear' Enter \; \
-
-
-# Zoxide
-# eval "$(zoxide init zsh)"
 
 # Starship
 eval "$(starship init zsh)"
