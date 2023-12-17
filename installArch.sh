@@ -44,14 +44,13 @@ while true; do
 	printf "  $CB nvchad $CRS    -- Install nvchad \n"
 	printf "  $CB alacr $CRS     -- Install allacrity \n"
 	printf "  $CB stars $CRS     -- Install de starship \n"
-	printf "  $CB gitui $CRS     -- Install de gitui \n"
+	printf "  $CB lazy $CRS      -- Install de lazygit \n"
 	printf "  $CB tmux $CRS      -- Install de tmux \n"
 	printf "  $CB insomnia $CRS  -- Install de insomnia \n"
 	printf "  $CB dbeaver $CRS   -- Install de dbeaver \n"
 	printf "  $CB vscode $CRS    -- Install de vscode \n"
 	printf "  $CB sql $CRS       -- Install de mariadb \n"
 	printf "  $CB btop $CRS      -- Install de btop \n"
-	printf "  $CB obsidian $CRS  -- Install de obsidian \n"
 	printf "  $CB mariadb $CRS   -- Install de mariadb \n"
 	printf "  $CB oh $CRS        -- Install ohmyzsh \n"
 	printf "  $CB ohfiles $CRS   -- Install fichiers ohmyzsh \n"
@@ -265,23 +264,20 @@ if [ "$choice" = "stars" ] || [ "$choice" = "all" ]; then
 	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S starship --noconfim
+  sudo pacman -S starship --noconfirm
 	mkdir -p $HOME/.config/starship
 	cd $HOME/dotfiles && \
 	stow -t $HOME/.config/starship starship
 fi
 
-# GITUI
-if [ "$choice" = "gitui" ] || [ "$choice" = "all" ]; then
+# LAZYGIT
+if [ "$choice" = "lazy" ] || [ "$choice" = "all" ]; then
 	printf " $CR ================================================\n"
-  printf "                Installation de gitui  \n"
+  printf "                Installation de lazygit \n"
 	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S gitui --noconfim
-	mkdir $HOME/.config/gitui && \
-	cd $HOME/dotfiles
-	stow -t $HOME/.config/gitui gitui
+  sudo pacman -S lazygit --noconfirm
 fi
 
 # TMUX 
@@ -310,7 +306,7 @@ if [ "$choice" = "insomnia" ] || [ "$choice" = "all" ]; then
 	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  yay -S insomnia-bin --noconfim
+  yay -S insomnia-bin --noconfirm
 fi
 
 # DBEAVER
@@ -320,7 +316,7 @@ if [ "$choice" = "dbeaver" ] || [ "$choice" = "all" ]; then
 	printf "  ================================================ $CRS\n"
 	sleep 1
 	cd $HOME && \
-  sudo pacman -S dbeaver --noconfim
+  sudo pacman -S dbeaver --noconfirm
 fi
 
 # VSCODE
@@ -341,15 +337,6 @@ if [ "$choice" = "btop" ] || [ "$choice" = "all" ]; then
 	sleep 1
 	cd $HOME && \
   sudo pacman -S btop --noconfirm
-fi
-
-# OBSIDIAN
-if [ "$choice" = "obsidian" ] || [ "$choice" = "all" ]; then
-	printf " $CR ================================================\n"
-  printf "                Installation de obsidian \n"
-	printf "  ================================================ $CRS\n"
-	sleep 1
-  sudo pacman -S obsidian --noconfirm
 fi
 
 # MARIADB
