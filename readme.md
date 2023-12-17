@@ -124,6 +124,13 @@ GRANT ALL PRIVILEGES ON *.* TO 'marco'@'localhost';
 exit
 ```
 
+=> Import a .sql file of a projet :
+-   Create database in dbeaver
+
+```bash
+mysql -u username -p database_name < file.sql
+```
+
 ### tmux
 
 ctrl + h/j => switch between tmux windows
