@@ -347,7 +347,8 @@ if [ "$choice" = "sql" ] || [ "$choice" = "all" ]; then
 	printf "  ================================================ $CRS\n"
 	sleep 1
   sudo pacman -S mariadb --noconfirm
-  mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+  sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+  systemctl start mariadb
 fi
 
 # OHMYZSH 
