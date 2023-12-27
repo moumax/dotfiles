@@ -374,7 +374,7 @@ if [ "$choice" = "ohfiles" ] || [ "$choice" = "all" ]; then
   printf "            Récupération du thème Oh my zsh \n"
 	printf "  ================================================ $CRS\n"
   sleep 1
-	cd $HOME/dotfiles
+	cd $HOME/dev/dotfiles
 	sudo stow -t $HOME/.oh-my-zsh/custom/themes oh-my-zsh
 	sudo rm $HOME/.zshrc && stow -t $HOME zsh
 fi
