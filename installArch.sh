@@ -6,6 +6,10 @@ Os="$(uname -s)"
 dialog_width=600
 dialog_height=200
 
+# Variables de dossiers
+ssh_dir="/.ssh"
+i3_config_dir="$HOME/.config/i3"
+
 CRS='\033[0m'
 CR='\033[0;31m'
 CN='\033[0;30m'
@@ -33,7 +37,6 @@ while true; do
 	printf "  =============================================\n"
 	printf "\n"
 	printf "\n"
-	printf "  $CB wall $CRS      -- Installation du wallpaper \n"
 	printf "  $CB stow $CRS      -- Install stow \n"
 	printf "  $CB maj $CRS       -- Mise à jour système \n"
 	printf "  $CB dep $CRS       -- Dépendances  \n"
@@ -64,13 +67,6 @@ while true; do
 
 	read -p "Votre choix ? " choice
 
-# WALLPAPER
-if [ "$choice" = "wall" ] || [ "$choice" = "all" ]; then
-  wget -P $HOME/downloads https://github.com/EndeavourOS-Community-Editions/Community-wallpapers/blob/main/eos_wallpapers_community/APOLLO-MOON.png
-  cd $HOME/downloads/
- sudo mv APOLLO-MOON.png /usr/share/endeavouros/backgrounds/
-fi
-
 # STOW
 if [ "$choice" = "stow" ] || [ "$choice" = "all" ]; then
 	printf " $CR ================================================\n"
@@ -97,7 +93,6 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
 	printf "  ================================================ $CRS\n"
   sudo systemctl enable --now bluetooth
   sudo pacman -S blueman --noconfirm
-  yay -S google-chrome --noconfirm
   yay -S picom --noconfirm
 fi
 
@@ -171,7 +166,14 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 	git config --global init.defaultBranch main && \
 	printf "git config --global init.defaultBranch main \n"
 
-  mkdir $HOME/.ssh && cd $HOME/.ssh
+  if [ -d "$ssh_dir" ]; then
+    echo "Le dossier $ssh_dir existe déjà."
+  else
+    mkdir "$HOME$ssh_dir"
+    echo "Le dossier $ssh_dir a été créé avec succès."
+    cd $HOME/.ssh
+  fi
+
 	ssh-keygen -t ed25519 -C "$EmailGit"
   eval `ssh-agent -s`
 	ssh-add $HOME/.ssh/id_ed25519
@@ -204,31 +206,45 @@ if [ "$choice" = "gitdot" ] || [ "$choice" = "all" ]; then
 	printf "      Copie des dotfiles dans les dossiers logiciels\n"
 	printf "  ================================================ $CRS\n"
 	sleep 1
-  sudo rm -r $HOME/.config/i3
-  mkdir $HOME/.config/i3
+
+  if [ -d "$i3_config_dir" ]; then
+    sudo rm -r "$i3_config_dir"
+    echo "Le dossier $i3_config_dir a été supprimé avec succès."
+  else
+    echo "Le dossier $i3_config_dir n'existe pas, aucune action nécessaire."
+  fi
+
+  mkdir "$i3_config_dir"
+  echo "Le dossier $i3_config_dir a été créé avec succès."
 	cd $HOME/dotfiles
 	stow -t $HOME/.config/i3 i3
 	stow -t $HOME/.config/ picom
-fi
+  fi
 
-# NVCHAD 
-if [ "$choice" = "nvchad" ] || [ "$choice" = "all" ]; then
-	printf " $CR ================================================\n"
-	printf "        Installation des dépendances pour nvchad  \n"
-	printf "  ================================================ $CRS\n"
-	sleep 1
-	cd $HOME && \
-  sudo pacman -S neovim --noconfirm
+# FONT IOSEVKA 
+if [ "$choice" = "font" ] || [ "$choice" = "all" ]; then
 	printf " $CR ================================================\n"
 	printf "            Installation de la font Iosevka  \n"
 	printf "  ================================================ $CRS\n"
 	sleep 1
-	wget -P $HOME/downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip && \
 	cd $HOME/.local/share && \
-	mkdir -p fonts && \
-	cd fonts && \
-	mv $HOME/downloads/Iosevka.zip . && \
+	mkdir -p fonts1 && \
+	cd fonts1 && \
+	wget  https://github.com/moumax/dotfiles/raw/main/Iosevka.zip && \
 	unzip Iosevka.zip
+  sudo rm -R Iosevka.zip
+  echo "La font Iosevka a bien été installée"
+  sleep 2
+fi
+
+# NEOVIM 
+if [ "$choice" = "neovim" ] || [ "$choice" = "all" ]; then
+	printf " $CR ================================================\n"
+	printf "        Installation de Neovim  \n"
+	printf "  ================================================ $CRS\n"
+	sleep 1
+	cd $HOME && \
+  sudo pacman -S neovim --noconfirm
 	printf " $CR ================================================\n"
 	printf "                Installation de ripgrep \n"
 	printf "  ================================================ $CRS\n"
@@ -240,10 +256,6 @@ if [ "$choice" = "nvchad" ] || [ "$choice" = "all" ]; then
   sleep 1
   rm -rf ~/.config/nvim
   rm -rf ~/.local/share/nvim
-	printf " $CR ================================================\n"
-  printf "                   Installation de nvchad \n"
-	printf "  ================================================ $CRS\n"
-	git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 fi
 
 # ALACRITTY
