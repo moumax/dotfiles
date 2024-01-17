@@ -44,9 +44,8 @@ alias dot="cd $HOME/dev/dotfiles"
 
 # List aliases
 alias la="ls -lAh"
-alias ll="ls -l"
-alias ls="ls --color=tty"
-
+alias ls="ls -l"
+alias ll="eza -l -a"
 
 # TMUX aliases
 alias tm="tmux -f $HOME/dotfiles/tmux/.tmux.conf new -s"
