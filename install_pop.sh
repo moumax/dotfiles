@@ -112,6 +112,7 @@ while true; do
 	printf "  $COLOR_YELLOW bruno $COLOR_RESET     -- Bruno installation \n"
 	printf "  $COLOR_YELLOW btop $COLOR_RESET      -- Btop installation \n"
 	printf "  $COLOR_YELLOW mariadb $COLOR_RESET   -- Mariadb installation \n"
+	printf "  $COLOR_YELLOW chrome $COLOR_RESET    -- Google chrome installation \n"
 	printf "\n"
 	printf "  ---------------------------------------------\n"
 	printf "  $COLOR_GREEN all   -- $COLOR_RESET Full install \n"
@@ -589,6 +590,28 @@ if [ "$choice" = "mariadb" ] || [ "$choice" = "all" ]; then
     sudo apt update && sudo apt install mariadb-server
 
     display_success "Mariadb was successfully installed"
+    sleep 2
+fi
+
+# GOOGLE CHROME
+if [ "$choice" = "chrome" ] || [ "$choice" = "all" ]; then
+    display_status "Google chrome installation"
+    sleep 2
+
+    # Dependancies
+    sudo apt install software-properties-common apt-transport-https ca-certificates curl -y
+
+    # gpg key importation
+    curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg >> /dev/null
+
+    # Add google chrome repository
+    echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+
+    # Google chrome installation
+    sudo apt update
+    sudo apt install google-chrome-stable
+
+    display_success "Google chrome was successfully installed"
     sleep 2
 fi
 
