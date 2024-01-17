@@ -97,6 +97,7 @@ while true; do
 	printf "  $COLOR_BLUE folders $COLOR_RESET   -- Dev folder creation \n"
 	printf "  $COLOR_BLUE git $COLOR_RESET       -- Git environement installation \n"
 	printf "  $COLOR_BLUE bob $COLOR_RESET       -- Bob installation for Neovim \n"
+	printf "  $COLOR_BLUE eza $COLOR_RESET       -- Eza installation \n"
 	printf "  $COLOR_BLUE font $COLOR_RESET      -- Iosevka font installation \n"
 	printf "  $COLOR_BLUE alac $COLOR_RESET      -- Allacrity installation \n"
 	printf "  $COLOR_BLUE lazy $COLOR_RESET      -- Lazygit installation \n"
@@ -169,7 +170,7 @@ if [ "$choice" = "dep" ] || [ "$choice" = "all" ]; then
     sudo apt install -y stow git curl compton \
         tree ripgrep fd-find silversearcher-ag unzip bat python3-dev \
         neofetch mlocate zoxide python3-pip libsqlite3-dev \
-        libssl-dev wget vim zsh
+        libssl-dev wget vim zsh gnome-tweaks exa
     if [ $? -eq 0 ]; then
         display_success "Dependencies installed successfully"
     else
@@ -545,6 +546,25 @@ if [ "$choice" = "bruno" ] || [ "$choice" = "all" ]; then
   sudo apt update
   sudo apt install bruno
   display_success "Bruno was successfully installed"
+  sleep 2
+fi
+
+# EZA
+if [ "$choice" = "eza" ] || [ "$choice" = "all" ]; then
+  display_status "Eza installation"
+  sleep 2
+  create_directory "$keyring_directory"
+
+  wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+  
+  echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+
+  sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+  
+  sudo apt update
+  sudo apt install -y eza
+
+  display_success "Eza was successfully installed"
   sleep 2
 fi
 
