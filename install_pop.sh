@@ -206,7 +206,15 @@ if [ "$choice" = "clean" ] || [ "$choice" = "all" ]; then
     # Package deletion
     sudo apt remove -y libreoffice-base-core libreoffice-common libreoffice-core \
         libreoffice-style-colibre libreoffice-style-elementary \
-        libreoffice-style-yaru geary
+        libreoffice-style-yaru geary brltty
+    if [ $? -eq 0 ]; then
+        display_success "Packages removed successfully"
+    else
+        display_error "Error removing packages"
+    fi
+
+    sudo apt purge --auto-remove gnome-contacts gnome-weather
+
     if [ $? -eq 0 ]; then
         display_success "Packages removed successfully"
     else
